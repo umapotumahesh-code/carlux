@@ -1,0 +1,166 @@
+/* services-details.css */
+
+/* General Styling for the Service Details Page */
+#service-details-page {
+    background-color: #f8f9fa; /* Light background for the page */
+}
+
+/* Main Image Styling */
+#service-main-image {
+    max-height: 500px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+/* Service Overview Card */
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Service Title */
+#service-title {
+    color: #007bff; /* Primary color for the main title */
+    font-weight: 700;
+    border-bottom: 3px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px !important;
+}
+
+/* Pricing */
+#service-price {
+    font-size: 2.5rem;
+    color: #28a745; /* Success color for price */
+    font-weight: 700;
+}
+
+/* Booking Button */
+.book-service-btn {
+    background-color: #ffc107; /* Warning color for a prominent button */
+    border-color: #ffc107;
+    color: #212529;
+    font-weight: 600;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.book-service-btn:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+    color: #212529;
+}
+
+/* Tabs Styling */
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    color: #6c757d;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    font-weight: 600;
+}
+
+#serviceDetailsTabContent {
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+/* Process Steps List */
+#process-steps-list .list-group-item {
+    border: none;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed #e9ecef;
+    color: #495057;
+}
+
+#process-steps-list .list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Customer Reviews */
+#customer-reviews-container .card {
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Related Services Section */
+#related-services {
+    background-color: #e9ecef;
+    border-radius: 0.75rem;
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+#related-services h2 {
+    color: #343a40;
+    font-weight: 700;
+}
+
+/* Related Service Card Styling (Reusing service-card from services.css if available, otherwise basic styling) */
+.service-card {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+.service-card .card-img-top {
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0.3rem;
+    margin-bottom: 15px;
+}
+
+.service-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.service-card .view-more-btn {
+    font-size: 0.9rem;
+}
+
+/* Modal Styling */
+#bookServiceModal .modal-header {
+    background-color: #007bff;
+    color: white;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+}
+
+#bookServiceModal .modal-title {
+    font-weight: 600;
+}
+
+#bookServiceModal .btn-close {
+    filter: invert(1);
+}
