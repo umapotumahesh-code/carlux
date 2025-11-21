@@ -1,0 +1,31 @@
+<!-- Search Section HTML -->
+<div class="search-section">
+    <div class="search-container">
+        <div class="search-input-wrapper">
+            <input 
+                type="text" 
+                id="searchBar" 
+                placeholder="Search for cars by brand, model, or fuel type..."
+                autocomplete="off"
+            >
+            <button class="mic-button" id="micButton" title="Voice Search">
+                <i class="fas fa-microphone" id="micIcon"></i>
+            </button>
+            <button class="search-btn" id="searchButton">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div id="statusMessage" style="display: none;"></div>
+</div>
+
+<!-- Cars Grid -->
+<div class="cars-section">
+    <div class="section-header">
+        <h2 class="section-title">Available Cars</h2>
+        <span class="cars-count" id="carsCount">0 cars found</span>
+    </div>
+    <div class="cars-grid" id="carsGrid">
+        <!-- Cars will be rendered here -->
+    </div>
+</div>

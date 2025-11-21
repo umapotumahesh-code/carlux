@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental - Complete Solution</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            flex: 1;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .search-input-wrapper:focus-within {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        #searchBar {
+            width: 100%;
+            padding: 15px 60px 15px 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
+            color: #333;
+        }
+
+        #searchBar::placeholder {
+            color: #6c757d;
+        }
+
+        .mic-button {
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .mic-button:hover {
+            background: #e9ecef;
+            color: #667eea;
+        }
+
+        .mic-button.listening {
+            color: #dc3545;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+            100% { transform: translateY(-50%) scale(1); }
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Cars Section */
+        .cars-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .cars-count {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .car-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .car-image {
+            height: 200px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #667eea;
+        }
+
+        .car-details {
+            padding: 1.5rem;
+        }
+
+        .car-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .car-brand {
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .car-model {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .car-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .car-specs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .spec-item i {
+            color: #667eea;
+        }
+
+        .book-btn {
+            width: 100%;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .book-btn:hover {
+            background: #5a6fd8;
+            transform: scale(1.02);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #e9ecef;
+        }
+
+        /* Status Messages */
+        .status-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        .status-message.listening {
+            background: #fff3cd;
+            color: #856404;
+            border-color: #ffeaa7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+            }
+
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-car"></i> Car Rental</h1>
+            <p>Find and rent your perfect car</p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="searchBar" 
+                        placeholder="Search for cars by brand, model, or fuel type..."
+                        autocomplete="off"
+                    >
+                    <button class="mic-button" id="micButton" title="Voice Search">
+                        <i class="fas fa-microphone" id="micIcon"></i>
+                    </button>
+                    <button class="search-btn" id="searchButton">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="statusMessage" style="display: none;"></div>
+        </div>
+
+        <!-- Cars Section -->
+        <div class="cars-section">
+            <div class="section-header">
+                <h2 class="section-title">Available Cars</h2>
+                <span class="cars-count" id="carsCount">0 cars found</span>
+            </div>
+            <div class="cars-grid" id="carsGrid">
+                <!-- Cars will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Car Data
+        const cars = [
+            { id: 1, brand: "Maruti", model: "Alto K10", fuel: "petrol", transmission: "manual", seats: 4, price: 2500 },
+            { id: 2, brand: "Hyundai", model: "i20", fuel: "diesel", transmission: "manual", seats: 5, price: 3500 },
+            { id: 3, brand: "Maruti", model: "Swift", fuel: "petrol", transmission: "automatic", seats: 5, price: 3200 },
+            { id: 4, brand: "Toyota", model: "Innova", fuel: "diesel", transmission: "manual", seats: 7, price: 5500 },
+            { id: 5, brand: "Honda", model: "City", fuel: "petrol", transmission: "automatic", seats: 5, price: 4200 },
+            { id: 6, brand: "Mahindra", model: "Scorpio", fuel: "diesel", transmission: "manual", seats: 7, price: 4800 },
+            { id: 7, brand: "Tata", model: "Nexon", fuel: "petrol", transmission: "automatic", seats: 5, price: 3800 },
+            { id: 8, brand: "Hyundai", model: "Creta", fuel: "diesel", transmission: "automatic", seats: 5, price: 4500 },
+            { id: 9, brand: "Maruti", model: "Baleno", fuel: "petrol", transmission: "manual", seats: 5, price: 3000 },
+            { id: 10, brand: "Ford", model: "EcoSport", fuel: "diesel", transmission: "automatic", seats: 5, price: 4000 }
+        ];
+
+        // DOM Elements
+        const searchBar = document.getElementById('searchBar');
+        const micButton = document.getElementById('micButton');
+        const micIcon = document.getElementById('micIcon');
+        const searchButton = document.getElementById('searchButton');
+        const carsGrid = document.getElementById('carsGrid');
+        const carsCount = document.getElementById('carsCount');
+        const statusMessage = document.getElementById('statusMessage');
+
+        // Global Variables
+        let filteredCars = [...cars];
+        let recognition;
+        let isListening = false;
+
+        // Initialize Speech Recognition
+        function initializeSpeechRecognition() {
+            if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
+            } else if ('SpeechRecognition' in window) {
+                recognition = new SpeechRecognition();
+            } else {
+                showStatusMessage('Voice search is not supported in your browser. Please use Chrome, Edge, or Safari.', 'error');
+                return false;
+            }
+
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function() {
+                isListening = true;
+                micButton.classList.add('listening');
+                micIcon.className = 'fas fa-microphone-slash';
+                searchBar.placeholder = 'Listening... Speak now!';
+                showStatusMessage('🎤 Listening... Speak your search query', 'listening');
+            };
+
+            recognition.onresult = function(event) {
+                let interimTranscript = '';
+                let finalTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript;
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+
+                // Show interim results
+                if (interimTranscript) {
+                    searchBar.value = finalTranscript + interimTranscript;
+                    searchBar.style.color = '#999';
+                }
+
+                // Process final results
+                if (finalTranscript) {
+                    searchBar.value = finalTranscript.trim();
+                    searchBar.style.color = '#333';
+                    showStatusMessage(`✅ Voice input captured: "${finalTranscript.trim()}"`, 'success');
+                    
+                    // Trigger search
+                    setTimeout(() => {
+                        searchCars();
+                        hideStatusMessage();
+                    }, 1000);
+                }
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+                stopVoiceSearch();
+                
+                let errorMessage = 'Voice search error. ';
+                switch(event.error) {
+                    case 'network':
+                        errorMessage += 'Please check your internet connection.';
+                        break;
+                    case 'not-allowed':
+                        errorMessage += 'Please allow microphone access.';
+                        break;
+                    case 'no-speech':
+                        errorMessage += 'No speech detected. Please try again.';
+                        break;
+                    default:
+                        errorMessage += 'Please try again.';
+                }
+                
+                showStatusMessage(errorMessage, 'error');
+                setTimeout(hideStatusMessage, 3000);
+            };
+
+            recognition.onend = function() {
+                stopVoiceSearch();
+            };
+
+            return true;
+        }
+
+        // Start Voice Search
+        function startVoiceSearch() {
+            if (!recognition && !initializeSpeechRecognition()) {
+                return;
+            }
+
+            if (isListening) {
+                recognition.stop();
+                return;
+            }
+
+            // Check microphone permissions
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function(stream) {
+                    // Permission granted, stop the stream and start recognition
+                    stream.getTracks().forEach(track => track.stop());
+                    recognition.start();
+                })
+                .catch(function(err) {
+                    console.error('Microphone access denied:', err);
+                    showStatusMessage('Please allow microphone access to use voice search.', 'error');
+                    setTimeout(hideStatusMessage, 3000);
+                });
+        }
+
+        // Stop Voice Search
+        function stopVoiceSearch() {
+            isListening = false;
+            micButton.classList.remove('listening');
+            micIcon.className = 'fas fa-microphone';
+            searchBar.style.color = '#333';
+            searchBar.placeholder = 'Search for cars by brand, model, or fuel type...';
+        }
+
+        // Show Status Message
+        function showStatusMessage(message, type = 'success') {
+            statusMessage.innerHTML = message;
+            statusMessage.className = `status-message ${type}`;
+            statusMessage.style.display = 'block';
+        }
+
+        // Hide Status Message
+        function hideStatusMessage() {
+            statusMessage.style.display = 'none';
+        }
+
+        // Search Cars Function
+        function searchCars() {
+            const searchTerm = searchBar.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredCars = [...cars];
+            } else {
+                filteredCars = cars.filter(car => 
+                    car.brand.toLowerCase().includes(searchTerm) ||
+                    car.model.toLowerCase().includes(searchTerm) ||
+                    car.fuel.toLowerCase().includes(searchTerm) ||
+                    car.transmission.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            renderCars();
+            updateCarsCount();
+        }
+
+        // Render Cars
+        function renderCars() {
+            carsGrid.innerHTML = '';
+            
+            if (filteredCars.length === 0) {
+                carsGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-car"></i>
+                        <h3>No cars found</h3>
+                        <p>Try searching with different keywords</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredCars.forEach(car => {
+                const carCard = createCarCard(car);
+                carsGrid.appendChild(carCard);
+            });
+        }
+
+        // Create Car Card
+        function createCarCard(car) {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'car-card';
+            cardDiv.innerHTML = `
+                <div class="car-image">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="car-details">
+                    <div class="car-header">
+                        <div>
+                            <div class="car-brand">${car.brand}</div>
+                            <div class="car-model">${car.model}</div>
+                        </div>
+                        <div class="car-price">₹${car.price}/day</div>
+                    </div>
+                    <div class="car-specs">
+                        <div class="spec-item">
+                            <i class="fas fa-gas-pump"></i>
+                            <span>${car.fuel}</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-cog"></i>
+                            <span>${car.transmission}</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-users"></i>
+                            <span>${car.seats} seats</span>
+                        </div>
+                    </div>
+                    <button class="book-btn" onclick="bookCar(${car.id})">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            `;
+            return cardDiv;
+        }
+
+        // Update Cars Count
+        function updateCarsCount() {
+            const count = filteredCars.length;
+            carsCount.textContent = `${count} car${count !== 1 ? 's' : ''} found`;
+        }
+
+        // Book Car Function
+        function bookCar(carId) {
+            const car = cars.find(c => c.id === carId);
+            alert(`Booking ${car.brand} ${car.model} for ₹${car.price}/day`);
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize speech recognition
+            initializeSpeechRecognition();
+            
+            // Initial render
+            renderCars();
+            updateCarsCount();
+            
+            // Search input event
+            searchBar.addEventListener('input', searchCars);
+            
+            // Search button click
+            searchButton.addEventListener('click', searchCars);
+            
+            // Microphone button click
+            micButton.addEventListener('click', startVoiceSearch);
+            
+            // Enter key press
+            searchBar.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchCars();
+                }
+            });
+            
+            console.log('Car rental app initialized successfully!');
+        });
+    </script>
+</body>
+</html>

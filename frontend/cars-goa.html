@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOCARZ - Cars in Goa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container-fluid">
+            <!-- Logo (Center on desktop, first on mobile) -->
+            <a class="navbar-brand" href="index.html" id="gocarz-logo">
+                <i class="fas fa-car-side me-2"></i>
+                <span class="logo-text">GOCARZ</span>
+            </a>
+
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links (Right on desktop, collapsed on mobile) -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="weHaveDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            We Have <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="weHaveDropdown">
+                            <li><a class="dropdown-item" href="categories.html">Categories</a></li>
+                            <li><a class="dropdown-item" href="rental.html">Rentals</a></li>
+                            <li><a class="dropdown-item" href="services.html">Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="carsAtDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cars @ <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="carsAtDropdown">
+                            <li><a class="dropdown-item" href="cars-hyderabad.html">Hyderabad</a></li>
+                            <li><a class="dropdown-item" href="cars-bangalore.html">Bangalore</a></li>
+                            <li><a class="dropdown-item" href="cars-new-delhi.html">New Delhi</a></li>
+                            <li><a class="dropdown-item" href="cars-mumbai.html">Mumbai</a></li>
+                            <li><a class="dropdown-item" href="cars-pune.html">Pune</a></li>
+                            <li><a class="dropdown-item" href="cars-chennai.html">Chennai</a></li>
+                            <li><a class="dropdown-item" href="cars-goa.html">Goa</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html" title="Login">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown ms-lg-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-globe"></i> Lan
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="#" data-lang="en">English</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="hi">हिंदी</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="te">తెలుగు</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ta">தமிழ்</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="kn">ಕನ್ನಡ</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ml">മലയാളം</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="mr">मराठी</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="bn">বাংলা</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <i class="fas fa-moon" id="dark-mode-toggle" title="Toggle Dark Mode"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="py-5 bg-gradient">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 text-center">
+                        <h1 class="display-4 fw-bold mb-4">Cars in Goa</h1>
+                        <p class="lead">Explore available rentals, sales, and services in Goa</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Available Rentals in Goa -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Available Rentals in Goa</h2>
+                <div class="row g-4">
+                    <!-- Maruti Swift -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <img src="images/maruti1.png" class="card-img-top" alt="Maruti Swift">
+                            <div class="card-body">
+                                <h5 class="card-title">Maruti Swift</h5>
+                                <p class="card-text">Petrol | Manual | 5 Seats</p>
+                                <p class="card-text">Mileage: 22 kmpl</p>
+                                <p class="card-text fw-bold">₹600/day</p>
+                                <a href="contact.html" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hyundai i10 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <img src="images/hundai1.1.png" class="card-img-top" alt="Hyundai i10">
+                            <div class="card-body">
+                                <h5 class="card-title">Hyundai i10</h5>
+                                <p class="card-text">Petrol | Manual | 5 Seats</p>
+                                <p class="card-text">Mileage: 20 kmpl</p>
+                                <p class="card-text fw-bold">₹500/day</p>
+                                <a href="contact.html" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Available Sales/Categories in Goa -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Available Sales/Categories in Goa</h2>
+                <div class="row g-4">
+                    <!-- Maruti Swift -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <img src="images/maruti1.png" class="card-img-top" alt="Maruti Swift">
+                            <div class="card-body">
+                                <h5 class="card-title">Maruti Swift</h5>
+                                <p class="card-text">2023 | Petrol | Manual | 8,000 KM</p>
+                                <p class="card-text">First Owner</p>
+                                <p class="card-text fw-bold">₹7,50,000</p>
+                                <a href="car-details.html?id=6" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hyundai i10 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <img src="images/hundai1.1.png" class="card-img-top" alt="Hyundai i10">
+                            <div class="card-body">
+                                <h5 class="card-title">Hyundai i10</h5>
+                                <p class="card-text">2022 | Petrol | Manual | 12,000 KM</p>
+                                <p class="card-text">First Owner</p>
+                                <p class="card-text fw-bold">₹5,00,000</p>
+                                <a href="car-details.html?id=12" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Available Services in Goa -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Available Services in Goa</h2>
+                <div class="row g-4">
+                    <!-- Car Services (General) -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-taxi fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Car Services (General)</h5>
+                                <p class="card-text">Full engine diagnostics, oil change, fluid top-up, and general health check.</p>
+                                <p class="card-text fw-bold">₹3000</p>
+                                <a href="service-car-services.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- AC Service & Repair -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-snowflake fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">AC Service & Repair</h5>
+                                <p class="card-text">Complete AC system check, gas refill, and cleaning for maximum cooling efficiency.</p>
+                                <p class="card-text fw-bold">₹2500</p>
+                                <a href="service-ac-repair.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Batteries -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-car-battery fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Batteries</h5>
+                                <p class="card-text">Free battery health check, charging, and replacement with high-quality, warrantied batteries.</p>
+                                <p class="card-text fw-bold">₹200</p>
+                                <a href="service-batteries.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tyres & Wheel Care -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fa-solid fa-person-biking fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Tyres & Wheel Care</h5>
+                                <p class="card-text">Wide selection of tires, professional fitting, balancing, and 3D wheel alignment for safety.</p>
+                                <p class="card-text fw-bold">₹500</p>
+                                <a href="service-tyres-wheel.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Denting & Painting -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-paint-roller fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Denting & Painting</h5>
+                                <p class="card-text">Expert dent removal, scratch repair, and full-body painting using premium, color-matched paints.</p>
+                                <p class="card-text fw-bold">₹5000</p>
+                                <a href="service-denting-painting.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Detailing Services -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-spray-can fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Detailing Services</h5>
+                                <p class="card-text">Complete exterior and interior cleaning, waxing, and professional detailing for a showroom finish.</p>
+                                <p class="card-text fw-bold">₹1500</p>
+                                <a href="service-detailing.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Car Spa & Cleaning -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fa-solid fa-spa fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Car Spa & Cleaning</h5>
+                                <p class="card-text">Quick and thorough car wash, interior vacuuming, and basic cleaning to keep your car fresh.</p>
+                                <p class="card-text fw-bold">₹800</p>
+                                <a href="service-car-spa.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Car Inspections -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-search-dollar fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Car Inspections</h5>
+                                <p class="card-text">Pre-purchase inspection, RTO fitness check, and general vehicle health assessment by experts.</p>
+                                <p class="card-text fw-bold">₹1000</p>
+                                <a href="service-car-inspections.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Windshields & Lights -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-lightbulb fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Windshields & Lights</h5>
+                                <p class="card-text">Windshield repair/replacement, headlamp restoration, and bulb replacement for clear visibility.</p>
+                                <p class="card-text fw-bold">₹1200</p>
+                                <a href="service-windshields-lights.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Suspension & Fitments -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fa-solid fa-dumbbell fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Suspension & Fitments</h5>
+                                <p class="card-text">Shock absorber replacement, suspension tuning, and fitment of performance parts for a smooth ride.</p>
+                                <p class="card-text fw-bold">₹4000</p>
+                                <a href="service-suspension-fitments.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Clutch & Body Parts -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-cogs fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Clutch & Body Parts</h5>
+                                <p class="card-text">Clutch plate replacement, gearbox repair, and replacement of essential body panels and parts.</p>
+                                <p class="card-text fw-bold">₹6000</p>
+                                <a href="service-clutch-body-parts.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Insurance Claims -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-file-invoice-dollar fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Insurance Claims</h5>
+                                <p class="card-text">Hassle-free accident claim processing, cashless repair, and documentation support.</p>
+                                <p class="card-text fw-bold">Free</p>
+                                <a href="service-insurance-claims.html" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-4 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <h5>GOCARZ</h5>
+                    <p>Your one-stop destination for buying, selling, and servicing cars with trusted deals and top-quality services.</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="categories.html" class="text-white text-decoration-none">Categories</a></li>
+                        <li><a href="services.html" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="contact.html" class="text-white text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Car Brands</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="categories.html?brand=Maruti" class="text-white text-decoration-none">Maruti</a></li>
+                        <li><a href="categories.html?brand=Hyundai" class="text-white text-decoration-none">Hyundai</a></li>
+                        <li><a href="categories.html?brand=Tata" class="text-white text-decoration-none">Tata</a></li>
+                        <li><a href="categories.html?brand=Mahindra" class="text-white text-decoration-none">Mahindra</a></li>
+                        <li><a href="categories.html?brand=Toyota" class="text-white text-decoration-none">Toyota</a></li>
+                        <li><a href="categories.html?brand=Honda" class="text-white text-decoration-none">Honda</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Car Street, Auto City</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@gocarz.com</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center border-top pt-2 mt-2">
+                <p class="mb-0">&copy; 2025 GOCARZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="btn btn-primary"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script src="language.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

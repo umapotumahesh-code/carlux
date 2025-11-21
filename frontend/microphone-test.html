@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microphone Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .test-button:hover {
+            background: #45a049;
+        }
+        .test-button.listening {
+            background: #ff4444;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎤 Microphone Test</h1>
+        <p>This page will test your microphone and speech recognition functionality.</p>
+        
+        <h3>Step 1: Test Microphone Access</h3>
+        <button id="micTestBtn" class="test-button" onclick="testMicrophone()">Test Microphone Access</button>
+        
+        <h3>Step 2: Test Speech Recognition</h3>
+        <button id="speechTestBtn" class="test-button" onclick="testSpeechRecognition()">Test Speech Recognition</button>
+        
+        <h3>Results:</h3>
+        <input type="text" id="speechOutput" placeholder="Your speech will appear here..." readonly>
+        
+        <div class="results" id="testResults">
+            <p><strong>Click the buttons above to test your microphone...</strong></p>
+        </div>
+    </div>
+
+    <script>
+        let recognition;
+        let isListening = false;
+
+        function addResult(message, isError = false) {
+            const results = document.getElementById('testResults');
+            const p = document.createElement('p');
+            p.innerHTML = message;
+            p.className = isError ? 'error' : 'success';
+            results.appendChild(p);
+        }
+
+        function testMicrophone() {
+            addResult('Testing microphone access...');
+            
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function(stream) {
+                    addResult('✅ Microphone access granted successfully!');
+                    addResult('🔊 Microphone is working. Stream active: ' + stream.active);
+                    
+                    // Stop the stream after testing
+                    stream.getTracks().forEach(track => {
+                        track.stop();
+                        addResult('🛑 Microphone stream stopped.');
+                    });
+                })
+                .catch(function(err) {
+                    addResult('❌ Microphone access denied: ' + err.message, true);
+                    addResult('💡 Please allow microphone access in your browser settings.', true);
+                });
+        }
+
+        function testSpeechRecognition() {
+            addResult('Testing speech recognition...');
+            
+            // Check if Speech Recognition is supported
+            if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
+                addResult('✅ webkitSpeechRecognition found (Chrome/Edge)');
+            } else if ('SpeechRecognition' in window) {
+                recognition = new SpeechRecognition();
+                addResult('✅ SpeechRecognition found');
+            } else {
+                addResult('❌ Speech Recognition not supported in this browser', true);
+                addResult('💡 Please use Chrome, Edge, or Safari for voice search.', true);
+                return;
+            }
+
+            // Configure recognition
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            const speechBtn = document.getElementById('speechTestBtn');
+            const outputField = document.getElementById('speechOutput');
+
+            recognition.onstart = function() {
+                isListening = true;
+                speechBtn.textContent = 'Listening... Click to stop';
+                speechBtn.classList.add('listening');
+                addResult('🎤 Speech recognition started - please speak now!');
+                outputField.placeholder = 'Listening... speak now!';
+            };
+
+            recognition.onresult = function(event) {
+                let interimTranscript = '';
+                let finalTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript;
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+
+                if (interimTranscript) {
+                    outputField.value = finalTranscript + interimTranscript;
+                    addResult('📝 Interim: "' + interimTranscript + '"');
+                }
+
+                if (finalTranscript) {
+                    outputField.value = finalTranscript;
+                    addResult('✅ Final result: "' + finalTranscript + '"');
+                }
+            };
+
+            recognition.onerror = function(event) {
+                addResult('❌ Speech recognition error: ' + event.error, true);
+                
+                switch(event.error) {
+                    case 'network':
+                        addResult('💡 Check your internet connection.', true);
+                        break;
+                    case 'not-allowed':
+                        addResult('💡 Microphone access not allowed. Please check browser permissions.', true);
+                        break;
+                    case 'no-speech':
+                        addResult('💡 No speech detected. Try speaking louder or closer to microphone.', true);
+                        break;
+                    case 'aborted':
+                        addResult('💡 Speech recognition was aborted.', true);
+                        break;
+                    default:
+                        addResult('💡 Unknown error occurred.', true);
+                }
+                stopSpeechRecognition();
+            };
+
+            recognition.onend = function() {
+                addResult('🛑 Speech recognition ended.');
+                stopSpeechRecognition();
+            };
+
+            if (isListening) {
+                recognition.stop();
+            } else {
+                // Request microphone access first
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(function(stream) {
+                        stream.getTracks().forEach(track => track.stop());
+                        addResult('🚀 Starting speech recognition...');
+                        recognition.start();
+                    })
+                    .catch(function(err) {
+                        addResult('❌ Cannot start speech recognition - microphone access denied: ' + err.message, true);
+                    });
+            }
+        }
+
+        function stopSpeechRecognition() {
+            isListening = false;
+            const speechBtn = document.getElementById('speechTestBtn');
+            speechBtn.textContent = 'Test Speech Recognition';
+            speechBtn.classList.remove('listening');
+            document.getElementById('speechOutput').placeholder = 'Your speech will appear here...';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOCARZ - Car Rental</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* Animation for brand logos on hover */
+        .brand-item .brand-logo {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .brand-item:hover .brand-logo {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body id="rental-page">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="car-loader">
+                <i class="fas fa-car-side car-body"></i>
+                <i class="fas fa-circle car-wheel car-wheel-front"></i>
+                <i class="fas fa-circle car-wheel car-wheel-back"></i>
+            </div>
+            <div class="road-line"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container-fluid">
+            <!-- Logo (Center on desktop, first on mobile) -->
+            <a class="navbar-brand" href="index.html" id="gocarz-logo">
+                <i class="fas fa-car-side me-2"></i>
+                <span class="logo-text">GOCARZ</span>
+            </a>
+
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links (Right on desktop, collapsed on mobile) -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="weHaveDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            We Have <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="weHaveDropdown">
+                            <li><a class="dropdown-item" href="categories.html">Categories</a></li>
+                            <li><a class="dropdown-item" href="rental.html">Rentals</a></li>
+                            <li><a class="dropdown-item" href="services.html">Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="rental.html">Car Rental</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html" title="Login">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown ms-lg-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-globe"></i> Lan
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="#" data-lang="en">English</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="hi">हिंदी</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="te">తెలుగు</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ta">தமிழ்</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="kn">ಕನ್ನಡ</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ml">മലയാളം</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="mr">मराठी</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="bn">বাংলা</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <i class="fas fa-moon" id="dark-mode-toggle" title="Toggle Dark Mode"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <!-- Location + Search Bar (Revv Style) -->
+            <div class="main-search-bar">
+                <div class="location-selector" onclick="toggleLocationDropdown()">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="selectedLocation">Hyderabad</span>
+                    <i class="fas fa-chevron-down"></i>
+                    <div class="location-dropdown" id="locationDropdown">
+                        <div class="location-search">
+                            <input type="text" id="locationSearchInput" placeholder="Search city..." onkeyup="filterLocationOptions()" onclick="event.stopPropagation()">
+                        </div>
+                        <div class="location-option current-location" onclick="useCurrentLocation()">
+                            <i class="fas fa-location-arrow"></i>
+                            <span>Use Current Location</span>
+                        </div>
+                        <div class="location-divider"></div>
+                        <div class="location-options-list" id="locationOptionsList">
+                            <div class="location-option" onclick="selectLocation('Hyderabad')" data-city="Hyderabad">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Hyderabad</span>
+                            </div>
+                            <div class="location-option" onclick="selectLocation('Chennai')" data-city="Chennai">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Chennai</span>
+                            </div>
+                            <div class="location-option" onclick="selectLocation('Bangalore')" data-city="Bangalore">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Bangalore</span>
+                            </div>
+                            <div class="location-option" onclick="selectLocation('Mumbai')" data-city="Mumbai">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Mumbai</span>
+                            </div>
+                            <div class="location-option" onclick="selectLocation('Delhi')" data-city="Delhi">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Delhi</span>
+                            </div>
+                            <div class="location-option" onclick="selectLocation('Pune')" data-city="Pune">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Pune</span>
+                            </div>
+                            <div class="location-option" onclick="selectLocation('Kolkata')" data-city="Kolkata">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kolkata</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-input-container">
+                    <input type="text" id="areaSearchInput" placeholder="Search for area, landmark (e.g., KPHB, Gachibowli)" onkeyup="performAreaSearch()" onfocus="showAreaSuggestions()">
+                    <button class="voice-search-btn" id="voiceSearchBtn" onclick="startVoiceSearch()" title="Voice Search">
+                        <i class="fas fa-microphone" id="micIcon"></i>
+                    </button>
+                    <div class="area-suggestions" id="areaSuggestions">
+                        <!-- Dynamic area suggestions will be populated here -->
+                    </div>
+                </div>
+                <button class="search-cars-btn" onclick="searchCars()">
+                    <i class="fas fa-search"></i>
+                    Search Cars
+                </button>
+            </div>
+
+            <div class="search-bar">
+                <div class="datetime">
+                    <div class="datetime-group">
+                        <label>Start time</label>
+                        <div class="datetime-input" onclick="openDateTimePicker('start')">
+                            <span id="startDate">8 Nov 25</span>
+                            <span id="startTime">08:00 Sun</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="datetime-group">
+                        <label>End time</label>
+                        <div class="datetime-input" onclick="openDateTimePicker('end')">
+                            <span id="endDate">9 Nov 25</span>
+                            <span id="endTime">20:00 Sun</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="datetime-refresh">
+                        <label>Current time</label>
+                        <div id="currentTimeClock" class="current-time-clock">
+                            <span id="liveTime">--:--</span>
+                        </div>
+                        <button class="refresh-time-btn" onclick="forceRefreshToCurrentTime()" title="Update to current time">
+                            <i class="fas fa-sync-alt"></i>
+                            Now
+                        </button>
+                    </div>
+                </div>
+                <button class="modify-search-btn" onclick="modifySearch()">Modify Search</button>
+            </div>
+
+            <!-- Plans Section -->
+            <div class="plans">
+                <div class="plan">
+                    <span class="plan-label">Km plan</span>
+                    <div class="plan-options">
+                        <div class="plan-option active" onclick="handlePlanChange(event)" onmouseover="showPlanPreview('390')" onmouseout="hidePlanPreview()">395 kms</div>
+                        <div class="plan-option" onclick="handlePlanChange(event)" onmouseover="showPlanPreview('570')" onmouseout="hidePlanPreview()">570 kms</div>
+                        <div class="plan-option" onclick="handlePlanChange(event)" onmouseover="showPlanPreview('720')" onmouseout="hidePlanPreview()">720 kms</div>
+                    </div>
+                </div>
+                <div class="plan">
+                    <span class="plan-label">Fuel plan</span>
+                    <div class="plan-options">
+                        <div class="plan-option">With Fuel</div>
+                        <div class="plan-option active">Without Fuel</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <span>Car Rental</span> > <span>Rent a Car</span> > <span class="active">Cars for Rent in Hyderabad</span>
+                <div class="clear-all">Clear all</div>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- Sidebar Filters -->
+                <aside class="filters">
+                    <div class="filter-header">
+                        <h3>Filter</h3>
+                        <span class="clear-all">Clear all</span>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Segment</h4>
+                        <div class="filter-options">
+                            <label><input type="checkbox" name="segment" value="hatchback"> Hatchback</label>
+                            <label><input type="checkbox" name="segment" value="sedan"> Sedan</label>
+                            <label><input type="checkbox" name="segment" value="suv"> SUV</label>
+                            <label><input type="checkbox" name="segment" value="muv"> MUV</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Brand</h4>
+                        <div class="filter-options">
+                            <label><input type="checkbox" name="brand" value="maruti"> Maruti</label>
+                            <label><input type="checkbox" name="brand" value="hyundai"> Hyundai</label>
+                            <label><input type="checkbox" name="brand" value="mahindra"> Mahindra</label>
+                            <label><input type="checkbox" name="brand" value="kia"> Kia</label>
+                            <label><input type="checkbox" name="brand" value="tata"> Tata</label>
+                            <label><input type="checkbox" name="brand" value="toyota"> Toyota</label>
+                            <label><input type="checkbox" name="brand" value="honda"> Honda</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Fuel Type</h4>
+                        <div class="filter-options">
+                            <label><input type="checkbox" name="fuel" value="diesel"> Diesel</label>
+                            <label><input type="checkbox" name="fuel" value="petrol"> Petrol</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Transmission Type</h4>
+                        <div class="filter-options">
+                            <label><input type="checkbox" name="transmission" value="automatic"> Automatic</label>
+                            <label><input type="checkbox" name="transmission" value="manual"> Manual</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Seating Capacity</h4>
+                        <div class="filter-options">
+                            <label><input type="checkbox" name="seating" value="4"> 4 seats</label>
+                            <label><input type="checkbox" name="seating" value="5"> 5 seats</label>
+                            <label><input type="checkbox" name="seating" value="6"> 6 seats</label>
+                            <label><input type="checkbox" name="seating" value="7"> 7 seats</label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Car Listings -->
+                <section class="car-listings">
+                    <div class="listings-header">
+                        <h2 id="carsAvailableHeading" style="display: none;">31 Cars available for rental in Hyderabad</h2>
+                        <div class="sort-by">
+                            <span>Sort by:</span>
+                            <select id="sortSelect" onchange="handleSortChange(event)">
+                                <option value="default">Default</option>
+                                <option value="price-low-high">Price: Low to High</option>
+                                <option value="price-high-low">Price: High to Low</option>
+                                <option value="popular">Most Popular</option>
+                                <option value="brand">Brand (A-Z)</option>
+                                <option value="fuel-type">Fuel Type</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Promotional Banner -->
+                    <div class="promo-banner">
+                        <div class="promo-content">
+                            <h3>Cheapest prices for long durations</h3>
+                            <div class="promo-offer">
+                                <span>Book cars starting</span>
+                                <div class="price">₹ 570<span>/day</span></div>
+                                <span>For min 7 days</span>
+                            </div>
+                        </div>
+                        <button class="promo-arrow">→</button>
+                    </div>
+
+                    <!-- Car Cards -->
+                    <div class="car-grid" id="carGrid">
+                        <!-- Car cards will be populated by JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Date Time Picker Modal -->
+    <div class="modal" id="dateTimeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="dateTimeModalTitle">Select Start Time</h3>
+                <span class="close" onclick="closeDateTimeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="date-time-picker">
+                    <div class="date-picker">
+                        <label>Date</label>
+                        <input type="date" id="datePicker" />
+                    </div>
+                    <div class="time-picker">
+                        <label>Time</label>
+                        <select id="timePicker">
+                            <option value="06:00">06:00 AM</option>
+                            <option value="06:30">06:30 AM</option>
+                            <option value="07:00">07:00 AM</option>
+                            <option value="07:30">07:30 AM</option>
+                            <option value="08:00" selected>08:00 AM</option>
+                            <option value="08:30">08:30 AM</option>
+                            <option value="09:00">09:00 AM</option>
+                            <option value="09:30">09:30 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="10:30">10:30 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="11:30">11:30 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="12:30">12:30 PM</option>
+                            <option value="13:00">01:00 PM</option>
+                            <option value="13:30">01:30 PM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="14:30">02:30 PM</option>
+                            <option value="15:00">03:00 PM</option>
+                            <option value="15:30">03:30 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                            <option value="16:30">04:30 PM</option>
+                            <option value="17:00">05:00 PM</option>
+                            <option value="17:30">05:30 PM</option>
+                            <option value="18:00">06:00 PM</option>
+                            <option value="18:30">06:30 PM</option>
+                            <option value="19:00">07:00 PM</option>
+                            <option value="19:30">07:30 PM</option>
+                            <option value="20:00">08:00 PM</option>
+                            <option value="20:30">08:30 PM</option>
+                            <option value="21:00">09:00 PM</option>
+                            <option value="21:30">09:30 PM</option>
+                            <option value="22:00">10:00 PM</option>
+                            <option value="22:30">10:30 PM</option>
+                            <option value="23:00">11:00 PM</option>
+                            <option value="23:30">11:30 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="cancel-btn" onclick="closeDateTimeModal()">Cancel</button>
+                    <button class="confirm-btn" onclick="confirmDateTime()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content booking-modal">
+            <div class="modal-header">
+                <h3>Confirm Your Booking</h3>
+                <span class="close" onclick="closeBookingModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="booking-details">
+                    <div class="car-booking-info">
+                        <img id="bookingCarImage" src="" alt="">
+                        <div class="car-booking-details">
+                            <h4 id="bookingCarName"></h4>
+                            <div class="booking-specs" id="bookingCarSpecs"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-summary">
+                        <h4>Booking Summary</h4>
+                        <div class="summary-row">
+                            <span>Pickup Location:</span>
+                            <span id="bookingLocation"></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Start Time:</span>
+                            <span id="bookingStartTime"></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>End Time:</span>
+                            <span id="bookingEndTime"></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Duration:</span>
+                            <span id="bookingDuration"></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Km Plan:</span>
+                            <span id="bookingKmPlan"></span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Amount:</span>
+                            <span id="bookingTotal"></span>
+                        </div>
+                    </div>
+
+                    <div class="customer-details">
+                        <h4>Customer Details</h4>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="customerName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="customerPhone" placeholder="Enter your phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="customerEmail" placeholder="Enter your email address" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Driving License Number</label>
+                            <input type="text" id="licenseNumber" placeholder="Enter your license number" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="cancel-btn" onclick="closeBookingModal()">Cancel</button>
+                    <button class="confirm-btn" onclick="confirmBooking()">Proceed to Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Revv-Style Booking Summary Modal -->
+    <div class="modal fullscreen-modal" id="bookingSummaryModal">
+        <div class="booking-summary-page">
+            <div class="booking-header">
+                <button class="back-btn" onclick="closeBookingSummary()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2 id="bookingSummaryTitle">Maruti Alto K10</h2>
+            </div>
+            
+            <div class="booking-main-content">
+                <!-- Left Side - Booking Details -->
+                <div class="booking-details-section">
+                    <div class="car-display">
+                        <div class="car-image-large">
+                            <img src="images/car-placeholder.svg" alt="Selected Car" id="summaryCarImage">
+                        </div>
+                        <div class="car-specs-summary">
+                            <div class="spec-item">
+                                <i class="fas fa-users"></i>
+                                <span id="summarySeats">5 seats</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cogs"></i>
+                                <span id="summaryTransmission">Manual</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span id="summaryFuel">Petrol</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-timeline">
+                        <h3>BOOKING DETAILS</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-item pickup">
+                                <div class="timeline-icon">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-time" id="summaryPickupTime">Tue, 11 Nov 8:00</div>
+                                    <div class="timeline-label">Pickup</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-divider">
+                                <div class="divider-line"></div>
+                                <div class="duration-info">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="summaryDuration">1 Day, 12 Hours</span>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item dropoff">
+                                <div class="timeline-icon">
+                                    <i class="fas fa-stop-circle"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-time" id="summaryDropoffTime">Wed, 12 Nov 20:00</div>
+                                    <div class="timeline-label">Drop-off</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="location-info">
+                            <div class="location-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span id="summaryLocation">Hyderabad</span>
+                                <button class="change-city-btn" onclick="showCitySelector()">Change city</button>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-plan-info">
+                            <span>Pricing Plan: Includes <span id="summaryKmLimit">400 kms</span>, excludes fuel</span>
+                            <button class="change-plan-btn" onclick="showPlanSelector()">Change plan</button>
+                        </div>
+                    </div>
+                    
+                    <div class="important-points">
+                        <h3><i class="fas fa-exclamation-triangle alert-icon-header"></i> IMPORTANT POINTS TO REMEMBER</h3>
+                        <div class="points-list">
+                            <div class="point-item warning-alert">
+                                <div class="alert-icon">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div class="point-content">
+                                    <strong>CHANGE IN PRICING PLAN:</strong>
+                                    <span>The pricing plan cannot be changed after the booking is made</span>
+                                </div>
+                            </div>
+                            <div class="point-item info-alert">
+                                <div class="alert-icon">
+                                    <i class="fas fa-gas-pump"></i>
+                                </div>
+                                <div class="point-content">
+                                    <strong>FUEL:</strong>
+                                    <span>In case you are returning the car at a lower fuel level than what was received, we will charge a flat Rs 500 refuelling service charge + actual fuel cost</span>
+                                </div>
+                            </div>
+                            <div class="point-item warning-alert">
+                                <div class="alert-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="point-content">
+                                    <strong>TOLLS, PARKING, INTER-STATE TAXES:</strong>
+                                    <span>To be paid by you.</span>
+                                </div>
+                            </div>
+                            <div class="point-item danger-alert">
+                                <div class="alert-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <div class="point-content">
+                                    <strong>ID VERIFICATION:</strong>
+                                    <span>Please keep your original or DigiLocker of Driving License handy. While delivering the car to you, our executive will verify your original or DigiLocker of Driving License and ID proof (same as the ones whose details were provided while making the booking). This verification is mandatory. In the unfortunate case where you cannot show these documents, we will not be able to handover the car to you, and it will be treated as a late cancellation (100% of the fare would be payable). Driving license printed on A4 sheet of paper (original or otherwise) will not be considered as a valid document. We may ask for additional documents for verification in some cases, e.g. local ID or proof of travel.</span>
+                                </div>
+                            </div>
+                            <div class="point-item info-alert">
+                                <div class="alert-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="point-content">
+                                    <strong>PRE-HANDOVER INSPECTION:</strong>
+                                    <span>Please inspect the car (including the fuel gauge and odometer) thoroughly before approving the checklist.</span>
+                                </div>
+                            </div>
+                            <div class="point-item danger-alert">
+                                <div class="alert-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="point-content">
+                                    <strong>DAMAGE RESPONSIBILITY:</strong>
+                                    <span>Any damage to the vehicle during your rental period is your responsibility. You will be charged for repairs, and the security deposit may be used to cover damages. Please drive carefully and report any incidents immediately.</span>
+                                </div>
+                            </div>
+                            <div class="point-item success-alert">
+                                <div class="alert-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="point-content">
+                                    <strong>24/7 EMERGENCY SUPPORT:</strong>
+                                    <span>For any emergency or roadside assistance, call our 24/7 helpline: <a href="tel:1800-123-7368" class="emergency-link">1800-123-7368</a></span>
+                                </div>
+                            </div>
+                            <div class="point-item warning-alert">
+                                <div class="alert-icon">
+                                    <i class="fas fa-ban"></i>
+                                </div>
+                                <div class="point-content">
+                                    <strong>RESTRICTED AREAS:</strong>
+                                    <span>Vehicle cannot be taken to Leh/Ladakh, Kaza/Nako regions, and Spiti Valley. Interstate travel requires prior approval.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alerts-footer">
+                            <button class="acknowledge-btn" onclick="acknowledgeImportantPoints()">
+                                <i class="fas fa-check-circle"></i>
+                                I Acknowledge These Important Points
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Section -->
+                    <div class="faq-section">
+                        <h3><i class="fas fa-question-circle faq-icon-header"></i> Frequently Asked Questions</h3>
+                        <div class="faq-container">
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <div class="faq-q-content">
+                                        <i class="fas fa-car faq-icon"></i>
+                                        <span>What documents do I need for car rental pickup?</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down faq-arrow"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>You need to bring the following documents during pickup:</p>
+                                    <ul>
+                                        <li><strong>Valid Driving License</strong> - Original or DigiLocker (minimum 1 year old)</li>
+                                        <li><strong>ID Proof</strong> - Aadhaar, PAN Card, or Passport (same as booking)</li>
+                                        <li><strong>Credit/Debit Card</strong> - For security deposit authorization</li>
+                                        <li><strong>Booking Confirmation</strong> - Screenshot or printout of booking details</li>
+                                    </ul>
+                                    <p><em>Note: Photocopies or A4 printouts of licenses are not accepted.</em></p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <div class="faq-q-content">
+                                        <i class="fas fa-money-bill-wave faq-icon"></i>
+                                        <span>How much is the security deposit and when will it be refunded?</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down faq-arrow"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Security deposit details:</p>
+                                    <ul>
+                                        <li><strong>Amount:</strong> ₹2,000 - ₹10,000 (varies by car model)</li>
+                                        <li><strong>Method:</strong> Pre-authorization on credit/debit card (no actual charge)</li>
+                                        <li><strong>Refund Timeline:</strong> 7-10 working days after safe vehicle return</li>
+                                        <li><strong>Deductions:</strong> Only for damages, traffic fines, or fuel shortfall</li>
+                                    </ul>
+                                    <p><em>The deposit is fully refundable if the car is returned in the same condition.</em></p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <div class="faq-q-content">
+                                        <i class="fas fa-gas-pump faq-icon"></i>
+                                        <span>What happens if I return the car with less fuel?</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down faq-arrow"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Fuel policy details:</p>
+                                    <ul>
+                                        <li><strong>Requirement:</strong> Return car with same fuel level as received</li>
+                                        <li><strong>Shortfall Charge:</strong> ₹500 refueling service fee + actual fuel cost</li>
+                                        <li><strong>Measurement:</strong> Based on fuel gauge reading at pickup/return</li>
+                                        <li><strong>Recommendation:</strong> Take photos of fuel gauge during pickup</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <div class="faq-q-content">
+                                        <i class="fas fa-clock faq-icon"></i>
+                                        <span>Can I extend my rental period or return early?</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down faq-arrow"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Rental period modifications:</p>
+                                    <ul>
+                                        <li><strong>Extension:</strong> Contact support at least 2 hours before original return time</li>
+                                        <li><strong>Extension Charges:</strong> Hourly rates apply (₹200-500/hour based on car)</li>
+                                        <li><strong>Early Return:</strong> No refund for unused time, but no penalty charges</li>
+                                        <li><strong>Late Return:</strong> ₹200/hour penalty after 30-minute grace period</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <div class="faq-q-content">
+                                        <i class="fas fa-route faq-icon"></i>
+                                        <span>Can I travel to other states or specific restricted areas?</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down faq-arrow"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Travel restrictions and permissions:</p>
+                                    <ul>
+                                        <li><strong>Interstate Travel:</strong> Allowed with prior approval (contact support)</li>
+                                        <li><strong>Restricted Areas:</strong> Leh/Ladakh, Kaza/Nako, Spiti Valley are strictly prohibited</li>
+                                        <li><strong>Border Areas:</strong> Some border regions require special permits</li>
+                                        <li><strong>Violation Penalty:</strong> Full rental amount + additional charges</li>
+                                    </ul>
+                                    <p><em>Always inform us about your travel plans during booking or pickup.</em></p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <div class="faq-q-content">
+                                        <i class="fas fa-tools faq-icon"></i>
+                                        <span>What should I do if the car breaks down or has an accident?</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down faq-arrow"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Emergency procedures:</p>
+                                    <ul>
+                                        <li><strong>Breakdown:</strong> Call our 24/7 helpline immediately: <a href="tel:1800-123-7368">1800-123-7368</a></li>
+                                        <li><strong>Accident:</strong> Ensure safety first, then call police + our support</li>
+                                        <li><strong>Roadside Assistance:</strong> Free towing and emergency repairs provided</li>
+                                        <li><strong>Replacement Car:</strong> Available if repair time exceeds 4 hours</li>
+                                        <li><strong>Documentation:</strong> Take photos and file police report for insurance</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <div class="faq-q-content">
+                                        <i class="fas fa-ban faq-icon"></i>
+                                        <span>What activities are prohibited in the rental car?</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down faq-arrow"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Strictly prohibited activities:</p>
+                                    <ul>
+                                        <li><strong>Smoking:</strong> Absolutely no smoking inside the vehicle</li>
+                                        <li><strong>Alcohol:</strong> No consumption of alcohol inside the car</li>
+                                        <li><strong>Commercial Use:</strong> No taxi, delivery, or commercial services</li>
+                                        <li><strong>Racing/Stunts:</strong> No racing, rallying, or dangerous driving</li>
+                                        <li><strong>Overloading:</strong> Respect seating and weight limits</li>
+                                        <li><strong>Pets:</strong> Prior approval required for pet travel</li>
+                                    </ul>
+                                    <p><em>Violation may result in booking termination and penalty charges.</em></p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <div class="faq-q-content">
+                                        <i class="fas fa-credit-card faq-icon"></i>
+                                        <span>What payment methods are accepted and when is payment due?</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down faq-arrow"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Payment information:</p>
+                                    <ul>
+                                        <li><strong>Booking Payment:</strong> Online via credit/debit card, UPI, or net banking</li>
+                                        <li><strong>Security Deposit:</strong> Credit/debit card pre-authorization only</li>
+                                        <li><strong>Additional Charges:</strong> Paid during return (cash or card)</li>
+                                        <li><strong>Refunds:</strong> Processed to original payment method</li>
+                                        <li><strong>International Cards:</strong> Accepted for NRI customers</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-footer">
+                            <div class="faq-contact">
+                                <p><i class="fas fa-headset"></i> <strong>Still have questions?</strong></p>
+                                <p>Contact our support team at <a href="tel:1800-123-7368" class="support-link">1800-123-7368</a> or <a href="mailto:support@gocarz.com" class="support-link">support@gocarz.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Fare Details -->
+                <div class="fare-details-section">
+                    <h3>FARE DETAILS</h3>
+                    
+                    <!-- Delivery Options Section -->
+                    <div class="delivery-options-section">
+                        <h4>DELIVERY OPTION</h4>
+                        
+                        <!-- Save Money Banner -->
+                        <div class="save-money-banner">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Pick Up Nearby & Save ₹ 500 !</span>
+                        </div>
+                        
+                        <!-- Delivery Options -->
+                        <div class="delivery-options">
+                            <div class="delivery-option" onclick="selectDeliveryOption('self-pickup', this)">
+                                <div class="option-radio">
+                                    <input type="radio" name="delivery" id="self-pickup" value="self-pickup">
+                                    <label for="self-pickup"></label>
+                                </div>
+                                <div class="option-content">
+                                    <div class="option-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="option-details">
+                                        <div class="option-title">Self Pickup</div>
+                                        <div class="option-savings">Save ₹500</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="delivery-option active" onclick="selectDeliveryOption('home-delivery', this)">
+                                <div class="option-radio">
+                                    <input type="radio" name="delivery" id="home-delivery" value="home-delivery" checked>
+                                    <label for="home-delivery"></label>
+                                </div>
+                                <div class="option-content">
+                                    <div class="option-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="option-details">
+                                        <div class="option-title">Home Delivery</div>
+                                        <div class="option-price">+ ₹500</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fare-breakdown">
+                        <div class="fare-item">
+                            <span class="fare-label">Base fare</span>
+                            <span class="fare-amount">₹ <span id="summaryBaseFare">1500</span></span>
+                        </div>
+                        
+                        <div class="fare-item">
+                            <span class="fare-label">Doorstep delivery & pickup</span>
+                            <span class="fare-amount">₹ <span id="summaryDeliveryFee">500</span></span>
+                        </div>
+                        
+                        <div class="fare-item">
+                            <span class="fare-label">Insurance & GST</span>
+                            <span class="fare-amount">Included</span>
+                        </div>
+                        
+                        <div class="fare-item refundable">
+                            <span class="fare-label">Refundable security deposit</span>
+                            <span class="fare-amount">₹ <span id="summaryDeposit">2000</span></span>
+                        </div>
+                        
+                        <div class="fare-total">
+                            <span class="total-label">Total</span>
+                            <span class="total-amount">₹ <span id="summaryTotal">2000</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="additional-info">
+                        <div class="info-item">
+                            <span class="info-label">Kms limit</span>
+                            <span class="info-value"><span id="summaryKmsLimit">400 kms</span></span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">Fuel</span>
+                            <span class="info-value">Excluded</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">Extra kms charge</span>
+                            <span class="info-value">₹ <span id="summaryExtraKm">5</span>/km</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">Tolls, Parking & inter-state taxes</span>
+                            <span class="info-value">To be paid by you</span>
+                        </div>
+                    </div>
+                    
+                    <div class="proceed-section">
+                        <button class="proceed-btn" onclick="proceedToPayment()">
+                            <span>Proceed</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Summary Modal -->
+    <div class="modal fullscreen-modal" id="bookingSummaryModal">
+        <div class="booking-summary-page">
+            <div class="booking-header">
+                <button class="back-btn" onclick="closeBookingSummary()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2 id="bookingSummaryTitle">Maruti Alto K10</h2>
+                <button class="close-btn" onclick="closeBookingSummary()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="booking-main-content">
+                <!-- Left Side: Booking Details -->
+                <div class="booking-details-section">
+                    <div class="car-info-display">
+                        <div class="car-image-container">
+                            <img src="images/car-placeholder.svg" alt="Car" id="summaryCarImage">
+                        </div>
+                        <div class="car-specs-display">
+                            <div class="spec-item">
+                                <i class="fas fa-users"></i>
+                                <span id="summarySeats">5 seats</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cog"></i>
+                                <span id="summaryTransmission">Manual</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span id="summaryFuel">Petrol</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-timeline">
+                        <h3>BOOKING DETAILS</h3>
+                        <div class="timeline-row">
+                            <div class="timeline-point">
+                                <div class="pickup-info">
+                                    <span class="time-label">Pickup</span>
+                                    <span class="time-value" id="summaryPickupTime">Tue, 11 Nov 8:00</span>
+                                </div>
+                            </div>
+                            <div class="timeline-divider">
+                                <i class="fas fa-circle"></i>
+                                <div class="duration-info">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="summaryDuration">1 Day, 12 Hours</span>
+                                </div>
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div class="timeline-point">
+                                <div class="dropoff-info">
+                                    <span class="time-label">Drop-off</span>
+                                    <span class="time-value" id="summaryDropoffTime">Wed, 12 Nov 20:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="location-pricing-info">
+                        <div class="info-row">
+                            <span class="info-label">Location</span>
+                            <div class="info-value">
+                                <span id="summaryLocation">Hyderabad</span>
+                                <button class="change-link">Change city</button>
+                            </div>
+                        </div>
+                        
+                        <div class="info-row">
+                            <span class="info-label">Pricing Plan</span>
+                            <div class="info-value">
+                                <span>Includes <span id="summaryKmLimit">396 kms</span>, <span id="summaryFuelStatus">excludes fuel</span></span>
+                                <button class="change-link" onclick="showChangePlanModal()">Change plan</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="important-points">
+                        <h3>IMPORTANT POINTS TO REMEMBER</h3>
+                        <div class="points-list">
+                            <div class="point-item">
+                                <strong>CHANGE IN PRICING PLAN:</strong>
+                                <span>The pricing plan cannot be changed after the booking is made</span>
+                            </div>
+                            <div class="point-item">
+                                <strong>FUEL:</strong>
+                                <span>In case you are returning the car at a lower fuel level than what was received, we will charge a flat Rs 500 refuelling service charge + actual fuel cost to get the tank to the same level as what was received</span>
+                            </div>
+                            <div class="point-item">
+                                <strong>TOLLS, PARKING, INTER-STATE TAXES:</strong>
+                                <span>To be paid by you.</span>
+                            </div>
+                            <div class="point-item">
+                                <strong>ID VERIFICATION:</strong>
+                                <span>Please keep your original or DigiLocker of Driving License handy. While delivering the car to you, our executive will verify your original or DigiLocker of Driving License and ID proof (same as the ones whose details were provided while making the booking). This verification is mandatory. In the unfortunate case where you cannot show these documents, we will not be able to handover the car to you, and it will be treated as a late cancellation (100% of the fare would be payable). Driving license printed on A4 sheet of paper (original or otherwise) will not be considered as a valid document. We may ask for additional documents for verification in some cases, e.g. local ID or proof of travel.</span>
+                            </div>
+                            <div class="point-item">
+                                <strong>PRE-HANDOVER INSPECTION:</strong>
+                                <span>Please inspect the car (including the fuel gauge and odometer) thoroughly before approving the checklist.</span>
+                            </div>
+                            <div class="point-item">
+                                <strong>DAMAGE RESPONSIBILITY:</strong>
+                                <span>Any damage to the vehicle during your rental period is your responsibility. You will be charged for repairs, and the security deposit may be used to cover damages. Please drive carefully and report any incidents immediately.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side: Fare Details -->
+                <div class="fare-details-section">
+                    <h3>FARE DETAILS</h3>
+                    
+                    <div class="fare-breakdown">
+                        <div class="fare-item">
+                            <span class="fare-label">Base fare</span>
+                            <span class="fare-amount">₹ <span id="summaryBaseFare">1917</span></span>
+                        </div>
+                        
+                        <div class="fare-item">
+                            <span class="fare-label">Doorstep delivery & pickup</span>
+                            <span class="fare-amount">₹ <span id="summaryDeliveryFee">500</span></span>
+                        </div>
+                        
+                        <div class="fare-item">
+                            <span class="fare-label">Insurance & GST</span>
+                            <span class="fare-amount">Included</span>
+                        </div>
+                        
+                        <div class="fare-item refundable">
+                            <span class="fare-label">Refundable security deposit</span>
+                            <span class="fare-amount">₹ <span id="summaryDeposit">2000</span></span>
+                        </div>
+                        
+                        <div class="fare-total">
+                            <span class="total-label">Total</span>
+                            <span class="total-amount">₹ <span id="summaryTotal">4417</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="additional-info">
+                        <div class="info-item">
+                            <span class="info-label">Kms limit</span>
+                            <span class="info-value"><span id="summaryKmsLimit">396 kms</span></span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">Fuel</span>
+                            <span class="info-value" id="summaryFuelInfo">Excluded</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">Extra kms charge</span>
+                            <span class="info-value">₹ <span id="summaryExtraKmCharge">5</span>/km</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">Tolls, Parking & inter-state taxes</span>
+                            <span class="info-value">To be paid by you</span>
+                        </div>
+                    </div>
+                    
+                    <div class="proceed-section">
+                        <button class="proceed-btn" onclick="proceedToPayment()">
+                            <span>Proceed</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Plan Modal -->
+    <div class="modal overlay-modal" id="changePlanModal">
+        <div class="modal-content revv-plan-modal">
+            <div class="revv-modal-header">
+                <h3>Change Pricing Plan</h3>
+                <button class="revv-close-btn" onclick="closeChangePlanModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="revv-plan-container">
+                <div class="revv-plan-headers">
+                    <div class="revv-header-spacer"></div>
+                    <div class="revv-header-item">Without Fuel</div>
+                    <div class="revv-header-item">With Fuel</div>
+                </div>
+                
+                <div class="revv-plan-row" data-km="396" data-without-fuel="1917" data-with-fuel="4502">
+                    <div class="revv-km-limit">396 kms</div>
+                    <div class="revv-price-option revv-without-fuel" onclick="selectRevvPlan(396, 1917, false)">
+                        <span class="revv-price">1917</span>
+                    </div>
+                    <div class="revv-price-option revv-with-fuel" onclick="selectRevvPlan(396, 4502, true)">
+                        <span class="revv-price">4502</span>
+                    </div>
+                </div>
+                
+                <div class="revv-plan-row revv-selected" data-km="576" data-without-fuel="2265" data-with-fuel="6076">
+                    <div class="revv-km-limit">576 kms</div>
+                    <div class="revv-price-option revv-without-fuel revv-active" onclick="selectRevvPlan(576, 2265, false)">
+                        <span class="revv-price">2265</span>
+                    </div>
+                    <div class="revv-price-option revv-with-fuel" onclick="selectRevvPlan(576, 6076, true)">
+                        <span class="revv-price">6076</span>
+                    </div>
+                </div>
+                
+                <div class="revv-plan-row" data-km="720" data-without-fuel="2614" data-with-fuel="7310">
+                    <div class="revv-km-limit">720 kms</div>
+                    <div class="revv-price-option revv-without-fuel" onclick="selectRevvPlan(720, 2614, false)">
+                        <span class="revv-price">2614</span>
+                    </div>
+                    <div class="revv-price-option revv-with-fuel" onclick="selectRevvPlan(720, 7310, true)">
+                        <span class="revv-price">7310</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="revv-plan-notes">
+                <p><strong>Please note:</strong></p>
+                <ul>
+                    <li>Pricing plan cannot be changed after the creation of a booking</li>
+                    <li>Extra kms charge: Rs 5/km</li>
+                    <li>We do not permit taking Revv vehicles to Leh/Ladakh region, Kaza/Nako region and Spiti Valley</li>
+                    <li><a href="#" class="revv-link">Click here</a> for further details on without fuel and with fuel pricing plans</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- City Selector Modal -->
+    <div class="modal" id="citySelectorModal">
+        <div class="modal-content city-selector-modal">
+            <div class="modal-header">
+                <h3>Select City</h3>
+                <span class="close" onclick="closeCitySelector()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="city-search">
+                    <input type="text" id="citySearchInput" placeholder="Search for a city..." onkeyup="filterCities()">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="popular-cities">
+                    <h4>Popular Cities</h4>
+                    <div class="city-grid" id="cityGrid">
+                        <div class="city-item" onclick="selectCity('Hyderabad')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hyderabad</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Bangalore')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Bangalore</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Mumbai')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Mumbai</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Delhi')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Delhi</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Pune')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Pune</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Chennai')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Chennai</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Kolkata')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kolkata</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Ahmedabad')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Ahmedabad</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Kochi')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kochi</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Goa')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Goa</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Mysore')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Mysore</span>
+                        </div>
+                        <div class="city-item" onclick="selectCity('Coimbatore')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Coimbatore</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Page -->
+    <div class="modal fullscreen-modal" id="bookingConfirmationModal">
+        <div class="booking-confirmation-page">
+            <!-- Header -->
+            <div class="confirmation-header">
+                <div class="header-left">
+                    <button class="back-btn" onclick="goBackToSummary()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+                <div class="header-center">
+                    <h2>Confirm Your Booking</h2>
+                </div>
+                <div class="header-right">
+                    <button class="close-btn" onclick="closeBookingConfirmation()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="progress-indicator">
+                    <div class="step completed">Select Car</div>
+                    <div class="step completed">Review Details</div>
+                    <div class="step active">Confirm Booking</div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="confirmation-content">
+                <!-- Left Side: Selected Details -->
+                <div class="selected-details-section">
+                    <h3><i class="fas fa-check-circle"></i> Your Selected Details</h3>
+                    
+                    <!-- Car Information -->
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-car detail-icon"></i>
+                            <h4>Selected Car</h4>
+                        </div>
+                        <div class="detail-content">
+                            <div class="car-info-display">
+                                <img id="confirmCarImage" src="images/car-placeholder.svg" alt="Selected Car">
+                                <div class="car-details">
+                                    <h5 id="confirmCarName">Honda City</h5>
+                                    <div class="car-specs">
+                                        <span><i class="fas fa-users"></i> <span id="confirmSeats">5</span> seats</span>
+                                        <span><i class="fas fa-cogs"></i> <span id="confirmTransmission">Manual</span></span>
+                                        <span><i class="fas fa-gas-pump"></i> <span id="confirmFuel">Petrol</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Booking Timeline -->
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-calendar-alt detail-icon"></i>
+                            <h4>Booking Duration</h4>
+                        </div>
+                        <div class="detail-content">
+                            <div class="booking-timeline-confirm">
+                                <div class="timeline-item">
+                                    <div class="timeline-label">Pickup</div>
+                                    <div class="timeline-value" id="confirmPickupDate">11 Nov</div>
+                                    <div class="timeline-time" id="confirmPickupTime">08:00</div>
+                                </div>
+                                <div class="timeline-divider">
+                                    <i class="fas fa-arrow-right"></i>
+                                    <div class="duration" id="confirmDuration">1 Day, 12 Hrs</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-label">Return</div>
+                                    <div class="timeline-value" id="confirmReturnDate">12 Nov</div>
+                                    <div class="timeline-time" id="confirmReturnTime">20:00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Delivery Option -->
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-truck detail-icon"></i>
+                            <h4>Delivery Option</h4>
+                        </div>
+                        <div class="detail-content">
+                            <div class="selected-delivery">
+                                <i class="fas fa-home" id="confirmDeliveryIcon"></i>
+                                <span id="confirmDeliveryOption">Self Pickup</span>
+                                <span class="delivery-fee" id="confirmDeliveryFee">Save ₹500</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pricing Plan -->
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-route detail-icon"></i>
+                            <h4>Pricing Plan</h4>
+                        </div>
+                        <div class="detail-content">
+                            <div class="pricing-details">
+                                <div class="plan-info">
+                                    <span class="plan-distance" id="confirmKmLimit">395 kms</span>
+                                    <span class="plan-fuel" id="confirmFuelPlan">excludes fuel</span>
+                                </div>
+                                <div class="plan-extra">
+                                    <span>Extra kms: ₹<span id="confirmExtraKm">5</span>/km</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Location -->
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-map-marker-alt detail-icon"></i>
+                            <h4>Location</h4>
+                        </div>
+                        <div class="detail-content">
+                            <div class="location-info">
+                                <span class="location-name" id="confirmLocation">Hyderabad</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side: Final Amount -->
+                <div class="final-fare-section">
+                    <h3><i class="fas fa-receipt"></i> Final Amount</h3>
+                    
+                    <div class="final-fare-breakdown">
+                        <div class="fare-row">
+                            <span class="fare-label">Base fare</span>
+                            <span class="fare-value">₹ <span id="confirmBaseFare">3000</span></span>
+                        </div>
+                        <div class="fare-row">
+                            <span class="fare-label" id="confirmDeliveryLabel">Doorstep delivery & pickup</span>
+                            <span class="fare-value">₹ <span id="confirmDeliveryFee">500</span></span>
+                        </div>
+                        <div class="fare-row">
+                            <span class="fare-label">Insurance & GST</span>
+                            <span class="fare-value">Included</span>
+                        </div>
+                        <div class="fare-row deposit">
+                            <span class="fare-label">Refundable security deposit</span>
+                            <span class="fare-value">₹ <span id="confirmDeposit">2000</span></span>
+                        </div>
+                        <div class="fare-total-confirm">
+                            <span class="total-label">Total Amount</span>
+                            <span class="total-value">₹ <span id="confirmTotalAmount">5500</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-note">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Security deposit will be pre-authorized on your card and refunded within 7-10 working days after safe vehicle return.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="confirmation-footer">
+                <div class="terms-acceptance">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="acceptTerms" onchange="toggleConfirmButton()">
+                        <span class="checkmark"></span>
+                        <span class="terms-text">I agree to the <a href="javascript:void(0)" onclick="showTermsModal()">Terms & Conditions</a> and have read all important information</span>
+                    </label>
+                </div>
+                
+                <div class="confirmation-actions">
+                    <button class="back-to-summary-btn" onclick="goBackToSummary()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Summary
+                    </button>
+                    <button class="confirm-booking-btn" id="confirmBookingBtn" onclick="finalConfirmBooking()" disabled>
+                        <i class="fas fa-check-circle"></i>
+                        Confirm Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content success-modal">
+            <div class="modal-body">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Booking Confirmed!</h3>
+                <p>Your car rental booking has been confirmed. You will receive a confirmation email shortly.</p>
+                <div class="booking-reference">
+                    <strong>Booking ID: <span id="bookingId"></span></strong>
+                </div>
+                <button class="confirm-btn" onclick="closeSuccessModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-4 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <h5>GOCARZ</h5>
+                    <p>Your one-stop destination for buying, selling, and servicing cars with trusted deals and top-quality services.</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="categories.html" class="text-white text-decoration-none">Categories</a></li>
+                        <li><a href="rental.html" class="text-white text-decoration-none">Car Rental</a></li>
+                        <li><a href="services.html" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="contact.html" class="text-white text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Car Brands</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="categories.html?brand=Maruti" class="text-white text-decoration-none">Maruti</a></li>
+                        <li><a href="categories.html?brand=Hyundai" class="text-white text-decoration-none">Hyundai</a></li>
+                        <li><a href="categories.html?brand=Tata" class="text-white text-decoration-none">Tata</a></li>
+                        <li><a href="categories.html?brand=Mahindra" class="text-white text-decoration-none">Mahindra</a></li>
+                        <li><a href="categories.html?brand=Toyota" class="text-white text-decoration-none">Toyota</a></li>
+                        <li><a href="categories.html?brand=Honda" class="text-white text-decoration-none">Honda</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Car Street, Auto City</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@gocarz.com</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center border-top pt-2 mt-2">
+                <p class="mb-0">&copy; 2025 GOCARZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="btn btn-primary"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script src="script1.js"></script>
+    <script src="language.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

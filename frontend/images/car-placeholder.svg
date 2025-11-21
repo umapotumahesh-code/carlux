@@ -1,0 +1,22 @@
+<!-- Simple SVG placeholder for car images -->
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f0f0f0"/>
+  <g fill="#999">
+    <!-- Car body -->
+    <rect x="50" y="120" width="200" height="40" rx="5"/>
+    <!-- Car roof -->
+    <rect x="80" y="100" width="140" height="20" rx="10"/>
+    <!-- Windows -->
+    <rect x="90" y="105" width="40" height="15" fill="#87CEEB"/>
+    <rect x="170" y="105" width="40" height="15" fill="#87CEEB"/>
+    <!-- Wheels -->
+    <circle cx="80" cy="160" r="15" fill="#333"/>
+    <circle cx="220" cy="160" r="15" fill="#333"/>
+    <circle cx="80" cy="160" r="8" fill="#666"/>
+    <circle cx="220" cy="160" r="8" fill="#666"/>
+    <!-- Headlights -->
+    <circle cx="45" cy="135" r="5" fill="#FFE4B5"/>
+    <circle cx="45" cy="145" r="5" fill="#FFE4B5"/>
+  </g>
+  <text x="150" y="80" text-anchor="middle" fill="#666" font-size="14" font-family="Arial">Car Image</text>
+</svg>

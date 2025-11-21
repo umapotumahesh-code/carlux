@@ -1,0 +1,194 @@
+/* ==========================================================================
+   Contact Page Specific Styles
+   ========================================================================== */
+
+/* Contact Page Specific */
+.contact-form .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(0, 150, 136, 0.25);
+}
+
+/* Additional alignment for contact details list */
+.contact-details-list .detail-item {
+    align-items: center !important;
+}
+
+/* Final polish for vertical alignment in the hero section */
+.contact-hero-section .row {
+    align-items: center;
+}
+
+/* Map to fill remaining card height */
+.map-fill-height {
+}
+
+.map-fill-height iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ==========================================================================
+   Contact Hero Section Styles (New Layout)
+   ========================================================================== */
+
+.contact-hero-section {
+    position: relative;
+    padding: 8rem 0; /* Large vertical padding */
+    background-color: #1a1a1a; /* Dark background color */
+    color: white;
+    overflow: hidden;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.contact-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('assets/cars/pexels-albinberlin-919073.jpg') no-repeat center center/cover; /* Use one of the existing car images */
+    opacity: 0.25; /* Darken the image */
+    z-index: 0;
+}
+
+.contact-hero-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-text-col {
+    padding-right: 3rem;
+}
+
+.welcome-badge {
+    display: inline-block;
+    background-color: #e74c3c; /* Red badge */
+    color: white;
+    padding: 0.3rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: white !important; /* Override global h1 style */
+}
+
+.accent-text {
+    color: #e74c3c; /* Red accent color */
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 80%;
+    margin-bottom: 2rem;
+}
+
+.slider-dots {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.dot.active {
+    background-color: white;
+}
+
+/* Form Card Styles */
+.hero-form-card {
+    background-color: rgba(255, 255, 255, 0.95); /* Light background for form */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    border: none;
+}
+
+.hero-form-card .form-control,
+.hero-form-card .form-select {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+.hero-form-card .form-control:focus,
+.hero-form-card .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(25, 118, 210, 0.25);
+}
+
+.hero-form-card .text-primary {
+    color: var(--primary-dark) !important;
+}
+
+/* Dark Mode Adjustments for Hero Form */
+body.dark-mode .contact-hero-section {
+    background-color: #121212;
+}
+
+body.dark-mode .hero-form-card {
+    background-color: rgba(30, 30, 30, 0.95); /* Darker background for form in dark mode */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.dark-mode .hero-form-card .form-control,
+body.dark-mode .hero-form-card .form-select {
+    background-color: #2d2d2d;
+    border: 1px solid #333;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .hero-form-card .form-control:focus,
+body.dark-mode .hero-form-card .form-select:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25); /* Use secondary color for focus in dark mode */
+}
+
+body.dark-mode .hero-form-card .form-label {
+    color: #e0e0e0 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .contact-hero-section {
+        padding: 4rem 0;
+        min-height: auto;
+    }
+    .hero-text-col {
+        padding-right: 1rem;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+    .hero-title {
+        font-size: 3rem;
+    }
+    .hero-subtitle {
+        max-width: 100%;
+    }
+    .slider-dots {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}

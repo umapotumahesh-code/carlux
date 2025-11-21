@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard - GOCARZ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar (Common) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html" id="gocarz-logo" style="font-weight: bold; font-size: 1.8rem;">
+                GOCARZ
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logout-link">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <h1 class="mb-4">Seller Dashboard</h1>
+
+        <!-- Add Car Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Add New Car</h5>
+            </div>
+            <div class="card-body">
+                <form id="add-car-form">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="brand" class="form-label">Brand</label>
+                            <input type="text" class="form-control" id="brand" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="model" class="form-label">Model</label>
+                            <input type="text" class="form-control" id="model" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="year" class="form-label">Year</label>
+                            <input type="number" class="form-control" id="year" min="1900" max="2025" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="price" class="form-label">Price (INR)</label>
+                            <input type="number" class="form-control" id="price" min="0" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="km-driven" class="form-label">Kilometers Driven</label>
+                            <input type="number" class="form-control" id="km-driven" min="0" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="fuel-type" class="form-label">Fuel Type</label>
+                            <select class="form-select" id="fuel-type" required>
+                                <option value="">Select Fuel Type</option>
+                                <option value="Petrol">Petrol</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="Electric">Electric</option>
+                                <option value="CNG">CNG</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="transmission" class="form-label">Transmission</label>
+                            <select class="form-select" id="transmission" required>
+                                <option value="">Select Transmission</option>
+                                <option value="Manual">Manual</option>
+                                <option value="Automatic">Automatic</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="body-type" class="form-label">Body Type</label>
+                            <select class="form-select" id="body-type" required>
+                                <option value="">Select Body Type</option>
+                                <option value="Hatchback">Hatchback</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="SUV">SUV</option>
+                                <option value="MUV">MUV</option>
+                                <option value="Coupe">Coupe</option>
+                                <option value="Convertible">Convertible</option>
+                                <option value="Truck">Truck</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="color" class="form-label">Color</label>
+                            <input type="text" class="form-control" id="color" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="seats" class="form-label">Seats</label>
+                            <input type="number" class="form-control" id="seats" min="1" max="10" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="engine-type" class="form-label">Engine Type</label>
+                            <input type="text" class="form-control" id="engine-type" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="mileage" class="form-label">Mileage</label>
+                            <input type="text" class="form-control" id="mileage" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="owner-type" class="form-label">Owner Type</label>
+                            <select class="form-select" id="owner-type" required>
+                                <option value="">Select Owner Type</option>
+                                <option value="First">First</option>
+                                <option value="Second">Second</option>
+                                <option value="Third">Third</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="features" class="form-label">Features (comma-separated)</label>
+                            <input type="text" class="form-control" id="features" placeholder="ABS, Airbags, Power Steering">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="image-urls" class="form-label">Image URLs (comma-separated)</label>
+                            <input type="text" class="form-control" id="image-urls" placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Car</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- My Cars List -->
+        <div class="card">
+            <div class="card-header">
+                <h5>My Cars</h5>
+            </div>
+            <div class="card-body">
+                <div id="cars-list" class="row">
+                    <!-- Cars will be listed here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Common) -->
+    <footer class="bg-dark text-white pt-4 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <h5>GOCARZ</h5>
+                    <p>Your one-stop destination for buying, selling, and servicing cars with trusted deals and top-quality services.</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="categories.html" class="text-white text-decoration-none">Categories</a></li>
+                        <li><a href="rental.html" class="text-white text-decoration-none">Rental</a></li>
+                        <li><a href="services.html" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="contact.html" class="text-white text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Car Brands</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="categories.html?brand=Maruti" class="text-white text-decoration-none">Maruti</a></li>
+                        <li><a href="categories.html?brand=Hyundai" class="text-white text-decoration-none">Hyundai</a></li>
+                        <li><a href="categories.html?brand=Tata" class="text-white text-decoration-none">Tata</a></li>
+                        <li><a href="categories.html?brand=Mahindra" class="text-white text-decoration-none">Mahindra</a></li>
+                        <li><a href="categories.html?brand=Toyota" class="text-white text-decoration-none">Toyota</a></li>
+                        <li><a href="categories.html?brand=Honda" class="text-white text-decoration-none">Honda</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Car Street, Auto City</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@gocarz.com</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center border-top pt-2 mt-2">
+                <p class="mb-0">&copy; 2025 GOCARZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="btn btn-primary"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="seller-dashboard.js"></script>
+</body>
+</html>

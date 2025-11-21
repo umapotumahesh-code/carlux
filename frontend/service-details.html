@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details - GoCarz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="services-details.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .service-header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 60px 0;
+        }
+        .service-content {
+            padding: 50px 0;
+        }
+        .related-services-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin: 40px 0;
+        }
+        .related-services-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .related-services-scroll {
+            display: flex;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .slide {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .related-service-card {
+            flex: 1;
+            min-width: 280px;
+        }
+        .related-nav-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s, opacity 0.3s;
+            z-index: 10;
+        }
+        .related-nav-btn:hover {
+            background: #0056b3;
+        }
+        .related-nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .related-nav-btn.prev-btn {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .related-nav-btn.next-btn {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        @media (max-width: 1024px) {
+            .related-service-card {
+                min-width: 250px;
+            }
+        }
+        @media (max-width: 768px) {
+            .related-services-container {
+                padding: 0 40px;
+            }
+            .related-service-card {
+                min-width: 200px;
+            }
+            .related-nav-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
+        @media (max-width: 576px) {
+            .related-service-card {
+                min-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">GoCarz</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categories.html">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Service Header -->
+    <section class="service-header">
+        <div class="container text-center">
+            <h1 id="service-title">Service Details</h1>
+            <p id="service-description">Loading service information...</p>
+        </div>
+    </section>
+
+    <!-- Service Content -->
+    <section class="service-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <!-- Service Image -->
+                            <div class="text-center mb-4">
+                                <img id="service-image" src="images/default-service.jpg" alt="Service Image" class="img-fluid service-image" style="max-height: 300px; object-fit: cover; border-radius: 10px;">
+                            </div>
+
+                            <h3>Service Overview</h3>
+                            <p id="service-overview">Detailed information about this service will be displayed here.</p>
+
+                            <h4>What's Included</h4>
+                            <ul id="service-includes">
+                                <li>Professional inspection</li>
+                                <li>Quality parts replacement</li>
+                                <li>Expert technicians</li>
+                                <li>Warranty coverage</li>
+                            </ul>
+
+                            <div class="mt-4">
+                                <h4>Pricing</h4>
+                                <div class="badge bg-primary fs-5 p-3">
+                                    Starting from ₹<span id="service-price">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Services Section -->
+    <section id="related-services" class="py-5">
+        <h2 class="text-center mb-4">Related Services</h2>
+        <div class="related-services-carousel-wrapper">
+            <button class="carousel-arrow prev-arrow" id="related-prev-arrow">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="related-services-carousel" id="related-services-container">
+                <!-- Related Service Cards will be dynamically inserted here -->
+                <div class="text-center">
+                    <p>Loading related services...</p>
+                </div>
+            </div>
+            <button class="carousel-arrow next-arrow" id="related-next-arrow">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 GoCarz. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Service data (same as in services-new.js)
+        const allServices = [
+            {
+                id: 1,
+                title: "Periodic Car Service",
+                price_in_inr: 2500,
+                icon_class: "fas fa-tools",
+                short_description: "Complete periodic maintenance service",
+                file_name: "service-details.html?id=1",
+                overview: "Comprehensive periodic car service including all essential checks.",
+                includes: ["Oil change", "Filter replacement", "Brake check", "Battery test"],
+                image_url: "images/periodic-service.jpg"
+            },
+            {
+                id: 2,
+                title: "Denting & Painting",
+                price_in_inr: 8000,
+                icon_class: "fas fa-paint-brush",
+                short_description: "Professional denting and painting services",
+                file_name: "service-details.html?id=2",
+                overview: "Expert dent removal and painting services for all vehicle types.",
+                includes: ["Dent removal", "Paint matching", "Surface preparation", "Finishing"]
+            },
+            {
+                id: 3,
+                title: "Car Insurance",
+                price_in_inr: 5000,
+                icon_class: "fas fa-shield-alt",
+                short_description: "Comprehensive car insurance services",
+                file_name: "service-details.html?id=3",
+                overview: "Complete car insurance coverage and claim assistance.",
+                includes: ["Policy review", "Claim assistance", "Documentation", "Premium calculation"]
+            },
+            {
+                id: 4,
+                title: "Car Wash & Detailing",
+                price_in_inr: 1500,
+                icon_class: "fas fa-shower",
+                short_description: "Professional car washing and detailing",
+                file_name: "service-details.html?id=4",
+                overview: "Premium car cleaning and detailing services.",
+                includes: ["Exterior wash", "Interior cleaning", "Waxing", "Detailing"]
+            },
+            {
+                id: 5,
+                title: "Wheel Care",
+                price_in_inr: 2000,
+                icon_class: "fas fa-circle",
+                short_description: "Wheel alignment and balancing services",
+                file_name: "service-details.html?id=5",
+                overview: "Complete wheel care including alignment and balancing.",
+                includes: ["Wheel alignment", "Balancing", "Tire rotation", "Pressure check"]
+            },
+            {
+                id: 6,
+                title: "AC Service & Repair",
+                price_in_inr: 3000,
+                icon_class: "fas fa-snowflake",
+                short_description: "Air conditioning service and repair",
+                file_name: "service-details.html?id=6",
+                overview: "Complete AC system service and repair.",
+                includes: ["System check", "Refrigerant recharge", "Filter replacement", "Repair"]
+            },
+            {
+                id: 7,
+                title: "Batteries",
+                price_in_inr: 4000,
+                icon_class: "fas fa-battery-half",
+                short_description: "Battery testing and replacement",
+                file_name: "service-details.html?id=7",
+                overview: "Battery testing, replacement and maintenance.",
+                includes: ["Battery testing", "Replacement", "Terminal cleaning", "Charging"]
+            },
+            {
+                id: 8,
+                title: "Tyres & Wheels",
+                price_in_inr: 3500,
+                icon_class: "fas fa-circle-dot",
+                short_description: "Tyre and wheel services",
+                file_name: "service-details.html?id=8",
+                overview: "Complete tyre and wheel maintenance services.",
+                includes: ["Tyre inspection", "Wheel alignment", "Balancing", "Replacement"]
+            },
+            {
+                id: 9,
+                title: "Car Inspection",
+                price_in_inr: 1000,
+                icon_class: "fas fa-search",
+                short_description: "Comprehensive car inspection service",
+                file_name: "service-details.html?id=9",
+                overview: "Detailed vehicle inspection and report.",
+                includes: ["Visual inspection", "System check", "Safety check", "Report"]
+            },
+            {
+                id: 10,
+                title: "Emergency Roadside Assistance",
+                price_in_inr: 2000,
+                icon_class: "fas fa-truck",
+                short_description: "24/7 emergency roadside assistance",
+                file_name: "service-details.html?id=10",
+                overview: "Round-the-clock emergency roadside support.",
+                includes: ["Towing", "Jump start", "Tire change", "Fuel delivery"]
+            },
+            {
+                id: 11,
+                title: "Custom Accessories",
+                price_in_inr: 5000,
+                icon_class: "fas fa-cogs",
+                short_description: "Custom car accessories and modifications",
+                file_name: "service-details.html?id=11",
+                overview: "Professional installation of custom accessories.",
+                includes: ["Accessory fitting", "Audio systems", "Lighting", "Custom parts"]
+            },
+            {
+                id: 12,
+                title: "Car Rental",
+                price_in_inr: 3000,
+                icon_class: "fas fa-car",
+                short_description: "Car rental services",
+                file_name: "service-details.html?id=12",
+                overview: "Convenient car rental with flexible options.",
+                includes: ["Vehicle selection", "Insurance", "Pickup/Dropoff", "24/7 support"]
+            },
+            {
+                id: 13,
+                title: "Tyres & Wheel Care",
+                price_in_inr: 3000,
+                icon_class: "fas fa-circle-dot",
+                short_description: "Professional tyre services and wheel alignment",
+                file_name: "service-details.html?id=13",
+                overview: "Complete tyre inspection, alignment, balancing, and replacement services.",
+                includes: ["Tyre inspection", "Wheel alignment", "Balancing", "Pressure check"]
+            },
+            {
+                id: 14,
+                title: "Suspension & Fitments",
+                price_in_inr: 5000,
+                icon_class: "fas fa-wrench",
+                short_description: "Complete suspension system service and parts fitting",
+                file_name: "service-details.html?id=14",
+                overview: "Comprehensive suspension system maintenance and component replacement.",
+                includes: ["Shock absorber replacement", "Spring inspection", "Control arm fitting", "Alignment check"]
+            },
+            {
+                id: 15,
+                title: "Car Services (General)",
+                price_in_inr: 4000,
+                icon_class: "fas fa-car",
+                short_description: "Comprehensive general car maintenance and servicing",
+                file_name: "service-details.html?id=15",
+                overview: "Full vehicle maintenance including all essential checks and services.",
+                includes: ["Oil change", "Filter replacement", "Brake check", "Battery test"]
+            },
+            {
+                id: 16,
+                title: "Car Spa & Cleaning",
+                price_in_inr: 2500,
+                icon_class: "fas fa-shower",
+                short_description: "Premium car washing and detailing services",
+                file_name: "service-details.html?id=16",
+                overview: "Professional car cleaning and detailing services for all vehicle types.",
+                includes: ["Exterior wash", "Interior cleaning", "Waxing", "Detailing"]
+            },
+            {
+                id: 17,
+                title: "Battery Replacement",
+                price_in_inr: 3500,
+                icon_class: "fas fa-battery-half",
+                short_description: "Battery testing, replacement and maintenance services",
+                file_name: "service-details.html?id=17",
+                overview: "Complete battery testing, replacement, and electrical system check.",
+                includes: ["Battery testing", "Replacement", "Terminal cleaning", "Charging system check"]
+            },
+            {
+                id: 18,
+                title: "AC Service",
+                price_in_inr: 2800,
+                icon_class: "fas fa-snowflake",
+                short_description: "Air conditioning repair and maintenance",
+                file_name: "service-details.html?id=18",
+                overview: "Full AC system service including repair and refrigerant recharge.",
+                includes: ["System check", "Refrigerant recharge", "Filter replacement", "Performance test"]
+            },
+            {
+                id: 19,
+                title: "Engine Oil Change",
+                price_in_inr: 1200,
+                icon_class: "fas fa-oil-can",
+                short_description: "Complete engine oil change and filter replacement",
+                file_name: "service-details.html?id=19",
+                overview: "Professional engine oil change with filter replacement.",
+                includes: ["Oil drain", "Filter replacement", "Oil level check", "System inspection"]
+            },
+            {
+                id: 20,
+                title: "Brake Service",
+                price_in_inr: 4500,
+                icon_class: "fas fa-stop-circle",
+                short_description: "Brake inspection, repair and replacement services",
+                file_name: "service-details.html?id=20",
+                overview: "Complete brake system inspection, repair, and component replacement.",
+                includes: ["Brake inspection", "Pad replacement", "Disc check", "Fluid change"]
+            },
+            {
+                id: 21,
+                title: "Transmission Service",
+                price_in_inr: 6000,
+                icon_class: "fas fa-cogs",
+                short_description: "Transmission fluid change and maintenance",
+                file_name: "service-details.html?id=21",
+                overview: "Transmission system maintenance and fluid service.",
+                includes: ["Fluid change", "Filter replacement", "System check", "Performance test"]
+            },
+            {
+                id: 22,
+                title: "Exhaust System",
+                price_in_inr: 5500,
+                icon_class: "fas fa-exclamation-triangle",
+                short_description: "Exhaust system repair and replacement",
+                file_name: "service-details.html?id=22",
+                overview: "Complete exhaust system inspection, repair, and replacement.",
+                includes: ["System inspection", "Pipe replacement", "Muffler service", "Emission check"]
+            },
+            {
+                id: 23,
+                title: "Clutch Service",
+                price_in_inr: 6500,
+                icon_class: "fas fa-cog",
+                short_description: "Clutch repair, replacement and adjustment services",
+                file_name: "service-details.html?id=23",
+                overview: "Professional clutch system service and replacement.",
+                includes: ["Clutch inspection", "Replacement", "Adjustment", "Flywheel service"]
+            },
+            {
+                id: 24,
+                title: "Timing Belt Replacement",
+                price_in_inr: 4800,
+                icon_class: "fas fa-clock",
+                short_description: "Timing belt and tensioner replacement service",
+                file_name: "service-details.html?id=24",
+                overview: "Timing belt replacement with related components.",
+                includes: ["Belt replacement", "Tensioner check", "Pulley inspection", "Water pump service"]
+            },
+            {
+                id: 25,
+                title: "Radiator Service",
+                price_in_inr: 3200,
+                icon_class: "fas fa-thermometer-half",
+                short_description: "Radiator repair, cleaning and coolant replacement",
+                file_name: "service-details.html?id=25",
+                overview: "Cooling system maintenance and radiator service.",
+                includes: ["Radiator cleaning", "Coolant replacement", "Pressure test", "Leak check"]
+            },
+            {
+                id: 26,
+                title: "Fuel System Service",
+                price_in_inr: 3800,
+                icon_class: "fas fa-gas-pump",
+                short_description: "Fuel system cleaning and maintenance",
+                file_name: "service-details.html?id=26",
+                overview: "Fuel system cleaning, maintenance, and component service.",
+                includes: ["Fuel filter replacement", "Injector cleaning", "Pump check", "System flush"]
+            },
+            {
+                id: 27,
+                title: "Electrical System Service",
+                price_in_inr: 4200,
+                icon_class: "fas fa-bolt",
+                short_description: "Electrical system diagnosis and repair",
+                file_name: "service-details.html?id=27",
+                overview: "Complete electrical system diagnosis and repair services.",
+                includes: ["System diagnosis", "Wiring repair", "Component replacement", "Battery check"]
+            },
+            {
+                id: 28,
+                title: "Diagnostic Services",
+                price_in_inr: 2500,
+                icon_class: "fas fa-search",
+                short_description: "Complete vehicle diagnostic and error code reading",
+                file_name: "service-details.html?id=28",
+                overview: "Advanced vehicle diagnostics and error code analysis.",
+                includes: ["OBD-II scanning", "Error code reading", "System analysis", "Report generation"]
+            },
+            {
+                id: 29,
+                title: "Windshield Replacement",
+                price_in_inr: 5200,
+                icon_class: "fas fa-window-maximize",
+                short_description: "Windshield repair and replacement services",
+                file_name: "service-details.html?id=29",
+                overview: "Professional windshield repair and replacement services.",
+                includes: ["Glass inspection", "Replacement", "Adhesive application", "Calibration"]
+            },
+            {
+                id: 30,
+                title: "Headlight Restoration",
+                price_in_inr: 1800,
+                icon_class: "fas fa-lightbulb",
+                short_description: "Headlight cleaning, restoration and replacement",
+                file_name: "service-details.html?id=30",
+                overview: "Headlight restoration and replacement services.",
+                includes: ["Lens cleaning", "Restoration", "Bulb replacement", "Adjustment"]
+            },
+            {
+                id: 31,
+                title: "Tire Rotation & Balancing",
+                price_in_inr: 800,
+                icon_class: "fas fa-sync-alt",
+                short_description: "Tire rotation, balancing and alignment check",
+                file_name: "service-details.html?id=31",
+                overview: "Complete tire maintenance and balancing service.",
+                includes: ["Tire rotation", "Balancing", "Pressure check", "Wear inspection"]
+            },
+            {
+                id: 32,
+                title: "Spark Plug Replacement",
+                price_in_inr: 1500,
+                icon_class: "fas fa-fire",
+                short_description: "Spark plug inspection and replacement service",
+                file_name: "service-details.html?id=32",
+                overview: "Spark plug replacement and ignition system service.",
+                includes: ["Plug inspection", "Replacement", "Gap adjustment", "Coil check"]
+            },
+            {
+                id: 33,
+                title: "Air Filter Replacement",
+                price_in_inr: 600,
+                icon_class: "fas fa-wind",
+                short_description: "Engine air filter inspection and replacement",
+                file_name: "service-details.html?id=33",
+                overview: "Air filter replacement and system cleaning.",
+                includes: ["Filter inspection", "Replacement", "Housing cleaning", "System check"]
+            },
+            {
+                id: 34,
+                title: "Wheel Alignment",
+                price_in_inr: 1200,
+                icon_class: "fas fa-crosshairs",
+                short_description: "Professional wheel alignment and geometry check",
+                file_name: "service-details.html?id=34",
+                overview: "Complete wheel alignment and suspension geometry check.",
+                includes: ["Alignment check", "Adjustment", "Geometry measurement", "Test drive"]
+            }
+        ];
+
+        // Get service ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceId = parseInt(urlParams.get('id'));
+
+        // Find current service
+        const currentService = allServices.find(s => s.id === serviceId);
+
+        if (currentService) {
+            // Update page content
+            document.getElementById('service-title').textContent = currentService.title;
+            document.getElementById('service-description').textContent = currentService.short_description;
+            document.getElementById('service-overview').textContent = currentService.overview;
+            document.getElementById('service-price').textContent = currentService.price_in_inr.toLocaleString('en-IN');
+
+            // Update includes list
+            const includesList = document.getElementById('service-includes');
+            includesList.innerHTML = '';
+            currentService.includes.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                includesList.appendChild(li);
+            });
+
+            // Update service image with smooth transition
+            const imageElement = document.getElementById('service-image');
+            const fallbackImage = 'images/default-service.jpg';
+
+            // Set initial opacity to 0 for smooth transition
+            imageElement.style.opacity = '0';
+            imageElement.style.transition = 'opacity 0.3s ease-in-out';
+
+            const loadImage = (src) => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => resolve(src);
+                    img.onerror = () => reject();
+                    img.src = src;
+                });
+            };
+
+            // Try to load the service image, fallback to default if fails
+            const storedImage = localStorage.getItem(`service-image-${serviceId}`);
+            const imageSrc = storedImage || currentService.image_url || fallbackImage;
+
+            loadImage(imageSrc)
+                .then(src => {
+                    imageElement.src = src;
+                    if (!storedImage && currentService.image_url) {
+                        localStorage.setItem(`service-image-${serviceId}`, currentService.image_url);
+                    }
+                    // Fade in after setting src
+                    requestAnimationFrame(() => {
+                        imageElement.style.opacity = '1';
+                    });
+                })
+                .catch(() => {
+                    imageElement.src = fallbackImage;
+                    // Fade in after setting src
+                    requestAnimationFrame(() => {
+                        imageElement.style.opacity = '1';
+                    });
+                });
+
+            // Populate related services
+            const relatedServices = allServices.filter(s => s.id !== serviceId);
+            const scrollContainer = document.getElementById('related-services-container');
+
+            // Clear loading message
+            scrollContainer.innerHTML = '';
+
+            relatedServices.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'related-service-card animate__animated animate__fadeIn';
+                card.innerHTML = `
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="${service.icon_class} service-icon mb-3 text-primary" style="font-size: 2.5rem;"></i>
+                            <h5 class="card-title mb-2">${service.title}</h5>
+                            <p class="card-text text-muted small mb-3">${service.short_description}</p>
+                            <a href="${service.file_name}" class="btn btn-primary btn-sm w-100 text-decoration-none">
+                                <i class="fas fa-info-circle me-1"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                `;
+                scrollContainer.appendChild(card);
+            });
+
+            // Add navigation functionality
+            const prevBtn = document.getElementById('related-prev-arrow');
+            const nextBtn = document.getElementById('related-next-arrow');
+
+            // Calculate scroll amount based on screen size
+            let scrollAmount = 790; // 3 cards on desktop: 250*3 + 20*2 = 790px
+            if (window.innerWidth <= 1200 && window.innerWidth > 768) {
+                scrollAmount = 600; // 2 cards on tablets: 280*2 + 20*1 = 600px
+            } else if (window.innerWidth <= 768) {
+                scrollAmount = 300; // 1 card on mobile: 280*1 + 20*0 = 300px
+            }
+
+            const updateArrows = () => {
+                const scrollLeft = scrollContainer.scrollLeft;
+                const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                prevBtn.disabled = scrollLeft <= 0;
+                nextBtn.disabled = scrollLeft >= maxScrollLeft - 1;
+                prevBtn.classList.toggle('disabled', prevBtn.disabled);
+                nextBtn.classList.toggle('disabled', nextBtn.disabled);
+            };
+
+            prevBtn.addEventListener('click', () => {
+                if (!prevBtn.disabled) {
+                    scrollContainer.scrollBy({
+                        left: -scrollAmount,
+                        behavior: 'smooth'
+                    });
+                    setTimeout(updateArrows, 300); // Update after smooth scroll
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (!nextBtn.disabled) {
+                    scrollContainer.scrollBy({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                    setTimeout(updateArrows, 300); // Update after smooth scroll
+                }
+            });
+
+            // Initial arrow state
+            updateArrows();
+
+            // Update on window resize
+            window.addEventListener('resize', () => {
+                // Recalculate scroll amount
+                scrollAmount = 790;
+                if (window.innerWidth <= 1200 && window.innerWidth > 768) {
+                    scrollAmount = 600;
+                } else if (window.innerWidth <= 768) {
+                    scrollAmount = 300;
+                }
+                updateArrows();
+            });
+        } else {
+            document.getElementById('service-title').textContent = 'Service Not Found';
+            document.getElementById('service-description').textContent = 'The requested service could not be found.';
+        }
+    </script>
+</body>
+</html>

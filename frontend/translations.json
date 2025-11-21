@@ -1,0 +1,28 @@
+{
+    "en": {
+        "home": "Home",
+        "we_have": "We Have",
+        "categories": "Categories",
+        "rentals": "Rentals",
+        "services": "Services",
+        "contact_us": "Contact Us",
+        "cars_at": "Cars @",
+        "hyderabad": "Hyderabad",
+        "bangalore": "Bangalore",
+        "new_delhi": "New Delhi",
+        "mumbai": "Mumbai",
+        "pune": "Pune",
+        "chennai": "Chennai",
+        "goa": "Goa"
+    },
+    "hi": {
+        "home": "होम",
+        "we_have": "हमारे पास",
+        "categories": "श्रेणियाँ",
+        "rentals": "किराए पर",
+        "services": "सेवाएं",
+        "contact_us": "संपर्क करें",
+        "cars_at": "कारें @",
+        "hyderabad": "हैदराबाद"
+    }
+}

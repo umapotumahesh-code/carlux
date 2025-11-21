@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOCARZ - Service Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="services-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body id="service-details-page">
+
+    <!-- Navbar (Common) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html" id="gocarz-logo" style="font-weight: bold; font-size: 1.8rem;">
+                GOCARZ
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html">Categories</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="rental.html">Rental</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rental.html">Rental</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="weHaveDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            We Have <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="weHaveDropdown">
+                            <li><a class="dropdown-item" href="categories.html">Categories</a></li>
+                            <li><a class="dropdown-item" href="rental.html">Rentals</a></li>
+                            <li><a class="dropdown-item" href="services.html">Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="carsAtDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cars @ <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="carsAtDropdown">
+                            <li><a class="dropdown-item" href="cars-hyderabad.html">Hyderabad</a></li>
+                            <li><a class="dropdown-item" href="cars-bangalore.html">Bangalore</a></li>
+                            <li><a class="dropdown-item" href="cars-new-delhi.html">New Delhi</a></li>
+                            <li><a class="dropdown-item" href="cars-mumbai.html">Mumbai</a></li>
+                            <li><a class="dropdown-item" href="cars-pune.html">Pune</a></li>
+                            <li><a class="dropdown-item" href="cars-chennai.html">Chennai</a></li>
+                            <li><a class="dropdown-item" href="cars-goa.html">Goa</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html" title="Login">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <i class="fas fa-moon" id="dark-mode-toggle" title="Toggle Dark Mode"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4" id="service-title">Premium Car Wash - Full Details</h1>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Service Image -->
+            <div class="col-lg-6 mb-4">
+                <img src="https://via.placeholder.com/800x500?text=Loading+Service+Image" class="img-fluid rounded shadow-lg" alt="Service Image" id="service-main-image">
+            </div>
+
+            <!-- Service Description and Booking -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-lg p-4 h-100">
+                    <h4 class="mb-3">Service Overview</h4>
+                    <p id="service-description">Loading description...</p>
+
+                    <h4 class="mt-4 mb-3">Pricing</h4>
+                    <p class="lead text-primary fw-bold" id="service-price">₹0</p>
+
+                    <button class="btn btn-primary btn-lg w-100 book-service-btn" data-bs-toggle="modal" data-bs-target="#bookServiceModal">
+                        <i class="fas fa-calendar-check me-2"></i> Book This Service
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Details Tabs -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <ul class="nav nav-tabs" id="serviceDetailsTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="process-tab" data-bs-toggle="tab" data-bs-target="#process" type="button" role="tab" aria-controls="process" aria-selected="true">Process Steps</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Customer Reviews</button>
+                    </li>
+                </ul>
+                <div class="tab-content p-4 bg-white shadow-sm" id="serviceDetailsTabContent">
+                    <div class="tab-pane fade show active" id="process" role="tabpanel" aria-labelledby="process-tab">
+                        <h5 class="text-primary mb-3">Our Service Process</h5>
+                        <ul class="list-group list-group-flush" id="process-steps-list">
+                            <!-- Process steps dynamically inserted here -->
+                            <li class="list-group-item">Loading process steps...</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        <h5 class="text-primary mb-3">What Our Customers Say</h5>
+                        <div id="customer-reviews-container">
+                            <!-- Reviews dynamically inserted here -->
+                            <p>Loading reviews...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Services Section -->
+        <section id="related-services" class="py-5">
+            <h2 class="text-center mb-4">Related Services</h2>
+            <div class="related-services-carousel-wrapper">
+                <button class="carousel-arrow prev-arrow" id="related-prev-arrow">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="related-services-carousel" id="related-services-container">
+                    <!-- Related Service Cards will be dynamically inserted here -->
+                    <div class="text-center">
+                        <p>Loading related services...</p>
+                    </div>
+                </div>
+                <button class="carousel-arrow next-arrow" id="related-next-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Book Service Modal -->
+    <div class="modal fade" id="bookServiceModal" tabindex="-1" aria-labelledby="bookServiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookServiceModalLabel">Book <span id="modal-service-name">Service</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="book-service-form">
+                        <div class="mb-3">
+                            <label for="book-name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="book-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="book-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book-phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="book-phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="book-date" class="form-label">Preferred Date</label>
+                            <input type="date" class="form-control" id="book-date" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Confirm Booking</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (Common) -->
+    <footer class="bg-dark text-white pt-4 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5>GOCARZ</h5>
+                    <p>Your one-stop destination for buying, selling, and servicing cars with trusted deals and top-quality services.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="categories.html" class="text-white text-decoration-none">Categories</a></li>
+                        <li><a href="services.html" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="contact.html" class="text-white text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Car Street, Auto City</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@gocarz.com</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center border-top pt-2 mt-2">
+                <p class="mb-0">&copy; 2025 GOCARZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="btn btn-primary"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="language.js"></script>
+</body>
+</html>

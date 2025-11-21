@@ -1,87 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - GOCARZ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="login.css">
-</head>
-<body class="login-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Online Academy</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+      }
+      :root {
+        --primary: #a435f0;
+        --primary-dark: #8b2fcf;
+        --light: #f8f9fa;
+        --dark: #1c1d1f;
+        --gray: #6a6f73;
+        --border: #e1e3e5;
+        --google: #db4437;
+        --facebook: #1877f2;
+      }
+      body {
+        background: url("https://as1.ftcdn.net/v2/jpg/01/82/04/38/1000_F_182043866_cQZwPYqKo2xZvZ8sSwW7rdRbf72GcsH4.jpg")
+          no-repeat center center fixed;
+        background-size: cover;
+        background-color: #d1d2d3; /* fallback */
+        color: var(--dark);
+        min-height: 100vh;
+        padding-top: 70px; /* space for header */
+        display: flex;
+        flex-direction: column;
+      }
 
-    <main class="login-container">
-        <div class="login-card card shadow-lg">
-            <div class="card-body">
-                <h3 class="card-title text-center mb-3">Welcome back</h3>
-                <p class="text-muted text-center">Sign in to continue to GOCARZ</p>
+      /* Header Bar */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--primary);
+        color: #fff;
+        padding: 15px 30px;
+        font-size: 20px;
+        font-weight: 700;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+      }
 
-                <form id="login-form" novalidate>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username or Email</label>
-                        <input type="email" class="form-control" id="username" placeholder="you@example.com" required>
-                        <div class="invalid-feedback">Please enter your email.</div>
-                    </div>
+      /* Main Layout */
+      .main-container {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        padding: 40px;
+      }
 
-                    <div class="mb-3 position-relative">
-                        <label for="password" class="form-label">Password</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
-                            <button class="btn btn-outline-secondary" type="button" id="toggle-password" aria-label="Toggle password"><i class="fa-regular fa-eye"></i></button>
-                        </div>
-                        <div class="invalid-feedback">Please enter your password.</div>
-                    </div>
+      .left-side {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .left-side img {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
 
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <input id="remember" type="checkbox">
-                            <label for="remember" class="small"> Remember me</label>
-                        </div>
-                        <div>
-                            <a href="#" id="forgot-link">Forgot password?</a>
-                        </div>
-                    </div>
+      /* Card */
+      .login-card {
+        background: #fff;
+        padding: 32px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+      .login-card h2 {
+        margin-bottom: 20px;
+        color: var(--primary);
+      }
+      .form-group {
+        margin-bottom: 16px;
+        text-align: left;
+      }
+      .form-group label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+        color: var(--dark);
+      }
+      .form-group input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      .form-group input:focus {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(164, 53, 240, 0.2);
+      }
+      .login-btn {
+        width: 100%;
+        padding: 12px;
+        background: var(--primary);
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-bottom: 12px;
+      }
+      .login-btn:hover {
+        background: var(--primary-dark);
+      }
 
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </div>
-                </form>
+      /* Divider */
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 16px 0;
+        color: var(--gray);
+        font-size: 14px;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid var(--border);
+      }
+      .divider:not(:empty)::before {
+        margin-right: 8px;
+      }
+      .divider:not(:empty)::after {
+        margin-left: 8px;
+      }
 
-                <div id="login-message" class="mt-3" aria-live="polite"></div>
-                            <p class="text-center mt-3">Don't have an account? <a href="register.html">Create account</a></p>
-            </div>
+      /* Social buttons */
+      .social-btn {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        border: none;
+        margin-bottom: 10px;
+        transition: opacity 0.3s ease;
+      }
+      .social-btn:hover {
+        opacity: 0.9;
+      }
+      .google-btn {
+        background: var(--google);
+      }
+      .facebook-btn {
+        background: var(--facebook);
+      }
+
+      .extra-links {
+        margin-top: 16px;
+        font-size: 14px;
+      }
+      .extra-links a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .extra-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .main-container {
+          flex-direction: column;
+        }
+        .left-side img {
+          max-width: 300px;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Online Academy</span>
         </div>
-    </main>
+      </div>
+    </header>
 
-    <!-- Forgot Password Modal -->
-    <div class="modal fade" id="forgotModal" tabindex="-1" aria-labelledby="forgotModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="forgotModalLabel">Reset password</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="main-container">
+      <!-- Left Side Image -->
+      <div class="left-side">
+        <img
+          src="https://via.placeholder.com/500x400?text=Academy+Image"
+          alt="Academy"
+        />
+      </div>
+
+      <!-- Right Side Login -->
+      <div class="login-card">
+        <h2><i class="fas fa-user-circle"></i> Login</h2>
+        <form action="home.html" method="post">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
           </div>
-          <div class="modal-body">
-            <p class="small text-muted">Enter your email and we'll send a password reset link.</p>
-            <div class="mb-3">
-                <label for="reset-email" class="form-label">Email address</label>
-                <input type="email" id="reset-email" class="form-control" placeholder="you@example.com">
-                <div class="invalid-feedback">Enter a valid email.</div>
-            </div>
-            <div id="reset-message" class="small"></div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="send-reset">Send reset link</button>
-          </div>
+          <button type="submit" class="login-btn" href="./home .html">
+            Login
+          </button>
+        </form>
+
+        <div class="divider">or continue with</div>
+
+        <!-- Social Login Buttons -->
+        <a
+          href="https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_GOOGLE_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=openid%20email%20profile"
+          class="social-btn google-btn"
+        >
+          <i class="fab fa-google"></i> Login with Google
+        </a>
+
+        <a
+          href="https://www.facebook.com/v19.0/dialog/oauth?client_id=YOUR_FACEBOOK_APP_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email,public_profile"
+          class="social-btn facebook-btn"
+        >
+          <i class="fab fa-facebook-f"></i> Login with Facebook
+        </a>
+
+        <div class="extra-links">
+          <p><a href="forgot-password.html">Forgot Password?</a></p>
+          <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
         </div>
       </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="login.js"></script>
-</body>
+  </body>
 </html>
