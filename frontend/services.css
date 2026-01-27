@@ -59,3 +59,16 @@ body.dark-mode .service-card-new {
 body.dark-mode .service-title {
     color: var(--text-light);
 }
+
+.service-header .navbar-brand img {
+    height: 40px;
+}
+
+.service-header .dropdown-toggle {
+    min-width: 180px;
+    text-align: left;
+}
+
+.service-header .form-control {
+    width: 100%;
+}

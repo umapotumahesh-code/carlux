@@ -1,0 +1,135 @@
+{
+  "cars": [
+    {
+      "id": 1,
+      "brand": "Maruti Suzuki",
+      "model": "Swift",
+      "year": 2022,
+      "price_in_inr": 750000,
+      "fuel_type": "Petrol",
+      "transmission": "Manual",
+      "body_type": "Hatchback",
+      "color": "Red",
+      "km_driven": 15000,
+      "location": "Hyderabad",
+      "image_urls": [
+        "images/image.1.jpg",
+        "images/vikky1.jpg",
+        "images/pexels-albinberlin-919073.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "brand": "Hyundai",
+      "model": "Creta",
+      "year": 2021,
+      "price_in_inr": 1400000,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "body_type": "SUV",
+      "color": "White",
+      "km_driven": 25000,
+      "location": "Bangalore",
+      "image_urls": [
+        "images/image.2.jpg",
+        "images/pexels-jessef11-1213294.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "brand": "Tata",
+      "model": "Nexon",
+      "year": 2023,
+      "price_in_inr": 980000,
+      "fuel_type": "Petrol",
+      "transmission": "Manual",
+      "body_type": "SUV",
+      "color": "Blue",
+      "km_driven": 8000,
+      "location": "Mumbai",
+      "image_urls": [
+        "images/image.3.jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "brand": "Mahindra",
+      "model": "XUV700",
+      "year": 2022,
+      "price_in_inr": 2200000,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "body_type": "SUV",
+      "color": "Black",
+      "km_driven": 18000,
+      "location": "New Delhi",
+      "image_urls": [
+        "images/image.4.jpg"
+      ]
+    },
+    {
+      "id": 5,
+      "brand": "Toyota",
+      "model": "Innova Crysta",
+      "year": 2020,
+      "price_in_inr": 1850000,
+      "fuel_type": "Diesel",
+      "transmission": "Manual",
+      "body_type": "MUV",
+      "color": "Silver",
+      "km_driven": 45000,
+      "location": "Chennai",
+      "image_urls": [
+        "images/vikky2.jpg"
+      ]
+    },
+    {
+      "id": 6,
+      "brand": "Honda",
+      "model": "City",
+      "year": 2021,
+      "price_in_inr": 1250000,
+      "fuel_type": "Petrol",
+      "transmission": "Automatic",
+      "body_type": "Sedan",
+      "color": "Grey",
+      "km_driven": 22000,
+      "location": "Pune",
+      "image_urls": [
+        "images/pexels-tdcat-70912.jpg"
+      ]
+    },
+    {
+      "id": 7,
+      "brand": "Kia",
+      "model": "Seltos",
+      "year": 2022,
+      "price_in_inr": 1550000,
+      "fuel_type": "Petrol",
+      "transmission": "Automatic",
+      "body_type": "SUV",
+      "color": "Orange",
+      "km_driven": 12000,
+      "location": "Hyderabad",
+      "image_urls": [
+        "images/pexels-lynxexotics-3802510.jpg"
+      ]
+    },
+    {
+      "id": 8,
+      "brand": "Volkswagen",
+      "model": "Polo",
+      "year": 2019,
+      "price_in_inr": 680000,
+      "fuel_type": "Petrol",
+      "transmission": "Manual",
+      "body_type": "Hatchback",
+      "color": "White",
+      "km_driven": 35000,
+      "location": "Goa",
+      "image_urls": [
+        "images/pexels-shvetsa-4315574.jpg"
+      ]
+    }
+  ]
+}

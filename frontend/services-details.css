@@ -262,3 +262,117 @@
 #bookServiceModal .btn-close {
     filter: invert(1);
 }
+
+/* Price List Styling */
+.price-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.price-card-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.price-card-details {
+    flex-grow: 1;
+}
+
+.price-card-title {
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 4px;
+    font-size: 1.1rem;
+}
+
+.price-card-price {
+    font-weight: 600;
+    color: #222;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.price-card-onwards {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 400;
+}
+
+.price-card-description {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.price-card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    margin-left: 15px;
+    white-space: nowrap;
+}
+
+.price-card-view-more {
+    font-size: 0.9rem;
+    color: #0066cc;
+    text-decoration: none;
+    margin-bottom: 4px;
+}
+
+.price-card-btn-enquire {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    font-weight: 500;
+}
+
+.price-card-btn-whatsapp {
+    background-color: #25D366;
+    border-color: #25D366;
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    font-weight: 500;
+}
+
+/* Responsive adjustments for price list */
+@media (max-width: 576px) {
+    .price-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .price-card-content {
+        flex-direction: column;
+    }
+
+    .price-card-price {
+        order: -1; /* Move price to the top on mobile */
+        margin-bottom: 10px;
+    }
+
+    .price-card-actions {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .price-card-view-more {
+        margin-bottom: 0;
+    }
+}

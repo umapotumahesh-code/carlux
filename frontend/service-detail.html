@@ -1,0 +1,4027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details - JustDial Style</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+            --light-gray: #f8f9fa;
+            --border-color: #e9ecef;
+            --text-muted: #6c757d;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f6f7f9;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        /* Header Block Styling */
+        .service-header {
+            background: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .service-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .service-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #222;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .rating-box {
+            background: var(--success-color);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .verified-badge {
+            background: #e8f5e8;
+            color: var(--success-color);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .location-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 4px 0;
+        }
+
+        .years-business {
+            color: var(--success-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-open {
+            color: var(--success-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-call {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-call:hover {
+            background: #218838;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-enquire {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-enquire:hover {
+            background: #0056b3;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1DA851;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .icon-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .icon-btn:hover {
+            background: var(--light-gray);
+            color: var(--primary-color);
+        }
+
+        /* Sticky Navigation Tabs */
+        .sticky-nav-tabs {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-top: 20px;
+        }
+
+        .nav-tabs-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 15px 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            gap: 0;
+        }
+
+        .nav-tabs-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-tab {
+            display: block;
+            padding: 15px 20px;
+            background: transparent;
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+            position: relative;
+            transition: all 0.3s ease;
+            border: none;
+            border-bottom: 3px solid transparent;
+            border-radius: 0;
+            margin-right: 0;
+        }
+
+        .nav-tab:hover {
+            background: transparent;
+            color: #007bff;
+            text-decoration: none;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .nav-tab.active {
+            background: transparent;
+            color: #007bff;
+            font-weight: 600;
+            border-bottom: 3px solid #007bff;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .price-list-tab {
+            background: transparent;
+            color: #666;
+            font-weight: 500;
+            border: none;
+            border-bottom: 3px solid transparent;
+            border-radius: 0;
+        }
+
+        .price-list-tab:hover {
+            background: transparent;
+            color: #007bff;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .price-list-tab.active {
+            background: transparent !important;
+            color: #007bff !important;
+            font-weight: 600;
+            border-bottom: 3px solid #007bff;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            scroll-margin-top: 80px; /* Account for sticky header */
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 16px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .service-category {
+            background: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .service-category:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .service-category-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .service-category-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .service-category-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-category-items li {
+            padding: 2px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Reviews Styling */
+        .reviews-summary {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .rating-summary {
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .big-rating {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success-color);
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+            margin: 4px 0;
+        }
+
+        .total-reviews {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .rating-bars {
+            max-width: 300px;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+        }
+
+        .rating-bar span:first-child {
+            min-width: 20px;
+        }
+
+        .rating-bar span:last-child {
+            min-width: 30px;
+            text-align: right;
+        }
+
+        .progress {
+            height: 6px;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--success-color);
+            transition: width 0.3s ease;
+        }
+
+        /* Services modal card styling */
+        .services-modal {
+            max-width: 980px;
+            margin: 1.5rem auto;
+        }
+
+        .services-modal-content {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+        }
+
+        .services-modal-body {
+            max-height: 70vh;
+            overflow: auto;
+        }
+
+        .services-modal-container {
+            display: flex;
+            align-items: stretch;
+            min-height: 300px;
+        }
+
+        .services-sidebar {
+            width: 300px;
+            border-right: 1px solid var(--border-color);
+            padding: 16px;
+            background: #fff;
+        }
+
+        .services-content {
+            padding: 20px;
+            background: #fff;
+        }
+
+        /* Photos Gallery */
+        .photo-category-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .photo-category-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .photo-category-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-category-card:hover .photo-category-overlay {
+            opacity: 1;
+        }
+
+        .photo-category-info {
+            padding: 12px 16px;
+            background: white;
+        }
+
+        .photo-category-info h6 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Photo Modal */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .photo-modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .photo-modal-image {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .photo-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            transition: all 0.3s ease;
+        }
+
+        .photo-modal-close:hover,
+        .photo-modal-close:focus {
+            color: #ddd;
+            transform: scale(1.1);
+        }
+
+        .photo-modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 50px;
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .photo-modal-nav:hover {
+            color: #ddd;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .photo-modal-prev {
+            left: 20px;
+        }
+
+        .photo-modal-next {
+            right: 20px;
+        }
+
+        .photo-modal-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 6px;
+        }
+
+        .photos-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .photo-tab {
+            padding: 10px 0;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .photo-tab.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .photo-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .photo-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-count {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .btn-upload-photo {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-upload-photo:hover {
+            background: var(--primary-dark);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .user-photo {
+            position: relative;
+        }
+
+        .user-photo::after {
+            content: 'By You';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--primary-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .photo-upload-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .photo-upload-options {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .photo-upload-options h5 {
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .upload-option-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid var(--border-color);
+            background: white;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-option-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+        }
+
+        .upload-option-btn i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        /* Service Chips */
+        .service-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .service-chip {
+            background: var(--light-gray);
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .service-chip:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Right Side Info Card */
+        .info-card {
+            position: sticky;
+            top: 20px;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-number {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .address-text {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .btn-direction, .btn-copy {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-direction {
+            background: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-copy {
+            background: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .status-timing {
+            padding: 10px;
+            background: #e8f5e8;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .status-open-text {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        /* Price List Styling */
+        .price-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .price-item:hover {
+            box-shadow: var(--shadow);
+            border-color: var(--primary-color);
+        }
+
+        .price-title {
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .price-amount {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--success-color);
+            margin-bottom: 8px;
+        }
+
+        .price-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .price-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Review Form Styling */
+        .add-review-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        /* View More Reviews Button */
+        .review-item.hidden {
+            display: none;
+        }
+
+        .view-more-reviews-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .view-more-reviews-btn:hover {
+            background: #0056b3;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .review-form .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .review-form .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .review-form .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .rating-input {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .rating-input input[type="radio"] {
+            display: none;
+        }
+
+        .rating-input .star {
+            font-size: 28px;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .rating-input .star:hover,
+        .rating-input .star:hover ~ .star {
+            color: #ffc107;
+        }
+
+        .rating-input input[type="radio"]:checked ~ .star {
+            color: #ffc107;
+        }
+
+        .review-form button[type="submit"] {
+            background: var(--primary-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .review-form button[type="submit"]:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        /* FAQs Section Styling */
+        #faqs {
+            margin-top: 30px;
+        }
+
+        .accordion-item {
+            border: 1px solid #e9ecef;
+            border-radius: 8px !important;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            background: #f8f9fa;
+            border: none;
+            padding: 16px 20px;
+            font-weight: 600;
+            color: #333;
+            border-radius: 8px !important;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            border: none;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23333'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            transform: rotate(-180deg);
+        }
+
+        .accordion-body {
+            padding: 20px;
+            background: white;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .accordion-collapse {
+            border-top: 1px solid #e9ecef;
+        }
+
+        /* JustDial Style Services Row */
+        .justdial-services-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 20px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .service-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-category-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            line-height: 1.2;
+        }
+
+        .service-links {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .service-link {
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .service-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .service-more {
+            color: #007bff;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+
+        .view-all-services {
+            border: 2px solid #007bff;
+            color: #007bff;
+            padding: 10px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .view-all-services:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        /* JustDial Pixel-Perfect Modal Styles */
+        .justdial-modal-content {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .justdial-modal-header {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .justdial-call-btn, .justdial-whatsapp-btn {
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .justdial-modal-body {
+            height: 520px;
+            overflow: hidden;
+        }
+
+        .justdial-modal-container {
+            display: flex;
+            height: 100%;
+        }
+
+        /* Left Sidebar Panel */
+        .justdial-sidebar {
+            width: 300px;
+            background: #fafbfc;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .justdial-search-container {
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .justdial-search-wrapper {
+            position: relative;
+        }
+
+        .justdial-search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 14px;
+            z-index: 2;
+        }
+
+        .justdial-search-input {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+            outline: none;
+        }
+
+        .justdial-search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        .justdial-search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .services-categories {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 2px 0;
+        }
+
+        .category-item:hover {
+            background: #e9ecef;
+        }
+
+        .category-item.active {
+            background: #e8f1ff;
+            color: #1976d2;
+            border-left: 4px solid #1976d2;
+            font-weight: 600;
+        }
+
+        .category-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .category-count {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .category-item.active .category-count {
+            color: #1976d2;
+        }
+
+        /* Right Content Area */
+        .services-content {
+            flex: 1;
+            background: #fff;
+            overflow-y: auto;
+            padding: 20px 24px;
+        }
+
+        .service-group {
+            margin-bottom: 25px;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .services-highlighted {
+            background: #e8f1ff !important;
+            border: 1px solid #cce7ff;
+        }
+
+        .service-group-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .service-items-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px 24px;
+            margin-bottom: 8px;
+        }
+
+        .service-item-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #333;
+            min-width: 0;
+        }
+
+        .service-check {
+            color: #28a745;
+            font-size: 16px;
+            width: 16px;
+            flex-shrink: 0;
+        }
+
+        .service-item-row span {
+            flex: 1;
+        }
+
+        /* Search Results Highlighting */
+        .search-highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Hidden state for filtered results */
+        .service-group.hidden {
+            display: none;
+        }
+
+        .service-item-row.hidden {
+            display: none;
+        }
+
+        /* JustDial Left Sidebar Styles */
+        .justdial-sidebar {
+            width: 300px;
+            background: #fafbfc;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .justdial-search-container {
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .justdial-search-wrapper {
+            position: relative;
+        }
+
+        .justdial-search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 14px;
+            z-index: 2;
+        }
+
+        .justdial-search-input {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+            outline: none;
+        }
+
+        .justdial-search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        .justdial-search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .justdial-categories {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .justdial-category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border-left: 3px solid transparent;
+            font-size: 14px;
+        }
+
+        .justdial-category-item:hover {
+            background: #f3f4f6;
+        }
+
+        .justdial-category-item.active {
+            background: #dbeafe;
+            color: #1e40af;
+            border-left-color: #2563eb;
+            font-weight: 600;
+        }
+
+        .justdial-category-name {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .justdial-category-count {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        .justdial-category-item.active .justdial-category-count {
+            color: #1e40af;
+        }
+
+        /* JustDial Right Content Panel */
+        .justdial-content {
+            flex: 1;
+            background: #fff;
+            overflow-y: auto;
+            padding: 16px 20px;
+        }
+
+        .justdial-service-group {
+            margin-bottom: 20px;
+            padding: 14px 16px;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .justdial-services-highlighted {
+            background: #eff6ff !important;
+            border: 1px solid #bfdbfe;
+        }
+
+        .justdial-service-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+            padding-bottom: 0;
+        }
+
+        .justdial-service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px 32px;
+            margin-bottom: 0;
+        }
+
+        .justdial-service-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 3px 0;
+            font-size: 14px;
+            color: #374151;
+            line-height: 1.3;
+        }
+
+        .justdial-check {
+            color: #059669;
+            font-size: 12px;
+            width: 12px;
+            flex-shrink: 0;
+        }
+
+        /* Custom scrollbar */
+        .justdial-categories::-webkit-scrollbar,
+        .justdial-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .justdial-categories::-webkit-scrollbar-track,
+        .justdial-content::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+
+        .justdial-categories::-webkit-scrollbar-thumb,
+        .justdial-content::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .justdial-categories::-webkit-scrollbar-thumb:hover,
+        .justdial-content::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Price List Styles */
+        .price-category {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .price-category-header {
+            background: #f8fafc;
+            padding: 16px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background-color 0.2s;
+        }
+
+        .price-category-header:hover {
+            background: #f1f5f9;
+        }
+
+        .price-category-header h5 {
+            color: #1f2937;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .price-category-header .fas.fa-chevron-down {
+            transition: transform 0.3s;
+            color: #6b7280;
+        }
+
+        .price-category-header[aria-expanded="true"] .fas.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .price-items {
+            padding: 0;
+        }
+
+        .price-item {
+            padding: 20px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-name {
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .price-range {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .price-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #059669;
+        }
+
+        .price-suffix {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .service-description {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .view-more-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .view-more-link:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        .price-item .btn {
+            padding: 8px 16px;
+            font-size: 13px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .price-item .btn-primary {
+            background: #2563eb;
+            border: none;
+        }
+
+        .price-item .btn-success {
+            background: #25d366;
+            border: none;
+        }
+
+        /* Modal Responsive Design */
+        @media (max-width: 768px) {
+            .services-modal-container {
+                flex-direction: column;
+            }
+            
+            .services-sidebar {
+                width: 100%;
+                max-height: 200px;
+            }
+            
+            .services-content {
+                flex: 1;
+            }
+            
+            .services-modal-body {
+                height: 500px;
+            }
+            
+            .service-items-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .service-items-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .services-sidebar {
+                max-height: 150px;
+            }
+            
+            .justdial-services-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 16px;
+            }
+            
+            .service-category-title {
+                font-size: 15px;
+                margin-bottom: 8px;
+            }
+            
+            .service-links {
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .justdial-services-row {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .services-sidebar {
+                max-height: 150px;
+            }
+        }
+            
+            .service-header {
+                padding: 15px 0;
+            }
+
+            .service-title {
+                font-size: 1.4rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-call, .btn-enquire, .btn-whatsapp {
+                width: 100%;
+                margin-bottom: 8px;
+                text-align: center;
+            }
+
+            .photos-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .content-section {
+                padding: 16px;
+                margin: 15px 0;
+            }
+
+            .custom-tabs {
+                padding: 0 15px;
+            }
+
+            .nav-tabs .nav-link {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .service-logo {
+                width: 60px;
+                height: 60px;
+            }
+
+            .service-title {
+                font-size: 1.2rem;
+            }
+
+            .photos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .photos-tabs {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .photo-tab {
+                padding: 8px 0;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Tab content styling */
+        .tab-content {
+            min-height: 200px;
+        }
+
+        .fade:not(.show) {
+            opacity: 0;
+        }
+
+        .fade.show {
+            opacity: 1;
+            transition: opacity 0.15s linear;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <!-- Header Section -->
+    <header style="background: white; border-bottom: 1px solid #e9ecef; padding: 20px 0;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <a href="services.html" style="text-decoration: none; color: #007bff; font-size: 1.2rem; font-weight: 600;">
+                        <i class="fas fa-car-side me-2"></i>GOCARZ
+                    </a>
+                </div>
+                <div class="col text-end">
+                    <a href="services.html" style="text-decoration: none; color: #6c757d;">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Service Info Card -->
+    <div style="background: white; padding: 30px 0; border-bottom: 1px solid #e9ecef;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="d-flex gap-3 align-items-start">
+                        <img id="serviceLogo" src="images/honda1.png" alt="MyTVS Logo" style="width: 100px; height: 100px; border-radius: 12px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <h1 id="serviceTitle" style="font-size: 1.8rem; font-weight: 700; margin-bottom: 8px;">
+                                MyTVS MultiBrand Car Service
+                                <span style="background: #28a745; color: white; font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; margin-left: 10px;">
+                                    <i class="fas fa-check-circle"></i> Verified
+                                </span>
+                            </h1>
+                            
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                                <div style="background: #28a745; color: white; padding: 6px 12px; border-radius: 8px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
+                                    <span id="serviceRating" style="font-size: 1.1rem;">4.5</span>
+                                    <i class="fas fa-star" style="font-size: 0.9rem;"></i>
+                                </div>
+                                <span style="color: #6c757d;"><span id="ratingsCount">982</span> Ratings Ratings</span>
+                            </div>
+
+                            <p style="margin: 8px 0; color: #6c757d;">
+                                <i class="fas fa-map-marker-alt me-2"></i><span id="serviceLocation">Block No 36 Auto Nagar, Hyderabad</span>
+                            </p>
+
+                            <div style="display: flex; gap: 20px; margin-top: 10px;">
+                                <span style="color: #28a745;">
+                                    <i class="fas fa-calendar-check me-1"></i><span id="yearsInBusiness">8+</span> Years in Business
+                                </span>
+                                <span style="color: #28a745;">
+                                    <i class="fas fa-clock me-1"></i>Open 24 Hours
+                                </span>
+                            </div>
+
+                            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                                <button id="callButton" onclick="window.location.href='tel:+918296967446'" style="background: #28a745; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; flex: 1; max-width: 200px;">
+                                    <i class="fas fa-phone me-2"></i>Call
+                                </button>
+                                <button style="background: #007bff; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; flex: 1; max-width: 200px;" data-bs-toggle="modal" data-bs-target="#enquiryModal">
+                                    <i class="fas fa-calendar-alt me-2"></i>Booking Slot
+                                </button>
+                                <a id="whatsappButton" href="https://wa.me/918296967446" style="background: #25D366; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; flex: 1; max-width: 200px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div style="background: white; border-bottom: 2px solid #f0f0f0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <div class="container">
+            <ul style="display: flex; list-style: none; padding: 0; margin: 0; gap: 10px; overflow-x: auto;">
+                <li>
+                    <a href="#overview-section" class="nav-tab" data-section="overview-section" style="display: block; padding: 15px 20px; text-decoration: none; color: #007bff; font-weight: 600; border-bottom: 3px solid #007bff; white-space: nowrap;">
+                        Overview
+                    </a>
+                </li>
+                <li>
+                    <a href="#photos-section" class="nav-tab" data-section="photos-section" style="display: block; padding: 15px 20px; text-decoration: none; color: #666; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap;">
+                        Photos
+                    </a>
+                </li>
+                <li>
+                    <a href="price-list.html" style="display: block; padding: 15px 20px; text-decoration: none; color: #666; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap;">
+                        Price List
+                    </a>
+                </li>
+                <li>
+                    <a href="#quick-info-section" class="nav-tab" data-section="quick-info-section" style="display: block; padding: 15px 20px; text-decoration: none; color: #666; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap;">
+                        Quick Info
+                    </a>
+                </li>
+                <li>
+                    <a href="#services-section" class="nav-tab" data-section="services-section" style="display: block; padding: 15px 20px; text-decoration: none; color: #666; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap;">
+                        Services
+                    </a>
+                </li>
+                <li>
+                    <a href="#reviews-section" class="nav-tab" data-section="reviews-section" style="display: block; padding: 15px 20px; text-decoration: none; color: #666; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap;">
+                        Reviews
+                    </a>
+                </li>
+                <li>
+                    <a href="#faqs" class="nav-tab" data-section="faqs" style="display: block; padding: 15px 20px; text-decoration: none; color: #666; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap;">
+                        FAQs
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left Content -->
+            <div class="col-lg-8">
+                <!-- Overview Section -->
+                <section id="overview-section" class="content-section">
+                    <div class="section-title">About the Service</div>
+                    <p id="serviceDescription">
+                        MyTVS MultiBrand Car Service is your trusted partner for all automotive needs. 
+                        We provide comprehensive car servicing solutions with skilled technicians, 
+                        genuine spare parts, and transparent pricing. Our services include regular maintenance, 
+                        oil changes, brake services, AC repair, and much more.
+                    </p>
+                    
+                    <div class="service-chips" id="serviceChips">
+                        <span class="service-chip">Doorstep Service</span>
+                        <span class="service-chip">Car Wash</span>
+                        <span class="service-chip">Oil Change</span>
+                        <span class="service-chip">Brake Service</span>
+                        <span class="service-chip">AC Repair</span>
+                        <span class="service-chip">Battery Replacement</span>
+                        <span class="service-chip">Tyre Services</span>
+                        <span class="service-chip">Engine Repair</span>
+                    </div>
+                </section>
+
+                <!-- Photos Section -->
+                <section id="photos-section" class="content-section">
+                    <div class="section-title mb-3">Photos</div>
+                    
+                    <!-- Hidden file input -->
+                    <input type="file" id="photoFileInput" accept="image/*" multiple capture="environment" style="display: none;">
+                    
+                    <!-- Photo Category Grid -->
+                    <div class="row g-3 mb-4">
+                        <!-- All Photos Card -->
+                        <div class="col-md-4">
+                            <div class="photo-category-card" data-photo-category="all">
+                                <div class="photo-category-image">
+                                    <img src="images/honda1.png" alt="All Photos" style="width: 100%; height: 140px; object-fit: cover;">
+                                    <div class="photo-category-overlay">
+                                        <i class="fas fa-images" style="font-size: 2rem; color: white;"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-category-info">
+                                    <h6 class="mb-1">All</h6>
+                                    <p class="mb-0 text-muted"><small><strong id="allPhotosCount">22</strong> Photos</small></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- By User Card -->
+                        <div class="col-md-4">
+                            <div class="photo-category-card" data-photo-category="user">
+                                <div class="photo-category-image">
+                                    <img src="images/honda1.png" alt="By User" style="width: 100%; height: 140px; object-fit: cover;">
+                                    <div class="photo-category-overlay">
+                                        <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-category-info">
+                                    <h6 class="mb-1">By User</h6>
+                                    <p class="mb-0 text-muted"><small><strong>5</strong> Photos</small></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- With Review Card -->
+                        <div class="col-md-4">
+                            <div class="photo-category-card" data-photo-category="review">
+                                <div class="photo-category-image">
+                                    <img src="images/honda1.png" alt="With Review" style="width: 100%; height: 140px; object-fit: cover;">
+                                    <div class="photo-category-overlay">
+                                        <i class="fas fa-star" style="font-size: 2rem; color: white;"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-category-info">
+                                    <h6 class="mb-1">With Review</h6>
+                                    <p class="mb-0 text-muted"><small><strong>7</strong> Photos</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Photos Button -->
+                    <div class="text-start mb-4">
+                        <button class="btn btn-primary" id="uploadPhotoBtn" style="background: #007bff; border: none; padding: 10px 24px; border-radius: 6px; font-size: 0.9rem;">
+                            <i class="fas fa-cloud-upload-alt me-2"></i>Upload Photos
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Price List Section -->
+                <section id="price-list-section" class="content-section">
+                    <div class="section-title">Price List</div>
+                    <div class="text-center mb-3">
+                        <a href="price-list.html" class="btn btn-primary">
+                            <i class="fas fa-list-alt me-2"></i>View Complete Price List
+                        </a>
+                    </div>
+                    <p class="text-muted">Click the button above to view our complete price list with all services and pricing details.</p>
+                </section>
+
+                <!-- Quick Info Section -->
+                <section id="quick-info-section" class="content-section">
+                    <div class="section-title">Quick Information</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><strong>Contact Details</strong></h6>
+                            <p><i class="fas fa-phone me-2"></i> <span id="quickPhone">+91 82969 67446</span></p>
+                            <p><i class="fas fa-envelope me-2"></i> mytvs@example.com</p>
+                            <p><i class="fas fa-globe me-2"></i> www.mytvs.com</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><strong>Operating Hours</strong></h6>
+                            <p><i class="fas fa-clock me-2"></i> 24 Hours Open</p>
+                            <p><i class="fas fa-calendar me-2"></i> All Days</p>
+                        </div>
+                    </div>
+                    
+                    <h6><strong>Address</strong></h6>
+                    <p id="quickAddress">Block No 36 Auto Nagar, Hyderabad, Telangana 500018</p>
+                    
+                    <h6><strong>Specializations</strong></h6>
+                    <div class="service-chips" id="quickServiceChips">
+                        <!-- Service chips will be populated here -->
+                    </div>
+                </section>
+
+                <!-- Services Section -->
+                <section id="services-section" class="content-section">
+                    <div class="section-title">Services Offered</div>
+                    
+                    <!-- JustDial Style Services Grid -->
+                    <div class="justdial-services-row">
+                        <!-- Services Category -->
+                        <div class="service-column">
+                            <h5 class="service-category-title">
+                                <i class="fas fa-check-circle text-success me-2"></i>Services
+                            </h5>
+                            <div class="service-links">
+                                <a href="#" class="service-link">Doorstep Service</a>,
+                                <a href="#" class="service-link">Oil Change</a>
+                                <span class="service-more">+3</span>
+                            </div>
+                        </div>
+
+                        <!-- Mechanical Repairs Category -->
+                        <div class="service-column">
+                            <h5 class="service-category-title">
+                                <i class="fas fa-check-circle text-success me-2"></i>Mechanical Repairs
+                            </h5>
+                            <div class="service-links">
+                                <a href="#" class="service-link">Car Engine Repair</a>,
+                                <a href="#" class="service-link">Breakdown Services</a>
+                            </div>
+                        </div>
+
+                        <!-- Body Repairs Category -->
+                        <div class="service-column">
+                            <h5 class="service-category-title">
+                                <i class="fas fa-check-circle text-success me-2"></i>Body Repairs
+                            </h5>
+                            <div class="service-links">
+                                <a href="#" class="service-link">Bumper Repair</a>,
+                                <a href="#" class="service-link">Car Door Repair</a>
+                            </div>
+                        </div>
+
+                        <!-- Denting & Painting Category -->
+                        <div class="service-column">
+                            <h5 class="service-category-title">
+                                <i class="fas fa-check-circle text-success me-2"></i>Denting & Painting
+                            </h5>
+                            <div class="service-links">
+                                <a href="#" class="service-link">Car Denting</a>,
+                                <a href="#" class="service-link">Car Painting</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View All Button -->
+                    <div class="text-center mt-4">
+                        <button class="btn btn-outline-primary" id="viewAllBtn" type="button">View all</button>
+                    </div>
+
+                    <div class="services-grid d-none" id="servicesList">
+                        <!-- Fallback services in case JavaScript doesn't load -->
+                        <div class="service-category">
+                            <div class="service-category-icon">
+                                <i class="fas fa-wrench"></i>
+                            </div>
+                            <div class="service-category-title">General Maintenance & Servicing</div>
+                            <ul class="service-category-items">
+                                <li>• Basic Car Service (Oil + Filter)</li>
+                                <li>• Premium Service Package</li>
+                                <li>• Periodic Maintenance Service</li>
+                                <li>• Engine Oil Change</li>
+                                <li>• Air Filter Replacement</li>
+                                <li>• Multi-Point Vehicle Inspection</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-category">
+                            <div class="service-category-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="service-category-title">Car Wash & Detailing</div>
+                            <ul class="service-category-items">
+                                <li>• Basic Exterior Wash</li>
+                                <li>• Premium Car Detailing</li>
+                                <li>• Interior Deep Cleaning</li>
+                                <li>• Steam Wash Service</li>
+                                <li>• Waxing & Polishing</li>
+                                <li>• Ceramic Coating</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-category">
+                            <div class="service-category-icon">
+                                <i class="fas fa-snowflake"></i>
+                            </div>
+                            <div class="service-category-title">AC & Cooling Services</div>
+                            <ul class="service-category-items">
+                                <li>• AC Gas Filling (R134a)</li>
+                                <li>• AC Filter Replacement</li>
+                                <li>• AC Compressor Service</li>
+                                <li>• Evaporator Cleaning</li>
+                                <li>• Cooling System Service</li>
+                                <li>• Radiator Cleaning</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-category">
+                            <div class="service-category-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="service-category-title">Repair & Mechanical Services</div>
+                            <ul class="service-category-items">
+                                <li>• Engine Diagnostics & Repair</li>
+                                <li>• Transmission Service</li>
+                                <li>• Brake System Service</li>
+                                <li>• Suspension & Steering Repair</li>
+                                <li>• Exhaust System Service</li>
+                                <li>• Timing Belt Replacement</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-category">
+                            <div class="service-category-icon">
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                            <div class="service-category-title">Electrical & Electronics</div>
+                            <ul class="service-category-items">
+                                <li>• Battery Testing & Replacement</li>
+                                <li>• Alternator Service & Repair</li>
+                                <li>• Starter Motor Service</li>
+                                <li>• Electrical Wiring Repair</li>
+                                <li>• Car Audio System Installation</li>
+                                <li>• ECU Diagnostics</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-category">
+                            <div class="service-category-icon">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div class="service-category-title">Tyre & Wheel Services</div>
+                            <ul class="service-category-items">
+                                <li>• Tyre Replacement (All Brands)</li>
+                                <li>• Wheel Alignment (2D/3D)</li>
+                                <li>• Wheel Balancing</li>
+                                <li>• Puncture Repair</li>
+                                <li>• Nitrogen Filling</li>
+                                <li>• Alloy Wheel Installation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reviews Section -->
+                <section id="reviews-section" class="content-section">
+                    <div class="section-title">Customer Reviews</div>
+                    <div class="reviews-summary mb-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rating-summary">
+                                <div class="big-rating">4.5</div>
+                                <div class="stars">★★★★★</div>
+                                <div class="total-reviews">982 Reviews</div>
+                            </div>
+                            <div class="rating-bars flex-grow-1">
+                                <div class="rating-bar">
+                                    <span>5★</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 75%"></div>
+                                    </div>
+                                    <span>640</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span>4★</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 20%"></div>
+                                    </div>
+                                    <span>196</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span>3★</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 3%"></div>
+                                    </div>
+                                    <span>30</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span>2★</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 1%"></div>
+                                    </div>
+                                    <span>10</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span>1★</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 1%"></div>
+                                    </div>
+                                    <span>6</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="reviewsList">
+                        <!-- Fallback reviews in case JavaScript doesn't load -->
+                        <div class="border rounded p-3 mb-3 review-item">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h6 class="mb-1">Rajesh Kumar</h6>
+                                    <div class="text-warning">★★★★★</div>
+                                </div>
+                                <small class="text-muted">2 days ago</small>
+                            </div>
+                            <p class="mb-0">Excellent service! Very professional team and transparent pricing. They completed my car service in just 2 hours and explained everything clearly. The doorstep service is amazing - they picked up and dropped my car at my office. Highly recommended for busy professionals!</p>
+                        </div>
+
+                        <div class="border rounded p-3 mb-3 review-item hidden">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h6 class="mb-1">Priya Singh</h6>
+                                    <div class="text-warning">★★★★☆</div>
+                                </div>
+                                <small class="text-muted">1 week ago</small>
+                            </div>
+                            <p class="mb-0">Good service quality and quick work. Got my AC repaired and gas filled at a reasonable price. The technician was knowledgeable and fixed the cooling issue immediately. Only minor complaint is the waiting area could be better. Overall satisfied and will visit again.</p>
+                        </div>
+
+                        <div class="border rounded p-3 mb-3 review-item hidden">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h6 class="mb-1">Mohammed Ali</h6>
+                                    <div class="text-warning">★★★★★</div>
+                                </div>
+                                <small class="text-muted">2 weeks ago</small>
+                            </div>
+                            <p class="mb-0">Best car service center in Hyderabad! I have been bringing my Maruti Swift here for the past 3 years. Fair pricing, honest service, and they never try to oversell unnecessary parts. The staff is courteous and always explains what needs to be done. Trustworthy mechanics are rare to find these days.</p>
+                        </div>
+
+                       
+
+                        
+
+                        
+                        
+
+                        
+
+                        
+                        <div class="border rounded p-3 mb-3 review-item hidden">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h6 class="mb-1">Shalini Joshi</h6>
+                                    <div class="text-warning">★★★★★</div>
+                                </div>
+                                <small class="text-muted">4 months ago</small>
+                            </div>
+                            <p class="mb-0">Impressed with their customer service and technical knowledge! Brought my Toyota Innova for AC problems. They not only fixed the AC but also identified and resolved other electrical issues. The service report was comprehensive with before-after photos. Very transparent process and fair pricing.</p>
+                        </div>
+
+                        <!-- View More Button -->
+                        <button class="view-more-reviews-btn" id="viewMoreReviewsBtn" onclick="showAllReviews()">
+                            <i class="fas fa-chevron-down me-2"></i>View More Reviews
+                        </button>
+                    
+                    <!-- Add Review Form -->
+                    <div class="add-review-section mt-4 pt-4 border-top">
+                        <h5 class="mb-3">Write a Review</h5>
+                        <form id="reviewForm" class="review-form">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="reviewName" class="form-label">Your Name *</label>
+                                    <input type="text" class="form-control" id="reviewName" required placeholder="Enter your name">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="reviewEmail" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="reviewEmail" required placeholder="your.email@example.com">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Rating *</label>
+                                <div class="rating-input">
+                                    <input type="radio" name="rating" value="5" id="star5" required>
+                                    <label for="star5" class="star">★</label>
+                                    <input type="radio" name="rating" value="4" id="star4" required>
+                                    <label for="star4" class="star">★</label>
+                                    <input type="radio" name="rating" value="3" id="star3" required>
+                                    <label for="star3" class="star">★</label>
+                                    <input type="radio" name="rating" value="2" id="star2" required>
+                                    <label for="star2" class="star">★</label>
+                                    <input type="radio" name="rating" value="1" id="star1" required>
+                                    <label for="star1" class="star">★</label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="reviewService" class="form-label">Service Taken</label>
+                                <select class="form-control" id="reviewService">
+                                    <option value="">Select Service (Optional)</option>
+                                    <option value="general-service">General Service</option>
+                                    <option value="oil-change">Oil Change</option>
+                                    <option value="car-wash">Car Wash</option>
+                                    <option value="ac-service">AC Service</option>
+                                    <option value="brake-service">Brake Service</option>
+                                    <option value="engine-repair">Engine Repair</option>
+                                    <option value="battery-service">Battery Service</option>
+                                    <option value="doorstep-service">Doorstep Service</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="reviewComment" class="form-label">Your Review *</label>
+                                <textarea class="form-control" id="reviewComment" rows="4" required 
+                                    placeholder="Share your experience with this service center..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane me-2"></i>Submit Review
+                            </button>
+                        </form>
+                    </div>
+                    </div>
+                </section>
+
+                <!-- FAQs Section -->
+                <section id="faqs" class="content-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-question-circle me-2"></i>Frequently Asked Questions
+                    </h3>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <!-- General Service FAQs -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq1" aria-expanded="false">
+                                    <i class="fas fa-wrench me-2"></i>
+                                    What types of car services do you offer?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We offer comprehensive car services including regular maintenance (oil changes, filter replacements), 
+                                    brake services, engine diagnostics and repair, AC service, battery replacement, tire services, 
+                                    electrical repairs, and complete car wash packages. Our certified technicians use genuine parts 
+                                    and modern equipment for all services.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Booking & Timing FAQs -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq2" aria-expanded="false">
+                                    <i class="fas fa-clock me-2"></i>
+                                    How can I book an appointment and what are your working hours?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    You can book appointments through our online booking system, phone call, or by visiting our service center. 
+                                    We're open Monday to Saturday from 8:00 AM to 8:00 PM, and Sunday from 9:00 AM to 6:00 PM. 
+                                    For urgent services, we also offer 24/7 emergency roadside assistance.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pricing & Payment FAQs -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq3" aria-expanded="false">
+                                    <i class="fas fa-rupee-sign me-2"></i>
+                                    What are your service charges and payment methods?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our service charges vary based on the type of service and car model. Basic services start from ₹500, 
+                                    major services from ₹2,000, and specialized repairs are quoted after diagnosis. We accept cash, 
+                                    all major credit/debit cards, UPI, and digital wallets. Free estimates are provided before any major work.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quality & Warranty FAQs -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq4" aria-expanded="false">
+                                    <i class="fas fa-shield-alt me-2"></i>
+                                    Do you provide warranty on services and parts?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we provide warranty on all our services and parts. Service warranty ranges from 1-6 months 
+                                    depending on the type of work. Genuine parts come with manufacturer warranty (6-12 months), 
+                                    while aftermarket parts have 3-6 months warranty. All warranty terms are clearly mentioned in your service receipt.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Doorstep Service FAQs -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq5" aria-expanded="false">
+                                    <i class="fas fa-home me-2"></i>
+                                    Do you offer doorstep/pickup and drop services?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we offer convenient doorstep services for basic maintenance like oil changes, battery replacement, 
+                                    and minor repairs. For major services, we provide free pickup and drop facility within 10km radius. 
+                                    Doorstep services are available on weekdays with advance booking, and pickup/drop is available all days.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Parts & Quality FAQs -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq6" aria-expanded="false">
+                                    <i class="fas fa-cog me-2"></i>
+                                    What type of parts do you use for repairs?
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We use only genuine OEM parts for newer vehicles under warranty and high-quality aftermarket parts 
+                                    for older vehicles. All parts are sourced from authorized dealers and reputable manufacturers. 
+                                    We also offer customers the choice between genuine and aftermarket parts with transparent pricing for both options.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Emergency Services FAQs -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq7" aria-expanded="false">
+                                    <i class="fas fa-ambulance me-2"></i>
+                                    Do you provide emergency breakdown services?
+                                </button>
+                            </h2>
+                            <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we provide 24/7 emergency breakdown services including jump-start, flat tire change, 
+                                    emergency fuel delivery, lockout assistance, and towing services. Our emergency response team 
+                                    typically reaches within 30-45 minutes in the city. Emergency service charges apply based on time and location.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insurance FAQs -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq8" aria-expanded="false">
+                                    <i class="fas fa-file-invoice me-2"></i>
+                                    Do you handle insurance claims for accident repairs?
+                                </button>
+                            </h2>
+                            <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we are authorized service partners with major insurance companies. We handle the entire 
+                                    insurance claim process including damage assessment, estimate preparation, claim filing, and 
+                                    direct billing with insurance companies. Our team ensures hassle-free claim settlement and quality repairs.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Side Info Card -->
+            <div class="col-lg-4">
+                <div class="info-card">
+                    <h6><strong>Contact Information</strong></h6>
+                    <div class="contact-number" id="contactNumber">
+                        <i class="fas fa-phone me-2"></i>
+                        +91 82969 67446
+                    </div>
+                    
+                    <h6 class="mt-3"><strong>Address</strong></h6>
+                    <div class="address-text" id="contactAddress">
+                        Block No 36 Auto Nagar, Hyderabad, Telangana 500018
+                    </div>
+                    
+                    <button class="btn btn-direction">
+                        <i class="fas fa-directions me-2"></i>
+                        Get Directions
+                    </button>
+                    
+                    <button class="btn btn-copy" onclick="copyAddress()">
+                        <i class="fas fa-copy me-2"></i>
+                        Copy Address
+                    </button>
+                    
+                    <div class="status-timing">
+                        <div class="status-open-text">
+                            <i class="fas fa-clock me-2"></i>
+                            Open Now - 24 Hours
+                        </div>
+                    </div>
+                    
+                    <h6 class="mt-3"><strong>Email Enquiry</strong></h6>
+                    <button class="btn btn-enquire w-100" data-bs-toggle="modal" data-bs-target="#emailEnquiryModal">
+                        <i class="fas fa-envelope me-2"></i>
+                        Send Email
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enquiry Modal -->
+    <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="enquiryModalLabel">
+                        <i class="fas fa-comment-dots me-2"></i>Send Enquiry
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="enquiry-form-detail">
+                        <div class="mb-3">
+                            <label for="enqName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="enqName" placeholder="Your full name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="enqPhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="enqPhone" placeholder="Your phone number" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="enqEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="enqEmail" placeholder="Your email address" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="enqService" class="form-label">Service Required</label>
+                            <select class="form-control" id="enqService" required>
+                                <option value="">Select service type</option>
+                                <option value="car-wash">Car Wash</option>
+                                <option value="oil-change">Oil Change</option>
+                                <option value="brake-service">Brake Service</option>
+                                <option value="ac-repair">AC Repair</option>
+                                <option value="general-service">General Service</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="enqMsg" class="form-label">Message</label>
+                            <textarea class="form-control" id="enqMsg" rows="3" placeholder="Additional details or requirements"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-paper-plane me-2"></i>Send Enquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Enquiry Modal -->
+    <div class="modal fade" id="emailEnquiryModal" tabindex="-1" aria-labelledby="emailEnquiryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emailEnquiryModalLabel">
+                        <i class="fas fa-envelope me-2"></i>Email Enquiry
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="email-enquiry-form">
+                        <div class="mb-3">
+                            <label for="emailName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="emailName" placeholder="Your full name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailAddress" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="emailAddress" placeholder="Your email address" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailSubject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="emailSubject" placeholder="Email subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailMessage" class="form-label">Message</label>
+                            <textarea class="form-control" id="emailMessage" rows="4" placeholder="Your message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-paper-plane me-2"></i>Send Email
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">
+                        <i class="fas fa-check-circle text-success me-2"></i>Success!
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-check-circle text-success fa-3x mb-3"></i>
+                    <p id="successMessage">Your enquiry has been sent successfully. We will get back to you shortly.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="services-data.js"></script>
+    <script>
+        // Utility function to get URL parameters
+        function getUrlParameter(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+
+        // Default service data for demonstration
+        const defaultServiceData = {
+            id: 'mytvs',
+            title: 'MyTVS MultiBrand Car Service',
+            address: 'Block No 36 Auto Nagar, Hyderabad, Telangana 500018',
+            phone: '+91 82969 67446',
+            whatsapp: 'https://wa.me/918296967446',
+            rating: 4.5,
+            ratingsCount: '982',
+            yearsInBusiness: '8+',
+            description: 'MyTVS MultiBrand Car Service is your trusted partner for all automotive needs. We provide comprehensive car servicing solutions with skilled technicians, genuine spare parts, and transparent pricing. Our services include regular maintenance, oil changes, brake services, AC repair, and much more.',
+            images: [
+                'images/honda1.png',
+                'images/maruthi1.png',
+                'images/mahindra1.png',
+                'images/tata1.png',
+                'images/hyundai4.png',
+                'images/toyota1.png',
+                'images/honda2.1.png',
+                'images/maruthi5.png'
+            ],
+            chips: ['Doorstep Service', 'Car Wash & Detailing', 'Oil Change & Service', 'Brake Service', 'AC Repair & Gas Filling', 'Battery Replacement', 'Tyre Services', 'Engine Repair', 'Electrical Services', 'Performance Tuning', 'Emergency Support', 'Insurance Claim Support', 'Denting & Painting', 'CNG/LPG Installation', 'Multi-Brand Service'],
+            services: [
+                'General Car Service',
+                'Oil Change & Filter Replacement',
+                'Brake Service & Repair',
+                'AC Service & Gas Filling',
+                'Battery Check & Replacement',
+                'Tyre Rotation & Balancing',
+                'Engine Diagnostics',
+                'Car Wash & Detailing',
+                'Suspension Repair',
+                'Transmission Service'
+            ],
+            priceList: [
+                {
+                    title: 'Basic Car Service',
+                    price: '1200',
+                    description: 'Complete basic service including oil change, filter replacement, and basic checkup'
+                },
+                {
+                    title: 'AC Service & Gas Filling',
+                    price: '800',
+                    description: 'AC system checkup, gas filling, and performance optimization'
+                },
+                {
+                    title: 'Brake Service Complete',
+                    price: '1500',
+                    description: 'Complete brake system service including pad replacement and fluid change'
+                },
+                {
+                    title: 'Engine Oil Change',
+                    price: '600',
+                    description: 'Premium engine oil change with oil filter replacement'
+                },
+                {
+                    title: 'Car Wash & Detailing',
+                    price: '400',
+                    description: 'Complete car wash with interior cleaning and basic detailing'
+                }
+            ],
+            reviews: [
+                {
+                    name: 'Rajesh Kumar',
+                    rating: 5,
+                    date: '2 days ago',
+                    comment: 'Excellent service! Very professional team and transparent pricing. They completed my car service in just 2 hours and explained everything clearly. The doorstep service is amazing - they picked up and dropped my car at my office. Highly recommended for busy professionals!'
+                },
+                {
+                    name: 'Priya Singh',
+                    rating: 4,
+                    date: '1 week ago',
+                    comment: 'Good service quality and quick work. Got my AC repaired and gas filled at a reasonable price. The technician was knowledgeable and fixed the cooling issue immediately. Only minor complaint is the waiting area could be better. Overall satisfied and will visit again.'
+                },
+                {
+                    name: 'Mohammed Ali',
+                    rating: 5,
+                    date: '2 weeks ago',
+                    comment: 'Best car service center in Hyderabad! I have been bringing my Maruti Swift here for the past 3 years. Fair pricing, honest service, and they never try to oversell unnecessary parts. The staff is courteous and always explains what needs to be done. Trustworthy mechanics are rare to find these days.'
+                },
+                {
+                    name: 'Anita Sharma',
+                    rating: 5,
+                    date: '3 weeks ago',
+                    comment: 'Outstanding experience! My car had multiple issues - brake problems, battery replacement needed, and engine oil leakage. They diagnosed everything correctly and fixed all issues in one day. The quality of work is excellent and they provided 6 months warranty on parts. Very happy with the service.'
+                },
+                {
+                    name: 'Vikram Reddy',
+                    rating: 4,
+                    date: '1 month ago',
+                    comment: 'Reliable service center with skilled technicians. They serviced my Honda City and did a complete health checkup. Found some issues I wasn\'t aware of and fixed them proactively. The digital service report they provided was very detailed. Price was competitive compared to other centers.'
+                },
+                {
+                    name: 'Neha Gupta',
+                    rating: 5,
+                    date: '1 month ago',
+                    comment: 'Fantastic doorstep car wash service! They came to my apartment and did a complete car detailing. The exterior shine and interior cleaning was phenomenal. Very convenient for working women like me who don\'t have time to visit service centers. The team was professional and punctual.'
+                },
+                {
+                    name: 'Arjun Patel',
+                    rating: 5,
+                    date: '6 weeks ago',
+                    comment: 'Emergency roadside assistance was a lifesaver! My car broke down at midnight on the highway. They reached within 45 minutes and fixed the issue on the spot. The mechanic was very skilled and carried all necessary tools. Their 24/7 service is genuine and reliable. Saved my important business trip!'
+                },
+                {
+                    name: 'Deepika Rao',
+                    rating: 4,
+                    date: '2 months ago',
+                    comment: 'Good experience overall. Got my Hyundai i20\'s periodic service done here. They follow manufacturer guidelines properly and use genuine parts. The service advisor explained the complete service checklist and pricing upfront. No hidden charges which I really appreciated. Will recommend to friends.'
+                },
+                {
+                    name: 'Suresh Babu',
+                    rating: 5,
+                    date: '2 months ago',
+                    comment: 'Excellent brake service and wheel alignment! My car was pulling to one side and brakes were making noise. They quickly identified the issues and fixed everything perfectly. The test drive after service showed significant improvement. Their diagnostic equipment is modern and technicians are well-trained.'
+                },
+                {
+                    name: 'Kavitha Menon',
+                    rating: 5,
+                    date: '3 months ago',
+                    comment: 'Best car detailing service in the city! They transformed my 5-year-old car to look almost new. The ceramic coating they applied is amazing - water just slides off now. Interior cleaning removed all stains and odors. Worth every penny spent. The before-after difference was incredible!'
+                },
+                {
+                    name: 'Ravi Krishna',
+                    rating: 4,
+                    date: '3 months ago',
+                    comment: 'Satisfactory service for engine repair. My Tata Nexon had some engine noise issues. They diagnosed it as timing belt problem and replaced it along with water pump. The car runs much smoother now. Price was reasonable and they completed work within promised time. Good technical expertise.'
+                },
+                {
+                    name: 'Shalini Joshi',
+                    rating: 5,
+                    date: '4 months ago',
+                    comment: 'Impressed with their customer service and technical knowledge! Brought my Toyota Innova for AC problems. They not only fixed the AC but also identified and resolved other electrical issues. The service report was comprehensive with before-after photos. Very transparent process and fair pricing.'
+                }
+            ]
+        };
+
+        // Initialize page with service data
+        function initializePage() {
+            const serviceId = getUrlParameter('id') || 'mytvs';
+            let serviceData = defaultServiceData;
+
+            // Try to get data from services-data.js if available
+            if (typeof SERVICES_DATA !== 'undefined' && SERVICES_DATA[serviceId]) {
+                serviceData = { ...defaultServiceData, ...SERVICES_DATA[serviceId] };
+            }
+
+            populateServiceData(serviceData);
+            
+            // Add URL image to gallery if provided
+            const urlImage = getUrlParameter('image');
+            let galleryImages = serviceData.images;
+            if (urlImage && !galleryImages.includes(urlImage)) {
+                galleryImages = [urlImage, ...serviceData.images];
+            }
+            
+            initializePhotoGallery(galleryImages);
+            initializePriceList(serviceData.priceList);
+            initializeServicesList();
+            initializeReviews(serviceData.reviews);
+            initializeEventListeners();
+        }
+
+        // Populate service data in the header
+        function populateServiceData(data) {
+            // Check for image parameter in URL first, then fallback to data.images[0]
+            const imageFromUrl = getUrlParameter('image');
+            const serviceLogoSrc = imageFromUrl || data.images[0];
+            
+            // Update header information
+            document.getElementById('serviceLogo').src = serviceLogoSrc;
+            document.getElementById('serviceTitle').textContent = data.title;
+            document.getElementById('serviceRating').textContent = data.rating;
+            document.getElementById('ratingsCount').textContent = data.ratingsCount;
+            document.getElementById('serviceLocation').textContent = data.address;
+            document.getElementById('yearsInBusiness').textContent = data.yearsInBusiness;
+
+            // Update contact information
+            document.getElementById('callButton').href = `tel:${data.phone}`;
+            document.getElementById('whatsappButton').href = data.whatsapp;
+            document.getElementById('contactNumber').innerHTML = `<i class="fas fa-phone me-2"></i>${data.phone}`;
+            document.getElementById('contactAddress').textContent = data.address;
+
+            // Update quick info
+            document.getElementById('quickPhone').textContent = data.phone;
+            document.getElementById('quickAddress').textContent = data.address;
+
+            // Update overview description
+            document.getElementById('serviceDescription').textContent = data.description;
+
+            // Update service chips
+            updateServiceChips(data.chips);
+        }
+
+        // Update service chips in overview and quick info
+        function updateServiceChips(chips) {
+            const serviceChipsContainer = document.getElementById('serviceChips');
+            const quickServiceChipsContainer = document.getElementById('quickServiceChips');
+
+            [serviceChipsContainer, quickServiceChipsContainer].forEach(container => {
+                container.innerHTML = '';
+                chips.forEach(chip => {
+                    const chipElement = document.createElement('span');
+                    chipElement.className = 'service-chip';
+                    chipElement.textContent = chip;
+                    container.appendChild(chipElement);
+                });
+            });
+        }
+
+        // Initialize photo gallery
+        function initializePhotoGallery(images) {
+            const photosGrid = document.getElementById('photosGrid');
+            const photoCount = document.getElementById('photoCount');
+
+            // Only clear if there are no user photos
+            const userPhotos = photosGrid.querySelectorAll('.user-photo');
+            if (userPhotos.length === 0) {
+                photosGrid.innerHTML = '';
+            } else {
+                // Remove only service photos, keep user photos
+                const servicePhotos = photosGrid.querySelectorAll('.photo-card:not(.user-photo)');
+                servicePhotos.forEach(photo => photo.remove());
+            }
+
+            // Add service photos to grid
+            images.forEach((image, index) => {
+                const photoCard = document.createElement('div');
+                photoCard.className = 'photo-card service-photo';
+                photoCard.innerHTML = `<img src="${image}" alt="Service Photo ${index + 1}" loading="lazy">`;
+                photosGrid.appendChild(photoCard);
+            });
+
+            // Update photo count (service photos + user photos)
+            const totalUserPhotos = photosGrid.querySelectorAll('.user-photo').length;
+            const totalPhotos = images.length * 3 + 2 + totalUserPhotos;
+            photoCount.innerHTML = `<strong>${totalPhotos}</strong> Photos`;
+
+            // Initialize photo category tabs
+            initializePhotoTabs();
+        }
+
+        // Initialize photo category tabs
+        function initializePhotoTabs() {
+            const photoTabs = document.querySelectorAll('.photo-tab');
+            const photosGrid = document.getElementById('photosGrid');
+
+            photoTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    photoTabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+
+                    // Here you could filter photos based on category
+                    // For now, we'll just show all photos
+                });
+            });
+        }
+
+        // Initialize price list
+        function initializePriceList(priceList) {
+            const priceListContainer = document.getElementById('priceListContainer');
+            priceListContainer.innerHTML = '';
+
+            if (priceList && priceList.length > 0) {
+                // Add category header
+                const categoryHeader = document.createElement('div');
+                categoryHeader.innerHTML = `<h6 style="font-weight: 600; margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #007bff;">Car Repair & Maintenance (${priceList.length})</h6>`;
+                priceListContainer.appendChild(categoryHeader);
+
+                // Add price items
+                priceList.forEach(item => {
+                    const priceItem = document.createElement('div');
+                    priceItem.className = 'price-item';
+                    priceItem.innerHTML = `
+                        <div class="price-title">${item.title}</div>
+                        <div class="price-amount">₹${item.price} <span style="font-size: 0.8rem; color: #6c757d; font-weight: 400;">onwards</span></div>
+                        <div class="price-description">${item.description}</div>
+                        <div class="price-actions">
+                            <button class="btn btn-sm btn-primary">
+                                <i class="fas fa-calendar-check me-1"></i>Booking Slot
+                            </button>
+                            <button class="btn btn-sm btn-outline-success">
+                                <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                            </button>
+                        </div>
+                    `;
+                    priceListContainer.appendChild(priceItem);
+                });
+            }
+        }
+
+        // Initialize services list with categories
+        function initializeServicesList() {
+            const servicesList = document.getElementById('servicesList');
+            if (!servicesList) {
+                console.error('Services list element not found');
+                return;
+            }
+            servicesList.innerHTML = '';
+            console.log('Initializing services list...');
+
+            // Service categories with icons
+            const serviceCategories = [
+                {
+                    icon: 'fas fa-wrench',
+                    title: 'General Maintenance & Servicing',
+                    items: [
+                        'Basic Car Service (Oil + Filter)',
+                        'Premium Service Package',
+                        'Periodic Maintenance Service',
+                        'Engine Oil Change',
+                        'Air Filter Replacement',
+                        'Fuel Filter Service',
+                        'Spark Plug Replacement',
+                        'Belt & Hose Inspection',
+                        'Fluid Level Check & Top-ups',
+                        'Multi-Point Vehicle Inspection'
+                    ]
+                },
+                {
+                    icon: 'fas fa-car',
+                    title: 'Car Wash & Detailing',
+                    items: [
+                        'Basic Exterior Wash',
+                        'Premium Car Detailing',
+                        'Interior Deep Cleaning',
+                        'Steam Wash Service',
+                        'Waxing & Polishing',
+                        'Ceramic Coating',
+                        'Paint Protection Film',
+                        'Underbody Wash',
+                        'Engine Bay Cleaning',
+                        'Headlight Restoration'
+                    ]
+                },
+                {
+                    icon: 'fas fa-snowflake',
+                    title: 'AC & Cooling Services',
+                    items: [
+                        'AC Gas Filling (R134a)',
+                        'AC Filter Replacement',
+                        'AC Compressor Service',
+                        'Evaporator Cleaning',
+                        'Condenser Cleaning',
+                        'AC Duct Sanitization',
+                        'Cooling System Service',
+                        'Radiator Cleaning',
+                        'Thermostat Replacement',
+                        'Coolant Flush & Refill'
+                    ]
+                },
+                {
+                    icon: 'fas fa-tools',
+                    title: 'Repair & Mechanical Services',
+                    items: [
+                        'Engine Diagnostics & Repair',
+                        'Transmission Service',
+                        'Clutch Repair & Replacement',
+                        'Brake System Service',
+                        'Suspension & Steering Repair',
+                        'Exhaust System Service',
+                        'Timing Belt Replacement',
+                        'Water Pump Service',
+                        'Fuel System Cleaning',
+                        'Carburetor Service'
+                    ]
+                },
+                {
+                    icon: 'fas fa-battery-full',
+                    title: 'Electrical & Electronics',
+                    items: [
+                        'Battery Testing & Replacement',
+                        'Alternator Service & Repair',
+                        'Starter Motor Service',
+                        'Electrical Wiring Repair',
+                        'Headlight & Taillight Service',
+                        'Horn & Indicator Repair',
+                        'Car Audio System Installation',
+                        'Central Locking Service',
+                        'Power Window Repair',
+                        'ECU Diagnostics'
+                    ]
+                },
+                {
+                    icon: 'fas fa-circle',
+                    title: 'Tyre & Wheel Services',
+                    items: [
+                        'Tyre Replacement (All Brands)',
+                        'Wheel Alignment (2D/3D)',
+                        'Wheel Balancing',
+                        'Tyre Rotation Service',
+                        'Puncture Repair',
+                        'Nitrogen Filling',
+                        'Rim Repair & Refurbishment',
+                        'Tyre Pressure Monitoring',
+                        'Alloy Wheel Installation',
+                        'Seasonal Tyre Change'
+                    ]
+                },
+                {
+                    icon: 'fas fa-shield-alt',
+                    title: 'Safety & Security Services',
+                    items: [
+                        'Brake Pad Replacement',
+                        'Brake Disc Service',
+                        'ABS System Check',
+                        'Airbag System Diagnostics',
+                        'Seatbelt Repair',
+                        'Car Security System',
+                        'GPS Tracker Installation',
+                        'Reverse Camera Installation',
+                        'Parking Sensors',
+                        'Anti-theft System'
+                    ]
+                },
+                {
+                    icon: 'fas fa-gas-pump',
+                    title: 'Fuel & Performance Services',
+                    items: [
+                        'Fuel Injector Cleaning',
+                        'Throttle Body Cleaning',
+                        'Engine Carbon Cleaning',
+                        'Performance Tuning',
+                        'ECU Remapping',
+                        'Turbocharger Service',
+                        'Fuel Tank Cleaning',
+                        'Emission Test & Service',
+                        'Catalytic Converter Service',
+                        'DPF (Diesel Particulate Filter) Cleaning'
+                    ]
+                },
+                {
+                    icon: 'fas fa-home',
+                    title: 'Doorstep Services',
+                    items: [
+                        'Home Car Service',
+                        'Office Pickup & Drop',
+                        'Emergency Roadside Assistance',
+                        'Battery Jump Start',
+                        'Flat Tyre Change',
+                        'Emergency Fuel Delivery',
+                        'Towing Service',
+                        'Key Lockout Assistance',
+                        'Mobile Car Wash',
+                        '24/7 Emergency Support'
+                    ]
+                },
+                {
+                    icon: 'fas fa-certificate',
+                    title: 'Specialized Services',
+                    items: [
+                        'Pre-Purchase Car Inspection',
+                        'Insurance Claim Support',
+                        'Accident Repair Service',
+                        'Denting & Painting',
+                        'Vintage Car Restoration',
+                        'Performance Modification',
+                        'CNG/LPG Kit Installation',
+                        'RTO Documentation Support',
+                        'Car Registration Transfer',
+                        'Extended Warranty Plans'
+                    ]
+                }
+            ];
+
+            serviceCategories.forEach(category => {
+                const categoryElement = document.createElement('div');
+                categoryElement.className = 'service-category';
+                categoryElement.innerHTML = `
+                    <div class="service-category-icon">
+                        <i class="${category.icon}"></i>
+                    </div>
+                    <div class="service-category-title">${category.title}</div>
+                    <ul class="service-category-items">
+                        ${category.items.map(item => `<li>• ${item}</li>`).join('')}
+                    </ul>
+                `;
+                servicesList.appendChild(categoryElement);
+            });
+            
+            console.log('Services list initialized with', serviceCategories.length, 'categories');
+        }
+
+        // Initialize reviews
+        function initializeReviews(reviews) {
+            const reviewsList = document.getElementById('reviewsList');
+            reviewsList.innerHTML = '';
+
+            if (reviews && reviews.length > 0) {
+                reviews.forEach((review, index) => {
+                    const reviewCard = document.createElement('div');
+                    // Add 'review-item' class and hide reviews after the first one
+                    reviewCard.className = 'border rounded p-3 mb-3 review-item' + (index > 0 ? ' hidden' : '');
+                    reviewCard.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h6 class="mb-1">${review.name}</h6>
+                                <div class="text-warning">
+                                    ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
+                                </div>
+                            </div>
+                            <small class="text-muted">${review.date}</small>
+                        </div>
+                        <p class="mb-0">${review.comment}</p>
+                    `;
+                    reviewsList.appendChild(reviewCard);
+                });
+
+                // Add "View More" button if there are more than 1 review
+                if (reviews.length > 1) {
+                    const viewMoreBtn = document.createElement('button');
+                    viewMoreBtn.className = 'view-more-reviews-btn';
+                    viewMoreBtn.id = 'viewMoreReviewsBtn';
+                    viewMoreBtn.innerHTML = '<i class="fas fa-chevron-down me-2"></i>View More Reviews';
+                    reviewsList.appendChild(viewMoreBtn);
+
+                    // Add click event listener
+                    viewMoreBtn.addEventListener('click', function() {
+                        const hiddenReviews = reviewsList.querySelectorAll('.review-item.hidden');
+                        hiddenReviews.forEach(review => {
+                            review.classList.remove('hidden');
+                        });
+                        // Hide the button after showing all reviews
+                        viewMoreBtn.style.display = 'none';
+                    });
+                }
+            } else {
+                reviewsList.innerHTML = '<p class="text-muted">No reviews available yet.</p>';
+            }
+        }
+
+        // Function to show all reviews
+        function showAllReviews() {
+            const reviewsList = document.getElementById('reviewsList');
+            const hiddenReviews = reviewsList.querySelectorAll('.review-item.hidden');
+            const viewMoreBtn = document.getElementById('viewMoreReviewsBtn');
+            
+            hiddenReviews.forEach(review => {
+                review.classList.remove('hidden');
+            });
+            
+            if (viewMoreBtn) {
+                viewMoreBtn.innerHTML = '<i class="fas fa-chevron-up me-2"></i>View Less Reviews';
+                viewMoreBtn.onclick = function() { hideExtraReviews(); };
+            }
+        }
+
+        // Function to hide extra reviews
+        function hideExtraReviews() {
+            const reviewsList = document.getElementById('reviewsList');
+            const allReviews = reviewsList.querySelectorAll('.review-item');
+            const viewMoreBtn = document.getElementById('viewMoreReviewsBtn');
+            
+            // Hide all reviews except the first one
+            allReviews.forEach((review, index) => {
+                if (index > 0) {
+                    review.classList.add('hidden');
+                }
+            });
+            
+            if (viewMoreBtn) {
+                viewMoreBtn.innerHTML = '<i class="fas fa-chevron-down me-2"></i>View More Reviews';
+                viewMoreBtn.onclick = function() { showAllReviews(); };
+            }
+        }
+
+        // Initialize event listeners
+        function initializeEventListeners() {
+            // Enquiry form submission
+            const enquiryForm = document.getElementById('enquiry-form-detail');
+            if (enquiryForm) {
+                enquiryForm.addEventListener('submit', handleEnquirySubmission);
+            }
+
+            // Email enquiry form submission
+            const emailForm = document.getElementById('email-enquiry-form');
+            if (emailForm) {
+                emailForm.addEventListener('submit', handleEmailSubmission);
+            }
+
+            // Price item enquiry buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.price-actions .btn-primary')) {
+                    const modal = new bootstrap.Modal(document.getElementById('enquiryModal'));
+                    modal.show();
+                }
+            });
+
+            // Initialize smooth scrolling navigation
+            initializeSmoothScrolling();
+            
+            // Initialize scroll spy for active tab highlighting
+            initializeScrollSpy();
+            
+            // Initialize photo upload functionality
+            initializePhotoUpload();
+            
+            // Initialize review form functionality
+            initializeReviewForm();
+            
+            // Services view all functionality removed
+        }
+
+        // Initialize smooth scrolling for navigation tabs
+        function initializeSmoothScrolling() {
+            const navTabs = document.querySelectorAll('.nav-tab:not(.price-list-tab)');
+            
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-section');
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        // Update active tab
+                        navTabs.forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Smooth scroll to section
+                        const offsetTop = targetElement.offsetTop - 80; // Account for sticky header
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Handle Price List tab click
+            const priceListTab = document.querySelector('.price-list-tab');
+            if (priceListTab) {
+                priceListTab.addEventListener('click', function(e) {
+                    // Remove active class from all tabs
+                    const allTabs = document.querySelectorAll('.nav-tab');
+                    allTabs.forEach(tab => tab.classList.remove('active'));
+                    
+                    // Add active class to price list tab
+                    this.classList.add('active');
+                    
+                    // Allow default behavior (navigate to price-list.html)
+                });
+            }
+        }
+
+        // Initialize scroll spy for active tab highlighting
+        function initializeScrollSpy() {
+            const sections = document.querySelectorAll('section[id$="-section"]');
+            const navTabs = document.querySelectorAll('.nav-tab:not(.price-list-tab)');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const scrollY = window.pageYOffset;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navTabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.getAttribute('data-section') === current) {
+                        tab.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Handle enquiry form submission
+        function handleEnquirySubmission(e) {
+            e.preventDefault();
+            
+            // Hide enquiry modal
+            const enquiryModal = bootstrap.Modal.getInstance(document.getElementById('enquiryModal'));
+            enquiryModal.hide();
+
+            // Show success modal
+            setTimeout(() => {
+                document.getElementById('successMessage').textContent = 'Your enquiry has been sent successfully. We will contact you shortly!';
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+            }, 300);
+
+            // Reset form
+            e.target.reset();
+        }
+
+        // Handle email form submission
+        function handleEmailSubmission(e) {
+            e.preventDefault();
+            
+            // Hide email modal
+            const emailModal = bootstrap.Modal.getInstance(document.getElementById('emailEnquiryModal'));
+            emailModal.hide();
+
+            // Show success modal
+            setTimeout(() => {
+                document.getElementById('successMessage').textContent = 'Your email has been sent successfully. We will respond within 24 hours!';
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+            }, 300);
+
+            // Reset form
+            e.target.reset();
+        }
+
+        // Copy address functionality
+        function copyAddress() {
+            const address = document.getElementById('contactAddress').textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                // Show temporary success message
+                const btn = event.target;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check me-2"></i>Copied!';
+                btn.classList.add('btn-success');
+                btn.classList.remove('btn-copy');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-copy');
+                }, 2000);
+            });
+        }
+
+        // Initialize photo upload functionality
+        function initializePhotoUpload() {
+            console.log('Initializing photo upload functionality...');
+            
+            const uploadBtn = document.getElementById('uploadPhotoBtn');
+            const fileInput = document.getElementById('photoFileInput');
+            const modal = document.getElementById('photoUploadModal');
+            const takePictureBtn = document.getElementById('takePictureBtn');
+            const selectFilesBtn = document.getElementById('selectFilesBtn');
+
+            console.log('Upload elements found:', {
+                uploadBtn: !!uploadBtn,
+                fileInput: !!fileInput,
+                modal: !!modal,
+                takePictureBtn: !!takePictureBtn,
+                selectFilesBtn: !!selectFilesBtn
+            });
+
+            if (!uploadBtn || !fileInput || !modal || !takePictureBtn || !selectFilesBtn) {
+                console.error('Some photo upload elements are missing!');
+                return;
+            }
+
+            // Upload button click - show modal
+            uploadBtn.addEventListener('click', function() {
+                console.log('Upload button clicked');
+                modal.style.display = 'flex';
+            });
+
+            // Take picture option
+            takePictureBtn.addEventListener('click', function() {
+                console.log('Take picture button clicked');
+                fileInput.setAttribute('capture', 'environment');
+                fileInput.setAttribute('accept', 'image/*');
+                fileInput.click();
+                closePhotoUploadModal();
+            });
+
+            // Select files option
+            selectFilesBtn.addEventListener('click', function() {
+                console.log('Select files button clicked');
+                fileInput.removeAttribute('capture');
+                fileInput.setAttribute('accept', 'image/*');
+                fileInput.click();
+                closePhotoUploadModal();
+            });
+
+            // Handle file selection
+            fileInput.addEventListener('change', function(e) {
+                console.log('File input changed, files selected:', e.target.files.length);
+                if (e.target.files.length > 0) {
+                    handlePhotoUpload(e.target.files);
+                    // Reset the input so the same file can be selected again
+                    e.target.value = '';
+                } else {
+                    console.log('No files selected');
+                }
+            });
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closePhotoUploadModal();
+                }
+            });
+        }
+
+        // Handle photo upload
+        function handlePhotoUpload(files) {
+            console.log('Handling photo upload, files:', files.length);
+            
+            const photosGrid = document.getElementById('photosGrid');
+            const photoCount = document.getElementById('photoCount');
+            
+            if (!photosGrid || !photoCount) {
+                console.error('Photo grid or photo count element not found!');
+                return;
+            }
+            
+            let uploadedCount = 0;
+            
+            Array.from(files).forEach(file => {
+                console.log('Processing file:', file.name, file.type);
+                
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            // Create photo card
+                            const photoCard = document.createElement('div');
+                            photoCard.className = 'photo-card user-photo';
+                            photoCard.innerHTML = `<img src="${e.target.result}" alt="User uploaded photo: ${file.name}">`;
+                            
+                            // Add to grid at the beginning
+                            if (photosGrid.firstChild) {
+                                photosGrid.insertBefore(photoCard, photosGrid.firstChild);
+                            } else {
+                                photosGrid.appendChild(photoCard);
+                            }
+                            
+                            // Update photo count
+                            const currentCountElement = photoCount.querySelector('strong');
+                            if (currentCountElement) {
+                                const currentCount = parseInt(currentCountElement.textContent) || 0;
+                                currentCountElement.textContent = currentCount + 1;
+                            }
+                            
+                            uploadedCount++;
+                            console.log('Photo uploaded successfully:', file.name);
+                            
+                            // Show success message after all files are processed
+                            setTimeout(() => {
+                                showUploadSuccess();
+                            }, 100);
+                            
+                        } catch (error) {
+                            console.error('Error processing uploaded photo:', error);
+                        }
+                    };
+                    
+                    reader.onerror = function(error) {
+                        console.error('Error reading file:', error);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                } else {
+                    console.warn('Skipping non-image file:', file.name);
+                }
+            });
+        }
+
+        // Close photo upload modal
+        function closePhotoUploadModal() {
+            const modal = document.getElementById('photoUploadModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Show upload success message
+        function showUploadSuccess() {
+            console.log('Showing upload success message');
+            
+            // Remove any existing success messages
+            const existingMessages = document.querySelectorAll('.upload-success-message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            const message = document.createElement('div');
+            message.className = 'alert alert-success position-fixed upload-success-message';
+            message.style.cssText = 'top: 20px; right: 20px; z-index: 10000; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+            message.innerHTML = '<i class="fas fa-check-circle me-2"></i>Photo uploaded successfully!';
+            
+            document.body.appendChild(message);
+            
+            // Fade in animation
+            setTimeout(() => {
+                message.style.opacity = '0';
+                message.style.transition = 'opacity 0.3s ease';
+            }, 2700);
+            
+            setTimeout(() => {
+                if (message.parentNode) {
+                    message.remove();
+                }
+            }, 3000);
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing page...');
+            initializePage();
+            
+            // Services modal removed
+            
+            // Ensure services are displayed even if there's an issue
+            setTimeout(function() {
+                const servicesList = document.getElementById('servicesList');
+                if (servicesList && servicesList.innerHTML.trim() === '') {
+                    console.log('Services list is empty, forcing initialization...');
+                    initializeServicesList();
+                }
+            }, 1000);
+
+            // Test photo upload functionality after a delay
+            setTimeout(function() {
+                console.log('Testing photo upload elements...');
+                const uploadBtn = document.getElementById('uploadPhotoBtn');
+                const modal = document.getElementById('photoUploadModal');
+                
+                if (uploadBtn) {
+                    console.log('Upload button found:', uploadBtn);
+                    // Add a backup event listener in case the first one didn't work
+                    uploadBtn.onclick = function() {
+                        console.log('Upload button clicked (backup handler)');
+                        if (modal) {
+                            modal.style.display = 'flex';
+                        } else {
+                            console.error('Modal not found!');
+                        }
+                    };
+                } else {
+                    console.error('Upload button not found!');
+                }
+                
+                if (modal) {
+                    console.log('Modal found:', modal);
+                } else {
+                    console.error('Photo upload modal not found!');
+                }
+            }, 2000);
+        });
+
+        // Initialize review form functionality
+        function initializeReviewForm() {
+            console.log('Initializing review form...');
+            
+            // Star rating functionality
+            const stars = document.querySelectorAll('.rating-input .star');
+            const ratingInputs = document.querySelectorAll('.rating-input input[type="radio"]');
+            
+            stars.forEach((star, index) => {
+                star.addEventListener('click', () => {
+                    const rating = 5 - index; // Convert index to rating (5 to 1)
+                    ratingInputs[index].checked = true;
+                    
+                    // Update visual feedback
+                    stars.forEach((s, i) => {
+                        if (i >= index) {
+                            s.style.color = '#ffc107';
+                        } else {
+                            s.style.color = '#ddd';
+                        }
+                    });
+                });
+                
+                // Hover effects
+                star.addEventListener('mouseenter', () => {
+                    stars.forEach((s, i) => {
+                        if (i >= index) {
+                            s.style.color = '#ffc107';
+                        } else {
+                            s.style.color = '#ddd';
+                        }
+                    });
+                });
+            });
+            
+            // Reset stars on mouse leave
+            const ratingContainer = document.querySelector('.rating-input');
+            if (ratingContainer) {
+                ratingContainer.addEventListener('mouseleave', () => {
+                    const checkedInput = document.querySelector('.rating-input input[type="radio"]:checked');
+                    if (checkedInput) {
+                        const checkedIndex = Array.from(ratingInputs).indexOf(checkedInput);
+                        stars.forEach((s, i) => {
+                            if (i >= checkedIndex) {
+                                s.style.color = '#ffc107';
+                            } else {
+                                s.style.color = '#ddd';
+                            }
+                        });
+                    } else {
+                        stars.forEach(s => s.style.color = '#ddd');
+                    }
+                });
+            }
+            
+            // Form submission
+            const reviewForm = document.getElementById('reviewForm');
+            if (reviewForm) {
+                reviewForm.addEventListener('submit', handleReviewSubmission);
+            }
+        }
+        
+        // Handle review form submission
+        function handleReviewSubmission(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const reviewData = {
+                name: formData.get('reviewerName'),
+                email: formData.get('reviewerEmail'),
+                rating: formData.get('rating'),
+                service: formData.get('serviceType'),
+                comment: formData.get('reviewComment')
+            };
+            
+            // Validate form
+            if (!reviewData.name || !reviewData.email || !reviewData.rating || !reviewData.comment) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Add review to the list
+            addReviewToList(reviewData);
+            
+            // Reset form
+            e.target.reset();
+            
+            // Reset star rating visual
+            const stars = document.querySelectorAll('.rating-input .star');
+            stars.forEach(star => star.style.color = '#ddd');
+            
+            // Show success message
+            showMessage('Review submitted successfully! Thank you for your feedback.', 'success');
+        }
+        
+        // Add new review to the reviews list
+        function addReviewToList(reviewData) {
+            const reviewsList = document.querySelector('.reviewsList');
+            if (!reviewsList) return;
+            
+            const reviewHTML = `
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="reviewer-details">
+                                <h6 class="reviewer-name">${reviewData.name}</h6>
+                                <div class="review-rating">
+                                    ${'★'.repeat(parseInt(reviewData.rating))}${'☆'.repeat(5 - parseInt(reviewData.rating))}
+                                </div>
+                                <p class="review-date">Just now • ${reviewData.service}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="review-text">${reviewData.comment}</p>
+                </div>
+            `;
+            
+            // Add to the top of the reviews list
+            reviewsList.insertAdjacentHTML('afterbegin', reviewHTML);
+        }
+        
+        // View all button disabled - no modal functionality
+
+
+    </script>
+
+    <!-- Photo Upload Modal -->
+    <div class="photo-upload-modal" id="photoUploadModal">
+        <div class="photo-upload-options">
+            <h5>Add Photos</h5>
+            <p class="text-muted mb-3">Choose how you want to add photos</p>
+            
+            <button class="upload-option-btn" id="takePictureBtn">
+                <i class="fas fa-camera"></i>
+                Take Picture
+            </button>
+            
+            <button class="upload-option-btn" id="selectFilesBtn">
+                <i class="fas fa-images"></i>
+                Choose from Gallery
+            </button>
+            
+            <button class="upload-option-btn" onclick="closePhotoUploadModal()">
+                <i class="fas fa-times"></i>
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    
+
+    <!-- Services Modal (JustDial Style) -->
+    <div class="modal fade" id="servicesModal" tabindex="-1" aria-labelledby="servicesModalLabel" aria-hidden="true">
+        <div class="modal-dialog services-modal modal-dialog-centered">
+            <div class="modal-content services-modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header services-modal-header">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-shield-alt me-2" style="font-size: 20px;"></i>
+                        <h5 class="modal-title" id="servicesModalLabel">Ace Cars</h5>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <button class="btn btn-success btn-sm px-3 services-call-btn">
+                            Show Number
+                        </button>
+                        <button class="btn btn-success btn-sm px-3 services-whatsapp-btn">
+                            <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                
+                <!-- Modal Body -->
+                <div class="modal-body services-modal-body p-0">
+                    <div class="services-modal-container" style="display:flex;">
+                        <!-- Left Sidebar -->
+                        <div class="services-sidebar">
+                            <!-- Search Bar -->
+                            <div class="services-search-container">
+                                <div class="services-search-input">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="serviceSearchInput" placeholder="Search Services" class="form-control border-0">
+                                </div>
+                            </div>
+                            
+                            <!-- Categories List -->
+                            <div class="services-categories">
+                                <div class="category-item active" data-category="services">
+                                    <span class="category-name">Services</span>
+                                    <span class="category-count">(5)</span>
+                                </div>
+                                <div class="category-item" data-category="denting">
+                                    <span class="category-name">Denting & Painting</span>
+                                    <span class="category-count">(2)</span>
+                                </div>
+                                <div class="category-item" data-category="body">
+                                    <span class="category-name">Body Repairs</span>
+                                    <span class="category-count">(1)</span>
+                                </div>
+                                <div class="category-item" data-category="tire">
+                                    <span class="category-name">Tire and Wheel Services</span>
+                                    <span class="category-count">(1)</span>
+                                </div>
+                                <div class="category-item" data-category="electrical">
+                                    <span class="category-name">Electrical Repairs</span>
+                                    <span class="category-count">(1)</span>
+                                </div>
+                                <div class="category-item" data-category="accessories">
+                                    <span class="category-name">Automobile Parts & Accessories</span>
+                                    <span class="category-count">(1)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Content Area -->
+                        <div class="services-content" id="servicesContent">
+                            <div id="servicesResults">
+                                <!-- Services Group (Highlighted in Blue) -->
+                                <div class="service-group services-highlighted" id="services-section" data-category="services">
+                                    <h6 class="service-group-title">Services</h6>
+                                    <div class="service-items-grid">
+                                        <div class="service-item-row" data-service="doorstep service">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>DoorStep Service</span>
+                                        </div>
+                                        <div class="service-item-row" data-service="battery jump-start">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>Battery Jump-Start</span>
+                                        </div>
+                                        <div class="service-item-row" data-service="breakdown support">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>Breakdown Support Over Phone</span>
+                                        </div>
+                                        <div class="service-item-row" data-service="on-site repair">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>On-site Repair</span>
+                                        </div>
+                                        <div class="service-item-row" data-service="flat tyre support">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>Flat Tyre Support</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Denting & Painting Group -->
+                                <div class="service-group" id="denting-section" data-category="denting">
+                                    <h6 class="service-group-title">Denting & Painting</h6>
+                                    <div class="service-items-grid">
+                                        <div class="service-item-row" data-service="car denting">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>Car Denting</span>
+                                        </div>
+                                        <div class="service-item-row" data-service="car painting">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>Car Painting</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Body Repairs Group -->
+                                <div class="service-group" id="body-section" data-category="body">
+                                    <h6 class="service-group-title">Body Repairs</h6>
+                                    <div class="service-items-grid">
+                                        <div class="service-item-row" data-service="car door repair">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>Car Door Repair</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Tire and Wheel Services Group -->
+                                <div class="service-group" id="tire-section" data-category="tire">
+                                    <h6 class="service-group-title">Tire and Wheel Services</h6>
+                                    <div class="service-items-grid">
+                                        <div class="service-item-row" data-service="wheel alignment">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>Wheel Alignment</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Electrical Repairs Group -->
+                                <div class="service-group" id="electrical-section" data-category="electrical">
+                                    <h6 class="service-group-title">Electrical Repairs</h6>
+                                    <div class="service-items-grid">
+                                        <div class="service-item-row" data-service="car battery repair">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>Car Battery Repair</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Automobile Parts & Accessories Group -->
+                                <div class="service-group" id="accessories-section" data-category="accessories">
+                                    <h6 class="service-group-title">Automobile Parts & Accessories</h6>
+                                    <div class="service-items-grid">
+                                        <div class="service-item-row" data-service="car accessory repair">
+                                            <i class="fas fa-check service-check"></i>
+                                            <span>Car Accessory Repair</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function(){
+            // Open modal when View all button clicked
+            const viewBtn = document.getElementById('viewAllBtn');
+            const servicesModalEl = document.getElementById('servicesModal');
+            let bsServicesModal = null;
+            try { if (servicesModalEl) bsServicesModal = new bootstrap.Modal(servicesModalEl); } catch(e) { console.warn('Bootstrap modal not available yet', e); }
+
+            if (viewBtn) {
+                viewBtn.addEventListener('click', function() {
+                    if (!bsServicesModal && servicesModalEl) bsServicesModal = new bootstrap.Modal(servicesModalEl);
+                    if (bsServicesModal) bsServicesModal.show();
+                });
+            }
+
+            // Wire category clicks to highlight right-hand groups
+            function setupModalInteractions() {
+                if (!servicesModalEl) return;
+                const categoryItems = servicesModalEl.querySelectorAll('.category-item');
+                const groups = servicesModalEl.querySelectorAll('.service-group');
+                const searchInput = servicesModalEl.querySelector('#serviceSearchInput');
+
+                function clearActiveCategory() {
+                    categoryItems.forEach(ci => ci.classList.remove('active'));
+                }
+
+                function clearHighlightedGroup() {
+                    groups.forEach(g => g.classList.remove('services-highlighted'));
+                }
+
+                categoryItems.forEach(ci => {
+                    ci.addEventListener('click', function() {
+                        const cat = this.dataset.category;
+                        clearActiveCategory();
+                        this.classList.add('active');
+
+                        clearHighlightedGroup();
+                        const target = servicesModalEl.querySelector('.service-group[data-category="' + cat + '"]');
+                        if (target) {
+                            target.classList.add('services-highlighted');
+                            // scroll into view inside modal content
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                });
+
+                // Search within modal categories and services
+                if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                        const q = this.value.trim().toLowerCase();
+                        categoryItems.forEach(ci => {
+                            const name = (ci.querySelector('.category-name')?.textContent || '').toLowerCase();
+                            const count = (ci.querySelector('.category-count')?.textContent || '').toLowerCase();
+                            const visible = q === '' || name.includes(q) || count.includes(q);
+                            ci.style.display = visible ? '' : 'none';
+                        });
+
+                        // also filter right groups
+                        groups.forEach(g => {
+                            const title = (g.querySelector('.service-group-title')?.textContent || '').toLowerCase();
+                            const text = g.textContent.toLowerCase();
+                            const visible = q === '' || title.includes(q) || text.includes(q);
+                            g.style.display = visible ? '' : 'none';
+                        });
+                    });
+                }
+
+                // When modal opens, ensure first visible category is active
+                servicesModalEl.addEventListener('shown.bs.modal', function() {
+                    const firstVisible = servicesModalEl.querySelector('.category-item:not([style*="display: none"])');
+                    if (firstVisible) firstVisible.click();
+                });
+            }
+
+            // Setup interactions when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupModalInteractions);
+            } else {
+                setupModalInteractions();
+            }
+        })();
+    </script>
+
+    <!-- Photo Modal for Full Screen View -->
+    <div id="photoModal" class="photo-modal">
+        <span class="photo-modal-close" id="closePhotoModal">&times;</span>
+        <span class="photo-modal-nav photo-modal-prev" id="prevPhoto">&#10094;</span>
+        <span class="photo-modal-nav photo-modal-next" id="nextPhoto">&#10095;</span>
+        <div class="photo-modal-content">
+            <img class="photo-modal-image" id="modalImage" src="" alt="Full screen photo">
+        </div>
+        <div class="photo-modal-caption" id="photoCaption"></div>
+    </div>
+
+    <script>
+        // Photo Gallery with Modal
+        (function() {
+            const samplePhotos = [
+                { src: 'images/honda1.png', category: 'all', caption: 'MyTVS Service Center' },
+                { src: 'images/honda1.png', category: 'all', caption: 'Car Servicing' },
+                { src: 'images/honda1.png', category: 'all', caption: 'Expert Technicians' },
+                { src: 'images/honda1.png', category: 'user', caption: 'Customer Photo 1' },
+                { src: 'images/honda1.png', category: 'user', caption: 'Customer Photo 2' },
+                { src: 'images/honda1.png', category: 'review', caption: 'Review Photo 1' },
+                { src: 'images/honda1.png', category: 'review', caption: 'Review Photo 2' }
+            ];
+
+            let currentPhotoIndex = 0;
+            let currentCategory = 'all';
+
+            const photoModal = document.getElementById('photoModal');
+            const modalImage = document.getElementById('modalImage');
+            const photoCaption = document.getElementById('photoCaption');
+            const closeModal = document.getElementById('closePhotoModal');
+            const prevPhoto = document.getElementById('prevPhoto');
+            const nextPhoto = document.getElementById('nextPhoto');
+
+            // Photo category cards click handlers
+            const photoCategoryCards = document.querySelectorAll('.photo-category-card');
+            photoCategoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.photoCategory;
+                    currentCategory = category;
+                    const filteredPhotos = category === 'all' ? samplePhotos : samplePhotos.filter(p => p.category === category);
+                    if (filteredPhotos.length > 0) {
+                        currentPhotoIndex = 0;
+                        showPhotoModal(filteredPhotos[currentPhotoIndex]);
+                    }
+                });
+            });
+
+            function showPhotoModal(photo) {
+                modalImage.src = photo.src;
+                photoCaption.textContent = photo.caption;
+                photoModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closePhotoModal() {
+                photoModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            closeModal.addEventListener('click', closePhotoModal);
+
+            photoModal.addEventListener('click', function(e) {
+                if (e.target === photoModal) {
+                    closePhotoModal();
+                }
+            });
+
+            prevPhoto.addEventListener('click', function() {
+                const filteredPhotos = currentCategory === 'all' ? samplePhotos : samplePhotos.filter(p => p.category === currentCategory);
+                currentPhotoIndex = (currentPhotoIndex - 1 + filteredPhotos.length) % filteredPhotos.length;
+                showPhotoModal(filteredPhotos[currentPhotoIndex]);
+            });
+
+            nextPhoto.addEventListener('click', function() {
+                const filteredPhotos = currentCategory === 'all' ? samplePhotos : samplePhotos.filter(p => p.category === currentCategory);
+                currentPhotoIndex = (currentPhotoIndex + 1) % filteredPhotos.length;
+                showPhotoModal(filteredPhotos[currentPhotoIndex]);
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (photoModal.style.display === 'block') {
+                    if (e.key === 'Escape') closePhotoModal();
+                    if (e.key === 'ArrowLeft') prevPhoto.click();
+                    if (e.key === 'ArrowRight') nextPhoto.click();
+                }
+            });
+
+            // Upload photos functionality
+            const uploadBtn = document.getElementById('uploadPhotoBtn');
+            const fileInput = document.getElementById('photoFileInput');
+
+            if (uploadBtn && fileInput) {
+                uploadBtn.addEventListener('click', function() {
+                    fileInput.click();
+                });
+
+                fileInput.addEventListener('change', function(e) {
+                    const files = e.target.files;
+                    if (files.length > 0) {
+                        alert(`${files.length} photo(s) selected for upload. Upload functionality will be implemented with backend integration.`);
+                        // Here you would handle the actual upload to your server
+                        const allPhotosCount = document.getElementById('allPhotosCount');
+                        if (allPhotosCount) {
+                            const currentCount = parseInt(allPhotosCount.textContent);
+                            allPhotosCount.textContent = currentCount + files.length;
+                        }
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+/* Color overrides: royal blue background + gold borders */
+:root {
+    --site-royal-blue: #4169E1; /* royal blue (background) */
+    --site-gold: #FFD700; /* gold (borders, accents) */
+    --card-dark-blue: #0f1f4d; /* dark royal blue for cards/panels */
+    --card-text-on-dark: #ffffff; /* text on dark blue */
+    --muted-on-dark: #e0e8f5; /* slightly lighter muted text for contrast */
+}
+
+/* Page background */
+body {
+    background-color: var(--site-royal-blue) !important;
+    color: #ffffff; /* white text on royal blue */
+}
+
+/* Apply to the main target sections to ensure consistent look */
+#services,
+#featured-cars,
+#categories-page,
+#testimonials,
+section.search-section,
+.bg-gradient,
+.py-section {
+    background-color: var(--site-royal-blue) !important;
+}
+
+/* Cards, panels and similar surfaces should use dark blue with gold borders */
+.car-card,
+.service-card,
+.feature-story-card,
+.testimonial-card,
+.brand-item,
+.filter-card,
+.detail-card,
+.card,
+.promo-banner,
+.delivery-option,
+.fare-details-section,
+.fare-breakdown {
+    background-color: var(--card-dark-blue) !important;
+    color: var(--card-text-on-dark) !important;
+    border: 2px solid var(--site-gold) !important; /* Gold border */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25) !important;
+}
+
+/* Ensure headings and titles inside dark cards are readable */
+.car-card .card-title,
+.service-card .card-title,
+.feature-story-card h4,
+.detail-card h3,
+.testimonial-card h5 {
+    color: var(--card-text-on-dark) !important;
+}
+
+/* Muted text on dark backgrounds */
+.car-card .card-text,
+.service-card .card-text,
+.detail-card .card-text,
+.brand-item span,
+.filter-card p,
+.fare-details-section .info-item span {
+    color: var(--muted-on-dark) !important;
+}
+
+/* Keep hover interaction: lighten card on hover for contrast */
+.car-card:hover,
+.service-card:hover,
+.feature-story-card:hover,
+.testimonial-card:hover {
+    background-color: #2d4a9c !important; /* slightly lighter dark-blue */
+    transform: translateY(-8px) scale(1.02) !important;
+    border-color: #ffed4e !important; /* brighter gold on hover */
+}
+
+/* Buttons inside dark cards should use gold */
+.car-card .btn,
+.service-card .btn,
+.detail-card .btn,
+.testimonial-card .btn {
+    background: linear-gradient(135deg, var(--site-gold), #ffed4e) !important;
+    color: #1E3A8A !important; /* dark blue text on gold buttons */
+    border: 1px solid var(--site-gold) !important;
+    font-weight: 600;
+}
+
+/* Small adjustments for accessibility */
+a, a:visited { color: #ffffff; }
+
+/* Dark mode: adjust for blue theme */
+body.dark-mode {
+    background-color: #0f1f4d !important;
+    color: #f2e7dc !important;
+}
+
+body.dark-mode .car-card,
+body.dark-mode .service-card,
+body.dark-mode .feature-story-card {
+    background-color: #1E3A8A !important;
+    color: var(--card-text-on-dark) !important;
+    border: 2px solid var(--site-gold) !important;
+}
+
+/* Footer overrides: use the dark blue surface with gold border */
+footer,
+footer.bg-dark,
+footer.bg-dark .container,
+footer .row {
+    background-color: var(--card-dark-blue) !important;
+    color: var(--card-text-on-dark) !important;
+    border-top: 3px solid var(--site-gold) !important;
+}
+
+footer a,
+footer a:visited {
+    color: #ffed4e !important; /* light gold for links */
+    text-decoration: none !important;
+}
+
+footer a:hover {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+}
+
+footer .text-white {
+    color: var(--card-text-on-dark) !important;
+}
+
+/* Ensure footer icon backgrounds (if any) contrast properly */
+footer .fab,
+footer .fas {
+    background: rgba(255,255,255,0.06) !important;
+    color: var(--card-text-on-dark) !important;
+}
+
+/* Navbar / Header overrides */
+.navbar,
+.navbar.sticky-top,
+.navbar.navbar-light,
+.navbar.navbar-expand-lg,
+.navbar.scrolled {
+    background-color: var(--card-dark-blue) !important;
+    background: linear-gradient(135deg, var(--card-dark-blue), #2d4a9c) !important;
+    border-bottom: 3px solid var(--site-gold) !important; /* Gold border */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25) !important;
+}
+
+.navbar .navbar-brand,
+.navbar #gocarz-logo,
+.navbar .logo-text {
+    color: #fff !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255,255,255,0.92) !important;
+    font-weight: 600;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: var(--site-gold) !important; /* Gold on hover */
+    background-color: rgba(255,255,255,0.03) !important;
+    border-radius: 8px;
+    transform: translateY(-1px);
+}
+
+.navbar-nav .nav-link.active::before {
+    background: linear-gradient(90deg, var(--site-gold), #ffed4e) !important; /* Gold underline */
+}
+
+.navbar-toggler {
+    border-color: var(--site-gold) !important; /* Gold border */
+    color: var(--site-gold) !important;
+}
+
+.dropdown-menu {
+    background-color: var(--card-dark-blue) !important;
+    border: 2px solid var(--site-gold) !important; /* Gold border */
+    color: var(--card-text-on-dark) !important;
+}
+
+.dropdown-item {
+    color: var(--card-text-on-dark) !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: rgba(255,215,0,0.1) !important; /* Light gold background on hover */
+    color: var(--site-gold) !important;
+}
+
+/* Ensure hero buttons remain visible */
+.carousel-caption .btn-primary,
+.btn-primary {
+    background: linear-gradient(135deg, var(--site-gold), #ffed4e) !important;
+    border: 2px solid var(--site-gold) !important;
+    color: #1E3A8A !important;
+    font-weight: 600;
+}
+
+/* Stats (section beneath hero) enforce royal-blue + gold theme */
+#stats {
+    background-color: var(--site-royal-blue) !important;
+    color: #ffffff !important;
+    position: relative;
+}
+#stats .stat-item h3,
+#stats .stat-item p,
+#stats .stat-icon { color: #ffffff !important; }
+#stats .stat-item { border: none; }
+#stats::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--site-gold), transparent);
+}
+
+/* Quick scroller styles (home page) */
+.quick-scroller {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--site-royal-blue) !important;
+    border-bottom: 3px solid var(--site-gold); /* Gold border */
+}
+.quick-scroller .scroller-track {
+    display: flex;
+    gap: 1rem;
+    padding: 0.6rem 1rem;
+    align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+}
+.quick-scroller .scroller-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 220px;
+    background: rgba(255,255,255,0.03);
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    color: var(--card-text-on-dark) !important;
+    text-decoration: none;
+    border: 1px solid var(--site-gold) !important; /* Gold border */
+}
+.quick-scroller .scroller-item i {
+    color: var(--site-gold); /* Gold icons */
+}
+.quick-scroller .scroller-text { line-height: 1; }
+.quick-scroller .scroller-text strong { display:block; font-size:1rem; }
+.quick-scroller .scroller-text span { font-size:0.85rem; color: rgba(255,255,255,0.9); }
+
+.quick-scroller .scroller-item:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25); 
+    border-color: #ffed4e !important; /* Brighter gold on hover */
+}
+
+/* Pause animation on hover for accessibility */
+.quick-scroller .scroller-track:hover { animation-play-state: paused; }
+
+/* Add soft fade masks at edges for nicer visual */
+.quick-scroller::before,
+.quick-scroller::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 6%;
+    pointer-events: none;
+    z-index: 2;
+}
+.quick-scroller::before { left: 0; background: linear-gradient(90deg, rgba(30,58,138,0.6), rgba(30,58,138,0)); }
+.quick-scroller::after { right: 0; background: linear-gradient(270deg, rgba(30,58,138,0.6), rgba(30,58,138,0)); }
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Ensure About carlux section text is readable on royal blue */
+#about,
+#about h2,
+#about h3,
+#about .lead {
+    color: #ffffff !important;
+}
+
+#about .feature-story-card {
+    background-color: var(--card-dark-blue) !important; /* dark royal surface */
+}
+#about .feature-story-card p,
+#about .feature-story-card .text-muted {
+    color: var(--muted-on-dark) !important; /* lighter paragraph text */
+}
+#about .stat-label { color: #d0def0 !important; }
+#about .story-stats { border-top-color: rgba(255,215,0,0.25) !important; }

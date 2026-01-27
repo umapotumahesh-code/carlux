@@ -15,9 +15,9 @@
 
     <!-- Back Button -->
     <div class="container-fluid py-3">
-        <button onclick="window.location.href='index.html'" class="btn btn-outline-secondary" title="Back to Home">
+        <a href="index.html" class="btn btn-outline-secondary" title="Back to Home" id="back-home">
             <i class="fas fa-arrow-left me-2"></i>Back to Home
-        </button>
+        </a>
     </div>
 
     <main class="login-container">
@@ -101,15 +101,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="login.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const backButton = document.querySelector('.container-fluid .btn-outline-secondary');
-            if (backButton) {
-                backButton.addEventListener('click', function() {
-                    window.location.href = 'index.html';
-                });
-            }
-        });
-    </script>
+    <!-- Back link is a normal anchor to ensure navigation works without JS interference -->
 </body>
 </html>
