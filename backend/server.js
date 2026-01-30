@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 4000;
 // MongoDB connection
 const connectDB = async () => {
     try {
-        const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://thrivikram2428_db_user:bIqQXf3pog6mm5Zw@cluster0.li9zbi1.mongodb.net/?appName=Cluster0';
+        const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://umapotumahesh_db_user:CCerJDWCrB6DkHm1@cluster0.6pgbnqw.mongodb.net/?appName=Cluster0';
         await mongoose.connect(mongoURI);
         console.log('MongoDB connected successfully');
     } catch (error) {
