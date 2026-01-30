@@ -2,8 +2,8 @@
 
 (function(){
     // Get logged in user
-    const token = localStorage.getItem('gocarz_token');
-    const user = JSON.parse(localStorage.getItem('gocarz_user') || 'null');
+    const token = localStorage.getItem('carlux_token');
+    const user = JSON.parse(localStorage.getItem('carlux_user') || 'null');
     if (!token || !user || user.accountType !== 'seller') {
         alert('Please login as a seller to access this page.');
         location.href = 'login.html';
@@ -227,8 +227,8 @@
     // Logout functionality
     document.getElementById('logout-link').addEventListener('click', (e) => {
         e.preventDefault();
-        localStorage.removeItem('gocarz_token');
-        localStorage.removeItem('gocarz_user');
+        localStorage.removeItem('carlux_token');
+        localStorage.removeItem('carlux_user');
         location.href = 'login.html';
     });
 

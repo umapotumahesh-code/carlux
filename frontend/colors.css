@@ -145,7 +145,7 @@ footer .fas {
 }
 
 .navbar .navbar-brand,
-.navbar #gocarz-logo,
+.navbar #carlux-logo,
 .navbar .logo-text {
     color: #fff !important;
     text-shadow: 0 1px 2px rgba(0,0,0,0.35);
@@ -295,3 +295,97 @@ footer .fas {
 }
 #about .stat-label { color: #d0def0 !important; }
 #about .story-stats { border-top-color: rgba(255,215,0,0.25) !important; }
+
+/* Testimonials alignment and box sizing */
+#testimonials .carousel-item .row > [class^="col-"],
+#testimonials .carousel-item .row > [class*=" col-"] {
+    display: flex; /* allow child card to stretch to same height */
+}
+
+#testimonials .testimonial-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1.25rem 1.25rem 1.5rem;
+    border-radius: 14px;
+    height: 100%;
+    min-height: 320px; /* base min height for uniform boxes */
+}
+
+#testimonials .testimonial-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
+    height: 100%;
+}
+
+#testimonials .testimonial-text {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--muted-on-dark) !important;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+#testimonials .testimonial-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.15rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#testimonials .testimonial-rating i.fas.fa-star,
+#testimonials .testimonial-rating i.fas.fa-star-half-alt,
+#testimonials .testimonial-rating i.far.fa-star {
+    color: #FFD700; /* gold stars */
+    margin: 0 1px;
+}
+
+@media (min-width: 992px) {
+    #testimonials .testimonial-card { min-height: 360px; }
+}
+
+/* Journey (Your Journey With Us) themed like testimonials */
+#about .journey-timeline { background-color: transparent !important; }
+
+#about .timeline-item {
+    background-color: var(--card-dark-blue) !important;
+    color: var(--card-text-on-dark) !important;
+    border: 2px solid var(--site-gold) !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25) !important;
+    min-height: 220px;
+}
+
+#about .timeline-item:hover {
+    background-color: #2d4a9c !important; /* slightly lighter dark-blue */
+    border-color: #ffed4e !important; /* brighter gold on hover */
+    transform: translateY(-8px) !important;
+}
+
+#about .timeline-icon {
+    background: linear-gradient(135deg, var(--site-gold), #ffed4e) !important;
+    color: #1E3A8A !important; /* dark blue text on gold bubble */
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25) !important;
+}
+
+#about .timeline-content p {
+    color: var(--muted-on-dark) !important;
+}
+
+#about .timeline-content a {
+    color: #ffed4e !important;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#about .timeline-content a:hover {
+    text-decoration: underline;
+}

@@ -35,7 +35,7 @@ const fetchData = async () => {
 // Get seller cars from localStorage
 const getSellerCars = () => {
     try {
-        return JSON.parse(localStorage.getItem('gocarz_seller_cars') || '[]');
+        return JSON.parse(localStorage.getItem('carlux_seller_cars') || '[]');
     } catch (e) {
         return [];
     }

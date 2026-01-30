@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     element.textContent = translations[lang][key];
                 }
             });
-            localStorage.setItem('gocarz_lang', lang);
+            localStorage.setItem('carlux_lang', lang);
             updateLanguageButton(lang);
         }
     };
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Check for saved language on page load
-    const savedLang = localStorage.getItem('gocarz_lang');
+    const savedLang = localStorage.getItem('carlux_lang');
     if (savedLang) {
         setLanguage(savedLang);
     } else {

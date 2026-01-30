@@ -2495,7 +2495,7 @@ function navigateToHome() {
     // Add active class to home
     event.target.closest('.nav-item').classList.add('active');
     
-    alert('Welcome to GOCARZ Home!\n• Featured Cars\n• Special Offers\n• Latest News\n• Customer Reviews');
+    alert('Welcome to CARLUX Home!\n• Featured Cars\n• Special Offers\n• Latest News\n• Customer Reviews');
 }
 
 function showCategories() {
@@ -2523,11 +2523,11 @@ function showContactUs() {
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
     event.target.closest('.nav-item').classList.add('active');
     
-    alert('Contact GOCARZ:\n📞 Phone: +91 9876543210\n📧 Email: support@gocarz.com\n📍 Address: Mumbai, India\n🕒 Hours: 24/7 Support');
+    alert('Contact CARLUX:\n📞 Phone: +91 9876543210\n📧 Email: support@carlux.com\n📍 Address: Mumbai, India\n🕒 Hours: 24/7 Support');
 }
 
 function showLogin() {
-    alert('Login to GOCARZ:\n• Sign in with Email\n• Continue with Google\n• Continue with Facebook\n• Create New Account\n\nEnjoy exclusive member benefits!');
+    alert('Login to CARLUX:\n• Sign in with Email\n• Continue with Google\n• Continue with Facebook\n• Create New Account\n\nEnjoy exclusive member benefits!');
 }
 
 // Dark Mode Toggle

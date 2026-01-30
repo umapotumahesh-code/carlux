@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 4000;
 // MongoDB connection
 const connectDB = async () => {
     try {
-        const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/gocarz';
+        const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://thrivikram2428_db_user:bIqQXf3pog6mm5Zw@cluster0.li9zbi1.mongodb.net/?appName=Cluster0';
         await mongoose.connect(mongoURI);
         console.log('MongoDB connected successfully');
     } catch (error) {
@@ -335,7 +335,7 @@ app.use((req, res) => {
 // Connect to database and start server
 connectDB().then(() => {
     app.listen(PORT, () => {
-        console.log(`\n🚀 GOCARZ server is running on http://localhost:${PORT}`);
+        console.log(`\n🚀 CARLUX server is running on http://localhost:${PORT}`);
         console.log(`📂 Serving static files from: ${path.join(__dirname, '../frontend')}`);
         console.log(`🔗 API endpoints available at: http://localhost:${PORT}/api`);
         console.log(`🗄️  Database: MongoDB connected`);
@@ -345,4 +345,3 @@ connectDB().then(() => {
     console.error('Failed to start server:', error);
     process.exit(1);
 });
-

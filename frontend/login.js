@@ -42,7 +42,7 @@
         resetMessage.textContent = 'If an account exists for ' + email + ', a reset link has been sent.';
         // Optionally store a reset token locally (demo only)
         const token = Math.random().toString(36).slice(2,10);
-        localStorage.setItem('gocarz_reset_token_for_' + email, token);
+        localStorage.setItem('carlux_reset_token_for_' + email, token);
     });
 
     // Login with backend API
@@ -87,8 +87,8 @@
 
             if (response.ok && data.success) {
                 // Store token and user data
-                localStorage.setItem('gocarz_token', data.token);
-                localStorage.setItem('gocarz_user', JSON.stringify(data.user));
+                localStorage.setItem('carlux_token', data.token);
+                localStorage.setItem('carlux_user', JSON.stringify(data.user));
 
                 msg.className = 'alert alert-success';
                 msg.textContent = 'Login successful — redirecting...';

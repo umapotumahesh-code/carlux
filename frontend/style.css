@@ -1,4 +1,4 @@
-/* Custom CSS for GOCARZ Website */
+/* Custom CSS for CARLUX Website */
 
 /* Preloader Styles */
 #preloader {
@@ -223,7 +223,7 @@ body.dark-mode h1 {
     background: linear-gradient(135deg, rgba(25, 118, 210, 0.98) 0%, rgba(255, 193, 7, 0.98) 100%) !important;
 }
 
-#gocarz-logo {
+#carlux-logo {
     display: flex;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
@@ -233,14 +233,14 @@ body.dark-mode h1 {
     color: var(--text-dark); /* Default color for the whole link */
 }
 
-#gocarz-logo .fas {
+#carlux-logo .fas {
     color: white;
     font-size: 2.2rem;
     transition: var(--transition);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-#gocarz-logo .logo-text {
+#carlux-logo .logo-text {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: white;
@@ -248,11 +248,11 @@ body.dark-mode h1 {
     transition: var(--transition);
 }
 
-#gocarz-logo:hover {
+#carlux-logo:hover {
     transform: scale(1.05);
 }
 
-#gocarz-logo:hover .fas {
+#carlux-logo:hover .fas {
     transform: translateX(5px);
 }
 
@@ -993,10 +993,10 @@ body.dark-mode #dark-mode-toggle {
 }
 
 .brand-item:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: var(--shadow-lg);
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    border-color: var(--primary-light);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    background: var(--card-dark-blue);
+    border-color: #ffed4e; /* subtle brighter gold */
 }
 
 .brand-logo {
@@ -1007,9 +1007,11 @@ body.dark-mode #dark-mode-toggle {
     transition: all 0.3s ease;
 }
 
-.brand-item:hover .brand-logo {
-    transform: scale(1.1);
-    filter: brightness(0) invert(1);
+.brand-item:hover 
+.brand-logo {
+    transform: none;
+    filter: none;
+    opacity: 0.95;
 }
 
 .brand-item span {
@@ -1020,7 +1022,15 @@ body.dark-mode #dark-mode-toggle {
 }
 
 .brand-item:hover span {
-    color: white;
+    color: var(--card-text-on-dark);
+}
+
+/* Accessible keyboard focus for brand cards */
+.brands-scroll-container > a:focus .brand-item,
+.brands-scroll-container > a:focus-visible .brand-item {
+    outline: 3px solid #ffed4e;
+    outline-offset: 2px;
+    transform: translateY(-2px);
 }
 
 /* Dark Mode Brand Items */
@@ -1030,7 +1040,8 @@ body.dark-mode .brand-item {
 }
 
 body.dark-mode .brand-item:hover {
-    background-color: var(--primary-color);
+    background-color: var(--card-dark-blue);
+    border-color: #ffed4e;
 }
 
 body.dark-mode .brand-item span {

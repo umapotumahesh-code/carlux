@@ -51,8 +51,8 @@
 
             if (response.ok && data.success) {
                 // Store token and user data
-                localStorage.setItem('gocarz_token', data.token);
-                localStorage.setItem('gocarz_user', JSON.stringify(data.user));
+                localStorage.setItem('carlux_token', data.token);
+                localStorage.setItem('carlux_user', JSON.stringify(data.user));
 
                 msg.className = 'alert alert-success';
                 msg.textContent = 'Account created successfully! Redirecting...';

@@ -281,13 +281,13 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       name: "Rahul Verma",
       location: "New Delhi",
-      text: "GOCARZ made selling my old car so easy. I got a fair price and the entire process was completed in just two days. Excellent service!",
+      text: "CARLUX made selling my old car so easy. I got a fair price and the entire process was completed in just two days. Excellent service!",
       rating: 4.5,
     },
     {
       name: "Anjali Singh",
       location: "Bangalore",
-      text: "I rented a car for a weekend trip and was impressed with the quality of the vehicle and the affordable rates. Will definitely use GOCARZ again.",
+      text: "I rented a car for a weekend trip and was impressed with the quality of the vehicle and the affordable rates. Will definitely use CARLUX again.",
       rating: 5,
     },
     {

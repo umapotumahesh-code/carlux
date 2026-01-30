@@ -1,97 +1,45 @@
-const Car = require('../models/Car');
+// Simple placeholder controller using data.json in backend to respond
+const path = require('path');
+const fs = require('fs');
 
-// Create a new car listing
-exports.createCar = async (req, res) => {
-    console.log('Creating car with body:', req.body);
-    console.log('User from token:', req.user);
-    try {
-        const car = new Car({
-            ...req.body,
-            sellerId: req.user.userId, // Assuming req.user is populated by auth middleware
-        });
-        await car.save();
-        res.status(201).json(car);
-    } catch (error) {
-        console.error('Error creating car:', error);
-        res.status(400).json({ message: error.message });
-    }
+const dataPath = path.join(__dirname, '..', 'data.json');
+
+function readData() {
+  try {
+    const raw = fs.readFileSync(dataPath, 'utf8');
+    return JSON.parse(raw);
+  } catch (e) {
+    return { cars: [] };
+  }
+}
+
+exports.getAllCars = (req, res) => {
+  const data = readData();
+  res.json(data.cars || []);
 };
 
-// Get all cars
-exports.getAllCars = async (req, res) => {
-    try {
-        const cars = await Car.find();
-        res.json(cars);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+exports.getCarById = (req, res) => {
+  const data = readData();
+  const car = (data.cars || []).find(c => String(c.id) === String(req.params.carId));
+  if (!car) return res.status(404).json({ error: 'Car not found' });
+  res.json(car);
 };
 
-// Get a specific car by ID
-exports.getCarById = async (req, res) => {
-    try {
-        const car = await Car.findById(req.params.carId);
-        if (!car) {
-            return res.status(404).json({ message: 'Car not found' });
-        }
-        res.json(car);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+exports.createCar = (req, res) => {
+  // In a real app, this would write to DB. For now acknowledge.
+  res.status(201).json({ success: true, message: 'Car created (demo stub)' });
 };
 
-// Retrieve all car listings for a specific seller
-exports.getCarsBySeller = async (req, res) => {
-    try {
-        const cars = await Car.find({ sellerId: req.params.sellerId });
-        if (!cars) {
-            return res.status(404).json({ message: 'No cars found for this seller' });
-        }
-        res.json(cars);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+exports.getCarsBySeller = (req, res) => {
+  const data = readData();
+  const list = (data.cars || []).filter(c => String(c.sellerId) === String(req.params.sellerId));
+  res.json(list);
 };
 
-// Update a specific car listing
-exports.updateCar = async (req, res) => {
-    try {
-        const car = await Car.findById(req.params.carId);
-
-        if (!car) {
-            return res.status(404).json({ message: 'Car not found' });
-        }
-
-        // Ensure the request is from the owner
-        if (car.sellerId.toString() !== req.user.userId.toString()) {
-            return res.status(403).json({ message: 'User not authorized to update this listing' });
-        }
-
-        Object.assign(car, req.body);
-        await car.save();
-        res.json(car);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
+exports.updateCar = (req, res) => {
+  res.json({ success: true, message: 'Car updated (demo stub)' });
 };
 
-// Delete a specific car listing
-exports.deleteCar = async (req, res) => {
-    try {
-        const car = await Car.findById(req.params.carId);
-
-        if (!car) {
-            return res.status(404).json({ message: 'Car not found' });
-        }
-
-        // Ensure the request is from the owner
-        if (car.sellerId.toString() !== req.user.userId.toString()) {
-            return res.status(403).json({ message: 'User not authorized to delete this listing' });
-        }
-
-        await Car.findByIdAndDelete(req.params.carId);
-        res.json({ message: 'Car listing deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+exports.deleteCar = (req, res) => {
+  res.json({ success: true, message: 'Car deleted (demo stub)' });
 };
