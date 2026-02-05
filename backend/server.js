@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
 const User = require('./models/User');
 const carRoutes = require('./routes/carRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
@@ -14,14 +15,13 @@ const PORT = process.env.PORT || 4000;
 
 // MongoDB connection
 const connectDB = async () => {
-    try {
-        const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://umapotumahesh_db_user:<basicuser03>@cluster0.6pgbnqw.mongodb.net/?appName=Cluster0';
-        await mongoose.connect(mongoURI);
-        console.log('MongoDB connected successfully');
-    } catch (error) {
-        console.error('MongoDB connection error:', error);
-        process.exit(1);
-    }
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('MongoDB connected successfully');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
 };
 
 
@@ -325,6 +325,108 @@ app.get('/', (req, res) => {
 // Handle 404 for API routes
 app.use('/api/*', (req, res) => {
     res.status(404).json({ error: 'API endpoint not found' });
+});
+
+// Chatbot endpoint
+app.post('/api/chatbot', async (req, res) => {
+    const { message, source } = req.body || {};
+
+    if (!message || typeof message !== 'string') {
+        return res.status(400).json({ error: 'Message is required' });
+    }
+
+    const apiKey = process.env.CHATBOT_API_KEY;
+
+    // Basic fallback response when no API key is configured
+    if (!apiKey) {
+        return res.json({
+            reply: `Thanks for reaching out${source ? ` from ${source}` : ''}! I’m here to help with car services, bookings, and general questions. Please contact support if you need more details.`
+        });
+    }
+
+    try {
+        // Example placeholder call to an LLM provider. Replace with your provider endpoint.
+        // This uses axios to demonstrate server-side proxying so the API key remains hidden from the frontend.
+        const llmResponse = await axios.post(
+            'https://api.openai.com/v1/chat/completions',
+            {
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    { role: 'system', content: 'You are a helpful support bot for a car services platform called CARLUX. Keep answers concise and friendly.' },
+                    { role: 'user', content: message }
+                ]
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${apiKey}`
+                },
+                timeout: 15000
+            }
+        );
+
+        const reply = llmResponse.data?.choices?.[0]?.message?.content?.trim();
+
+        if (!reply) {
+            return res.status(502).json({ error: 'Chatbot returned an empty response' });
+        }
+
+        res.json({ reply });
+    } catch (error) {
+        console.error('Chatbot error:', error.response?.data || error.message);
+        res.status(500).json({ error: 'Unable to process chatbot request right now.' });
+    }
+});
+
+// Chatbot endpoint
+app.post('/api/chatbot', async (req, res) => {
+    const { message, source } = req.body || {};
+
+    if (!message || typeof message !== 'string') {
+        return res.status(400).json({ error: 'Message is required' });
+    }
+
+    const apiKey = process.env.CHATBOT_API_KEY;
+
+    // Basic fallback response when no API key is configured
+    if (!apiKey) {
+        return res.json({
+            reply: `Thanks for reaching out${source ? ` from ${source}` : ''}! I’m here to help with car services, bookings, and general questions. Please contact support if you need more details.`
+        });
+    }
+
+    try {
+        // Example placeholder call to an LLM provider. Replace with your provider endpoint.
+        // This uses axios to demonstrate server-side proxying so the API key remains hidden from the frontend.
+        const llmResponse = await axios.post(
+            'https://api.openai.com/v1/chat/completions',
+            {
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    { role: 'system', content: 'You are a helpful support bot for a car services platform called CARLUX. Keep answers concise and friendly.' },
+                    { role: 'user', content: message }
+                ]
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${apiKey}`
+                },
+                timeout: 15000
+            }
+        );
+
+        const reply = llmResponse.data?.choices?.[0]?.message?.content?.trim();
+
+        if (!reply) {
+            return res.status(502).json({ error: 'Chatbot returned an empty response' });
+        }
+
+        res.json({ reply });
+    } catch (error) {
+        console.error('Chatbot error:', error.response?.data || error.message);
+        res.status(500).json({ error: 'Unable to process chatbot request right now.' });
+    }
 });
 
 // Handle 404 for all other routes
