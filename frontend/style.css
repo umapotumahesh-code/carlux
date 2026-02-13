@@ -733,6 +733,50 @@ body.dark-mode .section-header {
     transform: translateY(-1px);
 }
 
+/* Remove hover flash/white overlay on hero/carousel buttons while keeping functionality */
+.hero .btn::before,
+.hero .btn:hover::before,
+.hero .btn:focus::before,
+.hero .btn:active::before,
+.carousel .btn::before,
+.carousel .btn:hover::before,
+.carousel .btn:focus::before,
+.carousel .btn:active::before {
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    display: none !important;
+}
+
+.hero .btn-primary,
+.hero .btn-primary:hover,
+.hero .btn-primary:focus,
+.hero .btn-primary:active,
+.carousel .btn-primary,
+.carousel .btn-primary:hover,
+.carousel .btn-primary:focus,
+.carousel .btn-primary:active {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3) !important;
+    transform: none !important;
+    border-color: transparent !important;
+    filter: none !important;
+}
+
+/* Keep hero/carosuel primary buttons from changing color on click */
+.hero .btn-primary:active,
+.hero .btn-primary:focus,
+.carousel .btn-primary:active,
+.carousel .btn-primary:focus {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+    transform: none;
+    border-color: transparent;
+    outline: none;
+}
+
 .btn-outline-primary {
     color: var(--primary-color);
     border: 2px solid var(--primary-color);

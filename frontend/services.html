@@ -345,6 +345,86 @@
                         font-size: 13px;
                     }
                 }
+/* Chatbot Styles */
+.chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.chatbot-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.chatbot-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+.chat-window {
+    width: 350px;
+    height: 450px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    position: absolute;
+    bottom: 0px; /* Position above the button */
+    right: 0px;
+}
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat-body {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+}
+.chat-message {
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.chat-message.user {
+    background-color: #3b82f6;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 15px 15px 0 15px;
+    margin-bottom: 10px;
+    max-width: 80%;
+    align-self: flex-end;
+}
+.chat-message.bot {
+    background-color: #e7f3ff;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px 15px 15px 0;
+    margin-bottom: 10px;
+    max-width: 80%;
+    align-self: flex-start;
+}
         </style>
 </head>
 <body>
@@ -452,10 +532,38 @@
                                     <li><a class="dropdown-item" href="#" data-sort="name-asc">Name: A-Z</a></li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                </div>
+</div>
+</div>
+</div>
 
+<!-- Chatbot -->
+<div class="chatbot-container" id="chatbot-container">
+    <div class="chat-window" id="chat-window" aria-live="polite">
+        <div class="chat-header">
+            <span>CARLUX Assistant</span>
+            <button class="btn btn-sm btn-light" id="chat-close" aria-label="Close chat">&times;</button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="chat-message bot">Hi! Ask me about services, bookings, pricing, or general questions.</div>
+        </div>
+        <div class="p-3 border-top bg-white">
+            <div class="input-group">
+                <input type="text" class="form-control" id="chat-input" placeholder="Type your message..." aria-label="Chat message">
+                <button class="btn btn-primary" id="chat-send" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <small class="text-muted d-block mt-2" id="chat-status" aria-live="polite"></small>
+        </div>
+    </div>
+    <button class="chatbot-button" id="chatbot-button" aria-label="Open chat">
+        <i class="fas fa-robot"></i>
+    </button>
+</div>
+
+<script src="chatbot.js"></script>
+</body>
+</html>
                 <!-- Current Time & Service Type Toggles -->
                 <div class="search-meta-info mt-4 text-center">
                     <div class="d-flex align-items-center justify-content-center flex-wrap gap-4">
@@ -787,7 +895,7 @@
                         <button class="btn btn-enq" data-bs-toggle="modal" data-bs-target="#enquiryModal">Book Appointment</button>
                     </div>
                 </div>
-            </div>
+</div>
 
             <!-- New Auto Nagar Garage 2 -->
             <div class="card-service" data-service-id="royal-car-clinic">
